@@ -1,0 +1,22 @@
+TODOs:
+kbp* cleaning, merging under a parent class
+turn hash into __init__
+_misc.py : a lot of cleaning
+kbpack
+kbpcrypt
+
+Bugs:
+ascii85
+jcalg compression
+tiger constants
+
+missing:
+md2 constant implementation
+ripemd
+
+missing docs:
+everything
+
+roadmap:
+kbpsum gost haval whirlpool panama
+kbpentro adaptive_huffman, range, arithmetic
