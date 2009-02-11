@@ -1,6 +1,10 @@
 from getopt import *
 from sys import argv, exit
 
+__revision__ = "$LastChangedRevision$"
+__version__ = '0.1-%d' % int( __revision__.split()[1])
+
+
 try:
     import psyco
     psyco.run()
