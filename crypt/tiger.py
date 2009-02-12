@@ -30,7 +30,7 @@ class tiger(md4):
         self.nb_pass = 3 # standard tiger uses 3 passes
         self.sboxes = self.S
         self.Sboxes = self.S[::-1]
-        self.gen_const()
+#        self.gen_const()
 
 
     def key_schedule(self, words):
@@ -168,8 +168,27 @@ class tiger(md4):
 #            out_index = [2, 1024]# 32
             #in_index = [1024, 8]# 8
 """
-tiger()
-import sys
-sys.exit()
+
+class tiger128(tiger):
+    """tiger/128 is tiger with the digest truncated to 128 bits"""
+    def digest(self):
+        return tiger.digest(self)[:16]
+
+class tiger160(tiger):
+    """tiger/160 is tiger with the digest truncated to 160 bits"""
+
+    def digest(self):
+        return tiger.digest(self)[:20]
+
+class tiger2(tiger):
+    """tiger2 is tiger with the same padding as md4: bit 7 is used first"""
+    def __init__(self):
+        tiger.__init__(self)
+        self.pad_bit_7 = True
+
+#tiger()
+#import sys
+#sys.exit()
+
 if __name__ == "__main__":
     import test.tiger_test

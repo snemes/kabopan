@@ -95,12 +95,11 @@ class test(md4):
         l = list()
         ABCD = ["A", "B", "C", "D"]
         
-        for r in range(3):  # rounds
-            f, constant = self.functions[r], self.constants[r]
-            for i in range(16): # iterations per round
-                [a, b, c, d] = [((j - i) % 4) for j in range(4)]
-                s = self.shifts[r][i % 4]
-                k = self.r(i)[r]
+        for self.round in range(3):  # rounds
+            f, constant = self.round_parameters()
+            for self.iteration in range(16): # iterations per round
+                [a, b, c, d] = [((j - self.iteration) % 4) for j in range(4)]
+                s, k = self.iteration_parameters()
         
                 s = "%s %s%s%s %02i %02i %s 0x%08X" % (ABCD[a], ABCD[b], ABCD[c], ABCD[d], k, s, f.__name__, constant)
                 l.append(s)

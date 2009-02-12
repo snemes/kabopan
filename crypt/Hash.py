@@ -6,7 +6,9 @@ class Hash:
         self.IVs = None
         self.block_length = 8
         self.hv_size = 8
-        self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = False
+        self.output_big_endianness = False
+        self.block_big_endianness = False
+        self.padding_big_endianness = False
 
     def process_block(self, block):
         pass
@@ -36,6 +38,13 @@ class Hash:
 
 
 class merkledamgaard(Hash):
+
+    def round_parameters(self):
+        return
+
+    def iteration_parameters(self, round):
+        return
+
     def as_words(self, block):
         count_ = self.block_length / self.hv_size
         prefix = ">" if self.block_big_endianness else "<"

@@ -2,7 +2,7 @@
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
 from _misc import rol, hex2bin, test_vector_strings
-from crypt.md5 import *
+from crypt.md4 import *
 
 hash = lambda x: md5().compute(x).digest()
 
@@ -109,14 +109,10 @@ class test(md5):
         md5.__init__(self)
 
         rounds = list()
-        for r in range(4):  # 4 rounds
-            function = self.functions[r]
-            g_multiplier, g_increment = self.g_coefficients[r]
-        
-            for i in range(16): # 16 iterations per round
-                shift = self.shifts[r][i % 4]
-                k = self.K(i + r * 16)
-                g = (g_multiplier * i + g_increment) % 16
+        for self.round in range(4): 
+            function = self.round_parameters()
+            for self.iteration in range(16):
+                shift, k, g = self.iteration_parameters()
                 rounds.append([shift, function.__name__, g, k])
         
         assert md5_rounds == rounds

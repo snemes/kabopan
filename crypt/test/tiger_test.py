@@ -5,14 +5,6 @@ from crypt.tiger import *
 from _misc import test_vector_strings, ass
 
 IVs = [0x0123456789abcdef, 0xfedcba9876543210, 0xf096a5b4c3b2e187]
-test_vectors = [
-    0x3293ac630c13f0245f92bbb1766e16167a4e58492dde73f3,
-    0x77befbef2e7ef8ab2ec8f93bf587a7fc613e247f5f247809,
-    0x2aab1484e8c158f2bfb8c5ff41b57a525129131c957b5f93,
-    0xd981f8cb78201a950dcf3048751e441c517fca1aa55a29f6,
-    0x1714a472eee57d30040412bfcc55032a0b11602ff37beee9,
-    0x8dcea680a17583ee502ba38a3c368651890ffbccdc49a8cc,
-    0x1c14795529fd9f207a958f84c52f11e887fa0cabdfd91bfd]
 
 
 class test(tiger):
@@ -21,7 +13,6 @@ class test(tiger):
         assert [int(i) for i in self.IVs] == IVs
 test()
 
-ass(test_vectors, [tiger().compute(s).digest() for s in test_vector_strings], "test vectors")
 
 Ss_test = [
     [
@@ -542,4 +533,47 @@ Ss_test = [
     0xC83223F1720AEF96, 0xC3A0396F7363A51F]]
 
 
+test_vectors = [
+    0x3293ac630c13f0245f92bbb1766e16167a4e58492dde73f3,
+    0x77befbef2e7ef8ab2ec8f93bf587a7fc613e247f5f247809,
+    0x2aab1484e8c158f2bfb8c5ff41b57a525129131c957b5f93,
+    0xd981f8cb78201a950dcf3048751e441c517fca1aa55a29f6,
+    0x1714a472eee57d30040412bfcc55032a0b11602ff37beee9,
+    0x8dcea680a17583ee502ba38a3c368651890ffbccdc49a8cc,
+    0x1c14795529fd9f207a958f84c52f11e887fa0cabdfd91bfd]
 
+ass(test_vectors, [tiger().compute(s).digest() for s in test_vector_strings], "test vectors")
+
+test_vectors = [
+    0x3293ac630c13f0245f92bbb1766e16167a4e5849,
+    0x77befbef2e7ef8ab2ec8f93bf587a7fc613e247f,
+    0x2aab1484e8c158f2bfb8c5ff41b57a525129131c,
+    0xd981f8cb78201a950dcf3048751e441c517fca1a,
+    0x1714a472eee57d30040412bfcc55032a0b11602f,
+    0x8dcea680a17583ee502ba38a3c368651890ffbcc,
+    0x1c14795529fd9f207a958f84c52f11e887fa0cab]
+
+ass(test_vectors, [tiger160().compute(s).digest() for s in test_vector_strings], "tiger-160 test vectors")
+
+test_vectors = [
+    0x3293ac630c13f0245f92bbb1766e1616,
+    0x77befbef2e7ef8ab2ec8f93bf587a7fc,
+    0x2aab1484e8c158f2bfb8c5ff41b57a52,
+    0xd981f8cb78201a950dcf3048751e441c,
+    0x1714a472eee57d30040412bfcc55032a,
+    0x8dcea680a17583ee502ba38a3c368651,
+    0x1c14795529fd9f207a958f84c52f11e8]
+
+
+ass(test_vectors, [tiger128().compute(s).digest() for s in test_vector_strings], "tiger-128 test vectors")
+
+test_vectors = [
+    0x4441BE75F6018773C206C22745374B924AA8313FEF919F41,
+    0x67E6AE8E9E968999F70A23E72AEAA9251CBC7C78A7916636,
+    0xF68D7BC5AF4B43A06E048D7829560D4A9415658BB0B1F3BF,
+    0xE29419A1B5FA259DE8005E7DE75078EA81A542EF2552462D,
+    0xF5B6B6A78C405C8547E91CD8624CB8BE83FC804A474488FD,
+    0xEA9AB6228CEE7B51B77544FCA6066C8CBB5BBAE6319505CD,
+    0xD85278115329EBAA0EEC85ECDC5396FDA8AA3A5820942FFF]
+
+ass(test_vectors, [tiger2().compute(s).digest() for s in test_vector_strings], "tiger-2 test vectors")
