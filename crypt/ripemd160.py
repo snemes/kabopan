@@ -9,7 +9,7 @@
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
 import _misc as misc
-from md5 import *
+from md4 import *
 
 class ripemd160(md5):
     def __init__(self):

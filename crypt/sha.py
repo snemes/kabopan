@@ -5,15 +5,17 @@
 from md4 import *
 from _int import DWORD
 
+class sha_():
+    constants = [hsqrt(i) for i in [2, 3, 5, 10]]
+    f, g, h = md4_.f, md4_.h, md4_.g
+    functions = [md4_.f, g, h, g]
+
 class sha0(md4):
     def __init__(self):
         md4.__init__(self)
         self.IVs += [DWORD(0xC0D0E0F0 | 0x03020100)]
-        self.constants = [hsqrt(i) for i in [2, 3, 5, 10]]
         self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = True
         # function names are swapped
-        self.g, self.h = self.h, self.g
-        self.functions = [self.f, self.g, self.h, self.g]
 
 
     def compress(self, block, words):
@@ -25,8 +27,8 @@ class sha0(md4):
     def rounds(self, words):
         [a, b, c, d, e] = list(self.ihvs)
         for round_ in range(4):
-            f = self.functions[round_]
-            k = self.constants[round_]
+            f = sha_.functions[round_]
+            k = sha_.constants[round_]
             for i in range(20):
                 [a, b, c, d, e] = [
                    a.rol(5) + f(b, c, d) + e + k + words[i + 20 * round_],
@@ -36,5 +38,16 @@ class sha0(md4):
                     d]
         return [a, b, c, d, e]
 
+
+class sha1(sha0):
+
+    def compress(self, block, words):
+        words.extend(0 for i in xrange(80 - 16))
+        for i in range(16, 80):
+            words[i] = words[i - 3] ^ words[i - 8] ^ words[i - 14] ^ words[i - 16]
+            # a rotation was added between sha0 and sha1
+            words[i] = words[i].rol(1)
+        return words
+
 if __name__ == "__main__":
-    import test.sha0_test
+    import test.sha_test

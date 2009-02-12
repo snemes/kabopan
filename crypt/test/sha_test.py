@@ -2,8 +2,8 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from crypt.sha0 import *
-from _misc import test_vector_strings, rol, hex2bin, ass
+from crypt.sha import *
+from _misc import test_vector_strings, hex2bin, ass
 
 IVs = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0]
 
@@ -23,7 +23,7 @@ for i, tv in enumerate(test_vector_strings):
     0xc1b0f222d150ebb9aa36a40cafdc8bcbed830b14,
     0xb40ce07a430cfd3c033039b9fe9afec95dc1bdcd,
     0x79e966f7a3a990df33e40e3d7f8f18d2caebadfa,
-    0x4aa29d14d171522ece47bee8957e35a41f3e9cff][i], "test vectors"
+    0x4aa29d14d171522ece47bee8957e35a41f3e9cff][i], "Sha-0 test vectors"
 
 
 #full collision, by Antoine Joux, Patrick Carribault, Christophe Lemuet, William Jalby
@@ -49,3 +49,17 @@ b = [
 a, b = [hex2bin("".join(s).replace(" ", "")) for s in [a, b]]
 
 assert hash(a) == hash(b)
+
+def hash(msg):
+    m = sha1()
+    m.compute(msg)
+    return m.digest()
+
+assert [hash(s) for s in test_vector_strings] == [
+    0xDA39A3EE5E6B4B0D3255BFEF95601890AFD80709,
+    0x86F7E437FAA5A7FCE15D1DDCB9EAEAEA377667B8,
+    0xA9993E364706816ABA3E25717850C26C9CD0D89D,
+    0xC12252CEDA8BE8994D5FA0290A47231C1D16AAE3,
+    0x32D10C7B8CF96570CA04CE37F2A19D84240D3A89,
+    0x761C457BF73B14D27E9E9265C46F4B4DDA11F940,
+    0x50ABF5706A150990A08B2C5EA40FA0E585554732]

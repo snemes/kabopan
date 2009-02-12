@@ -13,10 +13,12 @@ except:
 
 import checksum.crc
 import crypt.has160
-import crypt.md2, crypt.md4, crypt.md5
-import crypt.sha0, crypt.sha1, crypt.sha224, crypt.sha256, crypt.sha384, crypt.sha512
+import crypt.md2
+import crypt.md4
+import crypt.sha
+import crypt.sha224, crypt.sha256, crypt.sha384, crypt.sha512
 import crypt.ripemd128, crypt.ripemd160, crypt.ripemd256, crypt.ripemd320
-import crypt.tiger, crypt.tiger128, crypt.tiger160, crypt.tiger2
+import crypt.tiger
 
 digesttest = lambda m, s:m.compute(s).hexdigest()
 
@@ -29,21 +31,21 @@ algorithms = {
     "has-160":lambda x:crypt.has160.has160().compute(x).hexdigest(),
     "md2":lambda x:crypt.md2.md2().compute(x).hexdigest(),
     "md4":lambda x:crypt.md4.md4().compute(x).hexdigest(),
-    "md5":lambda x:crypt.md5.md5().compute(x).hexdigest(),
+    "md5":lambda x:crypt.md4.md5().compute(x).hexdigest(),
     "ripemd-128":lambda x:crypt.ripemd128.ripemd128().compute(x).hexdigest(),
     "ripemd-160":lambda x:crypt.ripemd160.ripemd160().compute(x).hexdigest(),
     "ripemd-256":lambda x:crypt.ripemd256.ripemd256().compute(x).hexdigest(),
     "ripemd-320":lambda x:crypt.ripemd320.ripemd320().compute(x).hexdigest(),
-    "sha-0"     :lambda x:crypt.sha0.sha0().compute(x).hexdigest(),
-    "sha-1"     :lambda x:crypt.sha1.sha1().compute(x).hexdigest(),
+    "sha-0"     :lambda x:crypt.sha.sha0().compute(x).hexdigest(),
+    "sha-1"     :lambda x:crypt.sha.sha1().compute(x).hexdigest(),
     "sha-224"   :lambda x:crypt.sha224.sha224().compute(x).hexdigest(),
     "sha-256"   :lambda x:crypt.sha256.sha256().compute(x).hexdigest(),
     "sha-384"   :lambda x:crypt.sha384.sha384().compute(x).hexdigest(),
     "sha-512"   :lambda x:crypt.sha512.sha512().compute(x).hexdigest(),
-    "tiger"   :lambda x:crypt.tiger.tiger().compute(x).hexdigest(),
-    "tiger2"   :lambda x:crypt.tiger2.tiger2().compute(x).hexdigest(),
-    "tiger128"   :lambda x:crypt.tiger128.tiger128().compute(x).hexdigest(),
-    "tiger160"   :lambda x:crypt.tiger160.tiger160().compute(x).hexdigest(),
+    "tiger"     :lambda x:crypt.tiger.tiger().compute(x).hexdigest(),
+    "tiger2"    :lambda x:crypt.tiger.tiger2().compute(x).hexdigest(),
+    "tiger128"  :lambda x:crypt.tiger.tiger128().compute(x).hexdigest(),
+    "tiger160"  :lambda x:crypt.tiger.tiger160().compute(x).hexdigest(),
     #"adler32":_,
     #"flechter16":_,
     #"flechter32":_,

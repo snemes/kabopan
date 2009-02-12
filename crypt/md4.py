@@ -49,7 +49,9 @@ class md4(Hash.merkledamgaard):
         self.IVs = DWORDS(struct.unpack("<4L", hex2bin(IVhex)))
         self.pad_bit_7 = True
 
-
+    def compress(self, block, words):
+        return words
+        
     def round_parameters(self):
         f = [md4_.f, md4_.g, md4_.h][self.round]
         constant = md4_.constants[self.round]
@@ -82,6 +84,7 @@ class md4(Hash.merkledamgaard):
     def process_block(self, block):
         #compression
         words = self.as_words(block)
+        words = self.compress(block, words)
         #rounds
         bhvs = self.rounds(words)
         #integration
