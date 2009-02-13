@@ -10,6 +10,9 @@ standardize test_vectors for hashes
 create test class, use unittest
 merge hashes by families
 create utility friend class
+create a pickle class
+merge sha_
+merge IVs
 
 Bugs:
 ascii85

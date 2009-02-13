@@ -10,6 +10,16 @@ class sha_():
     f, g, h = md4_.f, md4_.h, md4_.g
     functions = [md4_.f, g, h, g]
 
+    @staticmethod
+    def round_f(a, b, c, d, e, f, rol1, rol2, words, words_index, k):
+        return [
+           a.rol(rol1) + f(b, c, d) + e + k + words[words_index],
+            a,
+            b.rol(rol2),
+            c,
+            d]
+
+
 class sha0(md4):
     def __init__(self):
         md4.__init__(self)
@@ -30,12 +40,7 @@ class sha0(md4):
             f = sha_.functions[round_]
             k = sha_.constants[round_]
             for i in range(20):
-                [a, b, c, d, e] = [
-                   a.rol(5) + f(b, c, d) + e + k + words[i + 20 * round_],
-                    a,
-                    b.rol(30),
-                    c,
-                    d]
+                [a, b, c, d, e] = sha_.round_f(a, b, c, d, e, f, 5, 30, words, i + 20 * round_, k)
         return [a, b, c, d, e]
 
 

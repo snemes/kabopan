@@ -18,6 +18,12 @@ class md4_():
             [3, 5,  9, 13],
             [3, 9, 11, 15]]
 
+    r = [
+            [
+            i,
+            ((i * 4) + (i / 4)) % 16 ,          # 0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15
+            [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15][i] ]
+        for i in range(16)]
 
     @staticmethod
     def f(b, c, d):
@@ -31,12 +37,10 @@ class md4_():
     def h(b, c, d):
         return (b ^ c ^ d)
 
-    @staticmethod
-    def r(i):
-        return [
-            i,
-            ((i * 4) + (i / 4)) % 16 ,          # 0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15
-            [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15][i] ]
+    hex = "0123456789ABCDEF"
+    IVhex = hex + hex[::-1]
+    IVs = DWORDS(struct.unpack("<4L", hex2bin(IVhex)))
+
 
 class md4(Hash.merkledamgaard):
     def __init__(self):
@@ -44,23 +48,11 @@ class md4(Hash.merkledamgaard):
         self.block_length = 512
         self.padding_size_encoding_length = 64
         self.hv_size = 32
-        hex = "0123456789ABCDEF"
-        IVhex = hex + hex[::-1]
-        self.IVs = DWORDS(struct.unpack("<4L", hex2bin(IVhex)))
+        self.IVs = DWORDS(md4_.IVs)
         self.pad_bit_7 = True
 
     def compress(self, block, words):
         return words
-        
-    def round_parameters(self):
-        f = [md4_.f, md4_.g, md4_.h][self.round]
-        constant = md4_.constants[self.round]
-        return f, constant
-
-    def iteration_parameters(self):
-        s = md4_.shifts[self.round][self.iteration % 4]
-        k = md4_.r(self.iteration)[self.round]
-        return s, k
 
     def pad(self, message):
         return pad_0_1_size(message, self.block_length, self.padding_size_encoding_length, self.padding_big_endianness, self.pad_bit_7)
@@ -69,12 +61,13 @@ class md4(Hash.merkledamgaard):
     def rounds(self, words):
         bhv = list(self.ihvs) # block hash values
         for self.round in range(3):  # rounds
-            F, constant = self.round_parameters()
+            F = [md4_.f, md4_.g, md4_.h][self.round]
+            constant = md4_.constants[self.round]
             for self.iteration in range(16): # iterations per round
-
                 #iteration-dependant parameters
                 [a, b, c, d] = [((j - self.iteration) % 4) for j in range(4)]
-                s, k = self.iteration_parameters()
+                s = md4_.shifts[self.round][self.iteration % 4]
+                k = md4_.r[self.iteration][self.round]
                 bhv[a] = (bhv[a] + F(bhv[b], bhv[c], bhv[d]) + words[k] + constant).rol(s)
         return bhv
 
@@ -117,28 +110,15 @@ class md5(md4):
     different round operation and parameters.
     """
 
-    def __init__(self):
-        md4.__init__(self)
-
-    def round_parameters(self):
-        function = [md4_.f, md5_.g, md4_.h, md5_.i][self.round]
-        return function
-
-
-    def iteration_parameters(self):
-        shift = md5_.shifts[self.round][self.iteration % 4]
-        k = md5_.K[self.iteration + self.round * 16]
-        mul, add = md5_.g_coefficients[self.round]
-        g = (mul * self.iteration + add) % 16
-        return shift, k, g
-
-
     def rounds(self, words):
         [a,b,c,d] = list(self.ihvs)
         for self.round in range(4):
-            function = self.round_parameters()
+            function = [md4_.f, md5_.g, md4_.h, md5_.i][self.round]
             for self.iteration in range(16):
-                shift, k, g = self.iteration_parameters()
+                shift = md5_.shifts[self.round][self.iteration % 4]
+                k = md5_.K[self.iteration + self.round * 16]
+                mul, add = md5_.g_coefficients[self.round]
+                g = (mul * self.iteration + add) % 16
                 [a,b,c,d] = [
                     d,
                     (a + function(b, c, d) + words[g] + k).rol(shift) + b,
@@ -148,4 +128,3 @@ class md5(md4):
 
 if __name__ == "__main__":
     import test.md4_test
-    import test.md5_test
