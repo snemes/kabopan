@@ -48,7 +48,7 @@ class md4(Hash.merkledamgaard):
         self.block_length = 512
         self.padding_size_encoding_length = 64
         self.hv_size = 32
-        self.IVs = DWORDS(md4_.IVs)
+        self.IVs = md4_.IVs
         self.pad_bit_7 = True
 
     def compress(self, block, words):

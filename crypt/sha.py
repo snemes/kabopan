@@ -18,12 +18,12 @@ class sha_():
             b.rol(rol2),
             c,
             d]
-
+    IVs = list(md4_.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
 
 class sha0(md4):
     def __init__(self):
         md4.__init__(self)
-        self.IVs += [DWORD(0xC0D0E0F0 | 0x03020100)]
+        self.IVs = sha_.IVs
         self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = True
         # function names are swapped
 

@@ -9,11 +9,10 @@
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
 import _misc as misc
+from sha import sha_
 from md4 import *
 
 class ripemd160_():
-
-    IVs = list(md4_.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
 
     ks = [misc.hsqrt(i) for i in [0, 2 ,3 , 5, 7]]
     Ks = [misc.hcbrt(i) for i in [2 ,3 , 5, 7, 0]]
@@ -70,7 +69,7 @@ class ripemd160_():
 class ripemd160(md5):
     def __init__(self):
         md5.__init__(self)
-        self.IVs = ripemd160_.IVs
+        self.IVs = sha_.IVs
 
 
 
@@ -96,7 +95,7 @@ class ripemd160(md5):
 
 class ripemd320_():
     #initialization vectors are extended by nibble-mirroring
-    IVs = list(ripemd160_.IVs) + [misc.nibbleswap(i, 4) for i in ripemd160_.IVs]
+    IVs = list(sha_.IVs) + [misc.nibbleswap(i, 4) for i in sha_.IVs]
 
 
 class ripemd320(ripemd160):

@@ -1,9 +1,8 @@
 
-from md4 import *
 
 from _misc import *
 from _int import *
-from ripemd import ripemd160_
+from md4 import *
 from sha import sha_
 
 class has160_():
@@ -22,7 +21,7 @@ class has160_():
 class has160(md4):
     def __init__(self):
         md4.__init__(self)
-        self.IVs = ripemd160_.IVs
+        self.IVs = sha_.IVs
 
     def rounds(self, words):
         words.extend((0 for i in xrange(20-16)))
