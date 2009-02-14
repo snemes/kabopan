@@ -63,10 +63,22 @@ class ripemd160_u():
         return (a + f(b, c, d) + w + k).rol(s) + e
 
     @staticmethod
-    def round_f(a, b, c, d, e, f, w, k, s):
+    def iteration_f(a, b, c, d, e, f, w, k, s):
         """permutation on a, b, c, d, e + transformation on b and d"""
         return e, ripemd160_u.T_(a, b, c, d, f, w, k, s, e), b, c.rol(10), d
 
+    @staticmethod
+    def round_f(round, a, b, c, d, e, A, B, C, D, E, words):
+        f = [ripemd160_u.f1, ripemd160_u.f2, ripemd160_u.f3, ripemd160_u.f4, ripemd160_u.f5][round]
+        F = [ripemd160_u.f5, ripemd160_u.f4, ripemd160_u.f3, ripemd160_u.f2, ripemd160_u.f1][round]
+        k, K = [j[round] for j in ripemd160_u.ks, ripemd160_u.Ks] # round-dependant parameters
+        for i in range(16):
+            #iteration-dependant parameters
+            s, S, r, R = ripemd160_u.ss[round][i], ripemd160_u.Ss[round][i], ripemd160_u.rs[i][round], ripemd160_u.Rs[i][round]
+
+            a, b, c, d, e = ripemd160_u.iteration_f(a,b,c,d,e,f, words[r], k, s)
+            A, B, C, D, E = ripemd160_u.iteration_f(A,B,C,D,E,F, words[R], K, S)    # the same
+        return a, b, c, d, e, A, B, C, D, E
 
 class ripemd160(md5):
     def __init__(self):
@@ -76,15 +88,7 @@ class ripemd160(md5):
     def rounds(self, words):
         a, b, c, d, e = A, B, C, D, E = list(self.ihvs)
         for round in range(5):
-            f = [ripemd160_u.f1, ripemd160_u.f2, ripemd160_u.f3, ripemd160_u.f4, ripemd160_u.f5][round]
-            F = [ripemd160_u.f5, ripemd160_u.f4, ripemd160_u.f3, ripemd160_u.f2, ripemd160_u.f1][round]
-            k, K = [j[round] for j in ripemd160_u.ks, ripemd160_u.Ks] # round-dependant parameters
-            for i in range(16):
-                #iteration-dependant parameters
-                s, S, r, R = ripemd160_u.ss[round][i], ripemd160_u.Ss[round][i], ripemd160_u.rs[i][round], ripemd160_u.Rs[i][round]
-
-                a, b, c, d, e = ripemd160_u.round_f(a,b,c,d,e,f, words[r], k, s)
-                A, B, C, D, E = ripemd160_u.round_f(A,B,C,D,E,F, words[R], K, S)    # the same
+            a, b, c, d, e, A, B, C, D, E = ripemd160_u.round_f(round, a, b, c, d, e, A, B, C, D, E, words)
         return a, b, c, d, e, A, B, C, D, E
 
 
@@ -120,15 +124,7 @@ class ripemd320(ripemd160):
         a, b, c, d, e, A, B, C, D, E = self.ihvs
         # ripemd standard round...
         for round in range(5):
-            f = [ripemd160_u.f1, ripemd160_u.f2, ripemd160_u.f3, ripemd160_u.f4, ripemd160_u.f5][round]
-            F = [ripemd160_u.f5, ripemd160_u.f4, ripemd160_u.f3, ripemd160_u.f2, ripemd160_u.f1][round]
-            k, K = [j[round] for j in ripemd160_u.ks, ripemd160_u.Ks] # round-dependant parameters
-            for i in range(16):
-                #iteration-dependant parameters
-                s, S, r, R = ripemd160_u.ss[round][i], ripemd160_u.Ss[round][i], ripemd160_u.rs[i][round], ripemd160_u.Rs[i][round]
-
-                a, b, c, d, e = ripemd160_u.round_f(a,b,c,d,e,f, words[r], k, s)
-                A, B, C, D, E = ripemd160_u.round_f(A,B,C,D,E,F, words[R], K, S)    # the same
+            a, b, c, d, e, A, B, C, D, E = ripemd160_u.round_f(round, a, b, c, d, e, A, B, C, D, E, words)
             # ...with an extra swap at the end of each round
             if round == 0L:
                 b, B = B, b
@@ -161,9 +157,22 @@ class ripemd128_u():
         return (a + f(b, c, d) + w + k).rol(s)
 
     @staticmethod
-    def round_f(a, b, c, d, f, w, k, s):
+    def iteration_f(a, b, c, d, f, w, k, s):
         """permutation on a, b, c, d + transformation on b and d"""
         return d, ripemd128_u.T_(a, b, c, d, f, w, k, s), b, c # no rotation on C for rmd128
+
+    @staticmethod
+    def round_f(round, a, b, c, d, A, B, C, D, words):
+        f = [ripemd160_u.f1, ripemd160_u.f2, ripemd160_u.f3, ripemd160_u.f4][round]
+        F = [ripemd160_u.f4, ripemd160_u.f3, ripemd160_u.f2, ripemd160_u.f1][round]
+        k, K = [j[round] for j in ripemd128_u.ks, ripemd128_u.Ks] #round-dependant parameters
+        for i in range(16):
+            # iteration dependant parameters
+            s, S, r, R = ripemd128_u.ss[round][i], ripemd128_u.Ss[round][i], ripemd128_u.rs[i][round], ripemd128_u.Rs[i][round]
+
+            a, b, c, d = ripemd128_u.iteration_f(a, b, c, d, f, words[r], k, s)
+            A, B, C, D = ripemd128_u.iteration_f(A, B, C, D, F, words[R], K, S)
+        return a, b, c, d, A, B, C, D
 
 
 class ripemd128(ripemd160):
@@ -176,19 +185,10 @@ class ripemd128(ripemd160):
         ripemd160.__init__(self)
         self.IVs = ripemd128_u.IVs
 
-
     def rounds(self, words):
         a, b, c, d = A, B, C, D = list(self.ihvs)
         for round in range(4):
-            f = [ripemd160_u.f1, ripemd160_u.f2, ripemd160_u.f3, ripemd160_u.f4][round]
-            F = [ripemd160_u.f4, ripemd160_u.f3, ripemd160_u.f2, ripemd160_u.f1][round]
-            k, K = [j[round] for j in ripemd128_u.ks, ripemd128_u.Ks] #round-dependant parameters
-            for i in range(16):
-                # iteration dependant parameters
-                s, S, r, R = ripemd128_u.ss[round][i], ripemd128_u.Ss[round][i], ripemd128_u.rs[i][round], ripemd128_u.Rs[i][round]
-
-                a, b, c, d = ripemd128_u.round_f(a, b, c, d, f, words[r], k, s)
-                A, B, C, D = ripemd128_u.round_f(A, B, C, D, F, words[R], K, S)
+            a, b, c, d, A, B, C, D = ripemd128_u.round_f(round, a, b, c, d, A, B, C, D, words)
         return a, b, c, d, A, B, C, D
 
     def combine(self, bhvs):
@@ -224,14 +224,7 @@ class ripemd256(ripemd128):
         a, b, c, d, A, B, C, D,= self.ihvs
         # ripemd standard round...
         for round in range(4):
-            f = [ripemd160_u.f1, ripemd160_u.f2, ripemd160_u.f3, ripemd160_u.f4][round]
-            F = [ripemd160_u.f4, ripemd160_u.f3, ripemd160_u.f2, ripemd160_u.f1][round]
-            k, K = [j[round] for j in ripemd128_u.ks, ripemd128_u.Ks] #round-dependant parameters
-            for i in range(16):
-                #iteration-dependant parameters
-                s, S, r, R = ripemd128_u.ss[round][i], ripemd128_u.Ss[round][i], ripemd128_u.rs[i][round], ripemd128_u.Rs[i][round]
-                a, b, c, d, = ripemd128_u.round_f(a,b,c,d,f, words[r], k, s)
-                A, B, C, D, = ripemd128_u.round_f(A,B,C,D,F, words[R], K, S)    # the same
+            a, b, c, d, A, B, C, D = ripemd128_u.round_f(round, a, b, c, d, A, B, C, D, words)
             # ...with an extra swap at the end of each round
             if round == 0:
                 a, A = A, a
