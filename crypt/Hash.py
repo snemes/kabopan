@@ -2,8 +2,12 @@ import _misc
 import struct
 from _int import Int
 class Hash:
+    """
+    base class for cryptographic hashes
+    """
     def __init__(self):
         self.IVs = None
+        self.ihvs = None
         self.block_length = 8
         self.hv_size = 8
         self.output_big_endianness = False
@@ -38,12 +42,17 @@ class Hash:
 
 
 class merkledamgaard(Hash):
+    """
+    Merkle-Damgaard model of cryptographic hashes
 
-    def round_parameters(self):
-        return
-
-    def iteration_parameters(self, round):
-        return
+    the message is padded, 
+    the Intermediate Hash Values are initialised with the Initialisation Vectors values.
+    the message is processed by blocks.
+    for each of this block:
+    * some block intermediate hash values are computed
+    * then those block IHVs are combined with the current IHVs, usually by summing both sets.
+    the digest is computed from the final IHVs, usually by concatenation
+    """
 
     def as_words(self, block):
         count_ = self.block_length / self.hv_size

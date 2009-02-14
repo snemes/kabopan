@@ -1,7 +1,8 @@
-#Secure Hash Algorithm 2 - SHA-2, SHA256
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
-
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Secure Hash Algorithm 2 - SHA-2
+sha-512, sha-384, sha-256, sha-224
+"""
 
 from md4 import *
 from _sha2 import nroot_primes
@@ -9,6 +10,7 @@ from _sha2 import nroot_primes
 import _pickle as p
 
 class sha512_():
+    """utility class for sha-512"""
     pickled = p.get_variables("sha512", ["IVs", "K"])
     if pickled is None:
 
@@ -33,32 +35,20 @@ class sha512(md4):
         self.IVs = sha512_.IVs
         self.K = sha512_.K
 
-    def rxrxr(self, x, i1, i2, i3):
-        """rol ^ rol ^ rol """
-        return x.ror(i1) ^ x.ror(i2) ^ x.ror(i3)
-    def rxrxs(self, x, i1, i2, i3):
-        """rol ^ rol ^ shift """
-        return x.ror(i1) ^ x.ror(i2) ^ (x >> i3)
 
-    def f1(self, x):
-        return self.rxrxr(x, 28, 34, 39)
-    def f2(self, x):
-        return self.rxrxr(x, 14, 18, 41)
+    def f1(self, x):    return x.ror(28) ^ x.ror(34) ^ x.ror(39)
+    def f2(self, x):    return x.ror(14) ^ x.ror(18) ^ x.ror(41)
 
-    def f3(self, x):
-        return self.rxrxs(x,  1,  8, 7)
-    def f4(self, x):
-        return self.rxrxs(x, 19, 61, 6)
+    def f3(self, x):    return x.ror( 1) ^ x.ror( 8) ^ (x >> 7)
+    def f4(self, x):    return x.ror(19) ^ x.ror(61) ^ (x >> 6)
 
-    def maj(self, x, y, z):
-        return ((x & y) ^ (x & z) ^ (y & z))
-    def ch(self, x, y, z):
-        return (x & y) ^ ((~x) & z)
+    def maj(self, x, y, z): return (x & y) ^ (x & z) ^ (y & z)
+    def ch(self, x, y, z):  return (x & y) ^ ((~x) & z)
 
     def compress(self, block, words):
         words.extend(0 for i in xrange(self.nb_rounds - 16))
         for i in range(16, self.nb_rounds):
-            words[i] = words[i-16] + self.f3(words[i-15]) + words[i-7] + self.f4(words[i-2])
+            words[i] = words[i - 16] + self.f3(words[i - 15]) + words[i - 7] + self.f4(words[i - 2])
         return words
 
     def rounds(self, words):
@@ -74,9 +64,11 @@ class sha512(md4):
         return [a, b, c, d, e, f, g, h]
 
 class sha384_():
+    """utility class for sha-384"""
     pickled = p.get_variables("sha384", ["IVs"])
     if pickled is None:
 
+        # 64bits representation of fractional parts of square root of the 8th to 16th first primes
         IVs = nroot_primes(8, 16, 2, 64)
 
         p.save_variables("sha384", {"IVs": IVs})
@@ -84,20 +76,36 @@ class sha384_():
         IVs = pickled["IVs"]
 
 class sha384(sha512):
+    """
+    sha-384 is based on sha-512
+    
+    it's sha-512 with different (but similarly computed) initialisation vectors,
+    and the final digest is the first 384 bits of sha-512's
+    """
     def __init__(self):
         sha512.__init__(self)
         self.IVs = sha384_.IVs
 
     def digest(self):
-        return sha512.digest(self)[:48]
+        return sha512.digest(self)[:384 / 8]
 
 
 class sha256_():
+    """utility class for sha-256"""
     #highest 4 bytes of sha512 IVs and K
-    IVs = [i[:4] for i in  sha512_.IVs]
-    K = [i[:4] for i in sha512_.K[:64]]
+    IVs = [i[:32 / 8] for i in  sha512_.IVs]
+    K = [i[:32 / 8] for i in sha512_.K[:64]]
 
 class sha256(sha512):
+    """
+    sha-256 is based on sha-512
+    
+    it's sha-512 with IHVs on 32 bits instead of 64: 
+    * the initialisations vectors and the constants K are the highest 32bits of their sha-512 counterparts.
+    also it's using 64 rounds instead of 80, thus:
+    * the F1-4 functions need different constants
+    the message length is is encoded on 64 bits instead of 128, during the padding
+    """
     def __init__(self):
         sha512.__init__(self)
         self.nb_rounds = 64
@@ -108,17 +116,14 @@ class sha256(sha512):
         self.IVs = sha256_.IVs
 
 
-    def f1(self, x):
-        return self.rxrxr(x,  2, 13, 22)
-    def f2(self, x):
-        return self.rxrxr(x,  6, 11, 25)
+    def f1(self, x):    return x.ror( 2) ^ x.ror(13) ^ x.ror(22)
+    def f2(self, x):    return x.ror( 6) ^ x.ror(11) ^ x.ror(25)
+    def f3(self, x):    return x.ror( 7) ^ x.ror(18) ^ (x >>  3)
+    def f4(self, x):    return x.ror(17) ^ x.ror(19) ^ (x >> 10)
 
-    def f3(self, x):
-        return self.rxrxs(x,  7, 18,  3)
-    def f4(self, x):
-        return self.rxrxs(x, 17, 19, 10)
 
 class sha224_():
+    """utility class for sha-224"""
     pickled = p.get_variables("sha224", ["IVs"])
     if pickled is None:
 
@@ -129,12 +134,18 @@ class sha224_():
         IVs = pickled["IVs"]
 
 class sha224(sha256):
+    """
+    sha-224 is based on sha-256
+    
+    it's sha-224 with sha-384 IVs
+    and the final digest is the first 224 bits of sha-256's
+    """
     def __init__(self):
         sha256.__init__(self)
         self.IVs = sha224_.IVs
 
     def digest(self):
-        return sha256.digest(self)[:28]
+        return sha256.digest(self)[:224 / 8]
 
 if __name__ == "__main__":
     import test.sha2_test

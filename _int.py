@@ -1,8 +1,7 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
-
-
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""customised standard type classes"""
 class List(list):
+    """list with left and right rotation, as << and >>"""
     def __lshift__(self, other):
         l = len(self)
         limit = other % l
@@ -14,6 +13,10 @@ class List(list):
         return List(self[limit:] + self[:limit])
 
 class Int():
+    """
+    integers with limited length encoding, and extra methods
+    
+    """
     def __init__(self, number, width):
         self.width = width
         self.modulo = 1 << width

@@ -1,6 +1,11 @@
-#MD4 - Message Digest 4 / Cryptographic hash / The MD4 Message-Digest Algorithm / Ron Rivest, 1992
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+#MD4 - Message Digest 4
+
+Cryptographic hash 
+The MD4 Message-Digest Algorithm
+Ron Rivest, 1992
+"""
 
 
 import struct
@@ -10,7 +15,7 @@ from _int import *
 import Hash
 
 class md4_():
-    """constants and functions of MD4 cryptographic hash"""
+    """utility class for MD4 cryptographic hash"""
     constants = [hsqrt(i) for i in [0, 2, 3]]
 
     shifts = [
@@ -84,7 +89,7 @@ class md4(Hash.merkledamgaard):
         self.combine(bhvs)
 
 class md5_():
-    """constants and functions of md5 cryptographic hash"""
+    """utility class for MD5 cryptographic hash"""
     g_coefficients = [[1,0], [5, 1], [3, 5], [7,0]]
     K = DWORDS([abs(sin(i + 1)) * (2**32) for i in range(16 * 4)])
     shifts = [
@@ -104,7 +109,8 @@ class md5_():
 
 class md5(md4):
     """
-    MD4 with:
+    MD5 is based on MD4
+    
     modified G
     extra round with its function I
     different round operation and parameters.

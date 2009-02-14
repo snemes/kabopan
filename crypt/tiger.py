@@ -1,9 +1,10 @@
-#Tiger Hash
-#Cryptographic Hash
-#Ross Anderson and Eli Biham, 1996
-#Tiger - A Fast New Hash Function
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Tiger Hash, Cryptographic Hash
+Tiger - A Fast New Hash Function
+Ross Anderson and Eli Biham, 1996
+tiger/192, tiger/160, tiger/128, tiger-2
+"""
 
 try:
     import psyco
@@ -17,6 +18,7 @@ from _int import QWORD, BYTE, List
 import tiger_const
 
 class tiger(md4):
+    """tiger/192 cryptographic class"""
     def __init__(self):
         md4.__init__(self)
         self.hv_size = 64
@@ -170,18 +172,18 @@ class tiger(md4):
 """
 
 class tiger128(tiger):
-    """tiger/128 is tiger with the digest truncated to 128 bits"""
+    """tiger/128 is tiger/192 with the digest truncated to 128 bits"""
     def digest(self):
-        return tiger.digest(self)[:16]
+        return tiger.digest(self)[:128 / 8]
 
 class tiger160(tiger):
-    """tiger/160 is tiger with the digest truncated to 160 bits"""
+    """tiger/160 is tiger/192 with the digest truncated to 160 bits"""
 
     def digest(self):
-        return tiger.digest(self)[:20]
+        return tiger.digest(self)[:160 / 8]
 
 class tiger2(tiger):
-    """tiger2 is tiger with the same padding as md4: bit 7 is used first"""
+    """tiger-2 is tiger/192 with the same padding as md4: bit 7 is used first"""
     def __init__(self):
         tiger.__init__(self)
         self.pad_bit_7 = True

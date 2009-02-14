@@ -1,18 +1,20 @@
-#RIPEMD
-#RIPEMD-128/160/256/320
-#RACE Integrity Primitives Evaluation Message Digest
-#Hans Dobbertin, Antoon Bosselaers and Bart Preneel, 1960
-#http://homes.esat.kuleuven.be/~bosselae/ripemd160.html
-#
-#RIPEMD-160, a strengthened version of RIPEMD, 1996
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+RIPEMD
+RIPEMD-128/160/256/320
+RACE Integrity Primitives Evaluation Message Digest
+Hans Dobbertin, Antoon Bosselaers and Bart Preneel, 1960
+http://homes.esat.kuleuven.be/~bosselae/ripemd160.html
+
+RIPEMD-160, a strengthened version of RIPEMD, 1996
+"""
 
 import _misc as misc
 from sha import sha_
 from md4 import *
 
 class ripemd160_():
+    """utility class for RIPEMD-160 cryptographic hash"""
 
     ks = [misc.hsqrt(i) for i in [0, 2 ,3 , 5, 7]]
     Ks = [misc.hcbrt(i) for i in [2 ,3 , 5, 7, 0]]
@@ -94,6 +96,7 @@ class ripemd160(md5):
 
 
 class ripemd320_():
+    """utility class for RIPEMD-320 cryptographic hash"""
     #initialization vectors are extended by nibble-mirroring
     IVs = list(sha_.IVs) + [misc.nibbleswap(i, 4) for i in sha_.IVs]
 
@@ -141,6 +144,7 @@ class ripemd320(ripemd160):
         return a, b, c, d, e, A, B, C, D, E
 
 class ripemd128_():
+    """utility class for RIPEMD-128 cryptographic hash"""
     # 4 rounds instead of 5
     # same as ripemd160, without the last elements, and f5 not beeing used
     IVs, ss, Ss, ks, Ks = [
@@ -194,14 +198,16 @@ class ripemd128(ripemd160):
 
 
 class ripemd256_():
+    """utility class for RIPEMD-256 cryptographic hash"""
     #initialization vectors are extended by nibble-mirroring
     IVs = list(ripemd128_.IVs) + [misc.nibbleswap(i, 4) for i in ripemd128_.IVs]
 
 class ripemd256(ripemd128):
     """
-    Ripemd-256 is base Ripemd-128,
-    but instead of combining both sets of intermediate hash values at the end of each round,
-    it stores them separately, with an extra swap.
+    Ripemd-256 is based on Ripemd-128
+
+    instead of combining both sets of intermediate hash values at the end of each round,
+    it stores them separately, with an extra swap at the end of each round
     thus, it doesn't increase security over Ripemd-128, but just extends
     the size of the hash.
     """
