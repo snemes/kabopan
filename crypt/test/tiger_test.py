@@ -1,18 +1,10 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""tests for tiger family: tiger, tiger-2, tiger-160, tiger-128"""
 
 from crypt.tiger import *
 from _misc import test_vector_strings, ass
 
 IVs = [0x0123456789abcdef, 0xfedcba9876543210, 0xf096a5b4c3b2e187]
-
-
-class test(tiger):
-    def __init__(self):
-        tiger.__init__(self)
-        assert [int(i) for i in self.IVs] == IVs
-test()
-
 
 Ss_test = [
     [
@@ -533,7 +525,7 @@ Ss_test = [
     0xC83223F1720AEF96, 0xC3A0396F7363A51F]]
 
 
-test_vectors = [
+tiger_test_vectors = [
     0x3293ac630c13f0245f92bbb1766e16167a4e58492dde73f3,
     0x77befbef2e7ef8ab2ec8f93bf587a7fc613e247f5f247809,
     0x2aab1484e8c158f2bfb8c5ff41b57a525129131c957b5f93,
@@ -542,9 +534,12 @@ test_vectors = [
     0x8dcea680a17583ee502ba38a3c368651890ffbccdc49a8cc,
     0x1c14795529fd9f207a958f84c52f11e887fa0cabdfd91bfd]
 
-ass(test_vectors, [tiger().compute(s).digest() for s in test_vector_strings], "test vectors")
+#TODO:didn't make a friendly class for tiger yet. fix constant generation first
+#ass(IVs, tiger_.IVs, "tiger IVs")
+#ass(Ss_test, tiger_.S, "tiger s-boxes")
+ass(tiger_test_vectors, [tiger().compute(s).digest() for s in test_vector_strings], "test vectors")
 
-test_vectors = [
+tiger160_test_vectors = [
     0x3293ac630c13f0245f92bbb1766e16167a4e5849,
     0x77befbef2e7ef8ab2ec8f93bf587a7fc613e247f,
     0x2aab1484e8c158f2bfb8c5ff41b57a525129131c,
@@ -553,9 +548,9 @@ test_vectors = [
     0x8dcea680a17583ee502ba38a3c368651890ffbcc,
     0x1c14795529fd9f207a958f84c52f11e887fa0cab]
 
-ass(test_vectors, [tiger160().compute(s).digest() for s in test_vector_strings], "tiger-160 test vectors")
+ass(tiger160_test_vectors, [tiger160().compute(s).digest() for s in test_vector_strings], "tiger-160 test vectors")
 
-test_vectors = [
+tiger128_test_vectors = [
     0x3293ac630c13f0245f92bbb1766e1616,
     0x77befbef2e7ef8ab2ec8f93bf587a7fc,
     0x2aab1484e8c158f2bfb8c5ff41b57a52,
@@ -564,10 +559,9 @@ test_vectors = [
     0x8dcea680a17583ee502ba38a3c368651,
     0x1c14795529fd9f207a958f84c52f11e8]
 
+ass(tiger128_test_vectors, [tiger128().compute(s).digest() for s in test_vector_strings], "tiger-128 test vectors")
 
-ass(test_vectors, [tiger128().compute(s).digest() for s in test_vector_strings], "tiger-128 test vectors")
-
-test_vectors = [
+tiger2_test_vectors = [
     0x4441BE75F6018773C206C22745374B924AA8313FEF919F41,
     0x67E6AE8E9E968999F70A23E72AEAA9251CBC7C78A7916636,
     0xF68D7BC5AF4B43A06E048D7829560D4A9415658BB0B1F3BF,
@@ -576,4 +570,4 @@ test_vectors = [
     0xEA9AB6228CEE7B51B77544FCA6066C8CBB5BBAE6319505CD,
     0xD85278115329EBAA0EEC85ECDC5396FDA8AA3A5820942FFF]
 
-ass(test_vectors, [tiger2().compute(s).digest() for s in test_vector_strings], "tiger-2 test vectors")
+ass(tiger2_test_vectors, [tiger2().compute(s).digest() for s in test_vector_strings], "tiger-2 test vectors")

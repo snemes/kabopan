@@ -1,5 +1,4 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 from crypt.md2 import *
 from _misc import test_vector_strings

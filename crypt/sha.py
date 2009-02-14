@@ -1,14 +1,16 @@
-#Secure Hash Standard - SHS - SHA-0
-#RFC 3174
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
-
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Secure Hash Standard - SHS - SHA-0
+RFC 3174
+"""
 from md4 import *
 from _int import DWORD
 
 class sha_():
     constants = [hsqrt(i) for i in [2, 3, 5, 10]]
     f, g, h = md4_.f, md4_.h, md4_.g
-    functions = [md4_.f, g, h, g]
+    functions = [f, g, h, g]
+    IVs = list(md4_.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
 
     @staticmethod
     def round_f(a, b, c, d, e, f, rol1, rol2, words, words_index, k):
@@ -18,9 +20,15 @@ class sha_():
             b.rol(rol2),
             c,
             d]
-    IVs = list(md4_.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
+
 
 class sha0(md4):
+    """
+    sha-0 is based on md4. 
+    size padding, block splitting and merging are big endian.
+    it extends the words from 16 to 80 by combining.
+    it adds an extra round, and uses the same function and constant for each round
+    """
     def __init__(self):
         md4.__init__(self)
         self.IVs = sha_.IVs
@@ -45,7 +53,7 @@ class sha0(md4):
 
 
 class sha1(sha0):
-
+    """sha-1 is a revision of sha-0. a 1-bit left rotation is added during word compression"""
     def compress(self, block, words):
         words.extend(0 for i in xrange(80 - 16))
         for i in range(16, 80):

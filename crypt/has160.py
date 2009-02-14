@@ -1,4 +1,4 @@
-
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 from _misc import *
 from _int import *

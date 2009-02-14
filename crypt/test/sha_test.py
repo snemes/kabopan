@@ -1,30 +1,25 @@
-
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""tests for sha-0 and sha-1"""
 
 from crypt.sha import *
 from _misc import test_vector_strings, hex2bin, ass
 
+hash0 = lambda x: sha0().compute(x).digest()
+hash1 = lambda x: sha1().compute(x).digest()
+
 IVs = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0]
 
-class test(sha0):
-    def __init__(self):
-        sha0.__init__(self)
-        assert [int(i) for i in self.IVs] == IVs
-test()
-
-hash = lambda x: sha0().compute(x).digest()
-
-for i, tv in enumerate(test_vector_strings):
-    assert hash(tv) == [
+sha0_test_vectors = [
     0xf96cea198ad1dd5617ac084a3d92c6107708c0ef,
     0x37f297772fae4cb1ba39b6cf9cf0381180bd62f2,
     0x0164b8a914cd2a5e74c4f7ff082c4d97f1edf880,
     0xc1b0f222d150ebb9aa36a40cafdc8bcbed830b14,
     0xb40ce07a430cfd3c033039b9fe9afec95dc1bdcd,
     0x79e966f7a3a990df33e40e3d7f8f18d2caebadfa,
-    0x4aa29d14d171522ece47bee8957e35a41f3e9cff][i], "Sha-0 test vectors"
+    0x4aa29d14d171522ece47bee8957e35a41f3e9cff]
 
+ass(IVs, IVs, "sha-0 IVs")
+ass(sha0_test_vectors, [hash0(s) for s in test_vector_strings], "sha-0 test vectors")
 
 #full collision, by Antoine Joux, Patrick Carribault, Christophe Lemuet, William Jalby
 a = [
@@ -48,14 +43,9 @@ b = [
 
 a, b = [hex2bin("".join(s).replace(" ", "")) for s in [a, b]]
 
-assert hash(a) == hash(b)
+ass(hash0(a), hash0(b), "sha-0 collision")
 
-def hash(msg):
-    m = sha1()
-    m.compute(msg)
-    return m.digest()
-
-assert [hash(s) for s in test_vector_strings] == [
+sha1_test_vectors = [
     0xDA39A3EE5E6B4B0D3255BFEF95601890AFD80709,
     0x86F7E437FAA5A7FCE15D1DDCB9EAEAEA377667B8,
     0xA9993E364706816ABA3E25717850C26C9CD0D89D,
@@ -63,3 +53,5 @@ assert [hash(s) for s in test_vector_strings] == [
     0x32D10C7B8CF96570CA04CE37F2A19D84240D3A89,
     0x761C457BF73B14D27E9E9265C46F4B4DDA11F940,
     0x50ABF5706A150990A08B2C5EA40FA0E585554732]
+
+ass(sha1_test_vectors, [hash1(s) for s in test_vector_strings], "sha-1 test vectors")

@@ -1,12 +1,14 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""tests for MD4 and MD5"""
 
-from _misc import rol, hex2bin
+from _misc import rol, hex2bin, test_vector_strings
 from crypt.md4 import *
 
-from _misc import test_vector_strings
+hashmd4 = lambda x: md4().compute(x).digest()
 
-test_vectors = [
+md4_IVs = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476]
+
+md4_test_vectors = [
     0x31d6cfe0d16ae931b73c59d7e0c089c0,
     0xbde52cb31de33e46245e05fbdbd6fb24,
     0xa448017aaf21d8525fc10ae87aa6729d,
@@ -15,24 +17,57 @@ test_vectors = [
     0x043f8582f241db351ce627e153e7f0e4,
     0xe33b4ddc9c38f2199c3e7b164fcc0536]
 
-test_IVs = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476]
-hash = lambda x: md4().compute(x).digest()
-assert [hash(s) for s in test_vector_strings] == test_vectors
-
 # collision, XiaoyunWang, Dengguo Feng, Xuejia Lai, Hongbo Yu, 2004
 
-a = [
+a4 = [
 "839c7a4d 7a92cb56 78a5d5b9 eea5a757 3c8a74de b366c3dc 20a083b6 9f5d2a3b",
 "b3719dc6 9891e9f9 5e809fd7 e8b23ba6 318edd45 e51fe397 08bf9427 e9c3e8b9"]
 
-b = [
+b4 = [
 "839c7a4d 7a92cbd6 78a5d529 eea5a757 3c8a74de b366c3dc 20a083b6 9f5d2a3b",
 "b3719dc6 9891e9f9 5e809fd7 e8b23ba6 318edc45 e51fe397 08bf9427 e9c3e8b9"]
 
-a, b = [hex2bin("".join(s).replace(" ", "")) for s in [a, b]]
+md4_a, md4_b = [hex2bin("".join(s).replace(" ", "")) for s in [a4, b4]]
 
 
-assert hash(a) == hash(b)
+ass(md4_.IVs, md4_IVs, "md4 IVs")
+ass(md4_test_vectors, [hashmd4(s) for s in test_vector_strings], "md4 test vectors")
+assert hashmd4(md4_a) == hashmd4(md4_b)
+
+# MD5
+hashmd5 = lambda x: md5().compute(x).digest()
+
+md5_test_vectors = [
+    0xd41d8cd98f00b204e9800998ecf8427e,
+    0x0cc175b9c0f1b6a831c399e269772661,
+    0x900150983cd24fb0d6963f7d28e17f72,
+    0xf96b697d7cb7938d525a2f31aaf161d0,
+    0xc3fcd3d76192e4007dfb496cca67e13b,
+    0xd174ab98d277d9f5a5611c2c9f419d9f,
+    0x57edf4a22be3c955ac49da2e2107b67a]
+
+# collision, XiaoyunWang, Dengguo Feng, Xuejia Lai, Hongbo Yu, 2004
+a5 = [
+"d131dd02c5e6eec4693d9a0698aff95c 2fcab58712467eab4004583eb8fb7f89",
+"55ad340609f4b30283e488832571415a 085125e8f7cdc99fd91dbdf280373c5b",
+"d8823e3156348f5bae6dacd436c919c6 dd53e2b487da03fd02396306d248cda0",
+"e99f33420f577ee8ce54b67080a80d1e c69821bcb6a8839396f9652b6ff72a70"]
+
+b5 = [
+"d131dd02c5e6eec4693d9a0698aff95c 2fcab50712467eab4004583eb8fb7f89",
+"55ad340609f4b30283e4888325f1415a 085125e8f7cdc99fd91dbd7280373c5b",
+"d8823e3156348f5bae6dacd436c919c6 dd53e23487da03fd02396306d248cda0",
+"e99f33420f577ee8ce54b67080280d1e c69821bcb6a8839396f965ab6ff72a70"]
+
+md5_a, md5_b = [hex2bin("".join(s).replace(" ", "")) for s in [a5, b5]]
+
+
+ass(md5_test_vectors, [hashmd5(s) for s in test_vector_strings], "md5 test vectors")
+assert hashmd5(md5_a) == hashmd5(md5_b)
+
+
+#EXTRA, obsolete
+#md4 round parameters usual representation
 md4_rounds = [
     'A BCD 00 03 f 0x00000000',
     'D ABC 01 07 f 0x00000000',
@@ -83,48 +118,10 @@ md4_rounds = [
     'C DAB 07 11 h 0x6ED9EBA1',
     'B CDA 15 15 h 0x6ED9EBA1']
 
+#s = "%s %s%s%s %02i %02i %s 0x%08X" % (ABCD[a], ABCD[b], ABCD[c], ABCD[d], k, s, f.__name__, constant)
 
 
-
-class test(md4):
-    def __init__(self):
-        md4.__init__(self)
-        assert [int(i) for i in self.IVs] == test_IVs
-
-        # check that we generate the usual representation of md4 rounds
-        l = list()
-        ABCD = ["A", "B", "C", "D"]
-
-        for self.round in range(3):  # rounds
-            f = [md4_.f, md4_.g, md4_.h][self.round]
-            constant = md4_.constants[self.round]
-            for self.iteration in range(16): # iterations per round
-                [a, b, c, d] = [((j - self.iteration) % 4) for j in range(4)]
-                s = md4_.shifts[self.round][self.iteration % 4]
-                k = md4_.r[self.iteration][self.round]
-
-                s = "%s %s%s%s %02i %02i %s 0x%08X" % (ABCD[a], ABCD[b], ABCD[c], ABCD[d], k, s, f.__name__, constant)
-                l.append(s)
-
-        assert l == md4_rounds
-
-test()
-
-hash = lambda x: md5().compute(x).digest()
-
-test_vectors = [
-    0xd41d8cd98f00b204e9800998ecf8427e,
-    0x0cc175b9c0f1b6a831c399e269772661,
-    0x900150983cd24fb0d6963f7d28e17f72,
-    0xf96b697d7cb7938d525a2f31aaf161d0,
-    0xc3fcd3d76192e4007dfb496cca67e13b,
-    0xd174ab98d277d9f5a5611c2c9f419d9f,
-    0x57edf4a22be3c955ac49da2e2107b67a]
-
-assert [hash(s) for s in test_vector_strings] == test_vectors
-
-
-# let's check results of our round parameters generator
+#md5 round parameters usual representation
 md5_rounds = [
  [ 7, "f",  0, 0xD76AA478],
  [12, "f",  1, 0xE8C7B756],
@@ -191,39 +188,3 @@ md5_rounds = [
  [15, "i", 02, 0x2AD7D2BB],
  [21, "i",  9, 0xEB86D391]
 ]
-
-# collision, XiaoyunWang, Dengguo Feng, Xuejia Lai, Hongbo Yu, 2004
-
-a = [
-"d131dd02c5e6eec4693d9a0698aff95c 2fcab58712467eab4004583eb8fb7f89",
-"55ad340609f4b30283e488832571415a 085125e8f7cdc99fd91dbdf280373c5b",
-"d8823e3156348f5bae6dacd436c919c6 dd53e2b487da03fd02396306d248cda0",
-"e99f33420f577ee8ce54b67080a80d1e c69821bcb6a8839396f9652b6ff72a70"]
-
-b = [
-"d131dd02c5e6eec4693d9a0698aff95c 2fcab50712467eab4004583eb8fb7f89",
-"55ad340609f4b30283e4888325f1415a 085125e8f7cdc99fd91dbd7280373c5b",
-"d8823e3156348f5bae6dacd436c919c6 dd53e23487da03fd02396306d248cda0",
-"e99f33420f577ee8ce54b67080280d1e c69821bcb6a8839396f965ab6ff72a70"]
-
-a, b = [hex2bin("".join(s).replace(" ", "")) for s in [a, b]]
-
-assert hash(a) == hash(b)
-
-class test(md5):
-    def __init__(self):
-        md5.__init__(self)
-
-        rounds = list()
-        for self.round in range(4):
-            function = [md4_.f, md5_.g, md4_.h, md5_.i][self.round]
-            for self.iteration in range(16):
-                shift = md5_.shifts[self.round][self.iteration % 4]
-                k = md5_.K[self.iteration + self.round * 16]
-                mul, add = md5_.g_coefficients[self.round]
-                g = (mul * self.iteration + add) % 16
-                rounds.append([shift, function.__name__, g, k])
-
-        assert md5_rounds == rounds
-
-test()
