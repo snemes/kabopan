@@ -46,15 +46,14 @@ class ripemd160_u():
         rs[pi(i)]
         for i in xrange(16)]
 
+    #f1 = md4.h     # exor
+    #f2 = md4.f     # mux
 
     @staticmethod
-    def f1(*args): return md4_u.h(*args) # b ^ c ^ d , exor
-    @staticmethod
-    def f2(*args): return md4_u.f(*args) # (b & c) | ((~b) & d) , mux
-    @staticmethod
     def f3(b, c, d): return (b | ~c) ^ d
-    @staticmethod
-    def f4(*args): return md5_u.g(*args) #(b & d) | (c & (~d)), mux
+
+    #f4 = md5.g     # mux
+
     @staticmethod
     def f5(b, c, d): return b ^ (c | ~d)    # similar to md5.i
 
@@ -69,8 +68,10 @@ class ripemd160_u():
 
     @staticmethod
     def round_f(round, a, b, c, d, e, A, B, C, D, E, words):
-        f = [ripemd160_u.f1, ripemd160_u.f2, ripemd160_u.f3, ripemd160_u.f4, ripemd160_u.f5][round]
-        F = [ripemd160_u.f5, ripemd160_u.f4, ripemd160_u.f3, ripemd160_u.f2, ripemd160_u.f1][round]
+        functions = [md4_u.h, md4_u.f, ripemd160_u.f3, md5_u.g, ripemd160_u.f5]
+        Functions = list(reversed(functions))
+        f = functions[round]
+        F = Functions[round]
         k, K = [j[round] for j in ripemd160_u.ks, ripemd160_u.Ks] # round-dependant parameters
         for i in range(16):
             #iteration-dependant parameters
@@ -81,6 +82,12 @@ class ripemd160_u():
         return a, b, c, d, e, A, B, C, D, E
 
 class ripemd160(md5):
+    """
+    RIPEMD-160 is based on md5
+    
+    uses sha-0 IVs
+    each round computes 2 sets of IHVs in parallel which are combined in a special way
+    """
     def __init__(self):
         md5.__init__(self)
         self.IVs = sha_u.IVs
@@ -106,11 +113,13 @@ class ripemd320_u():
 
 class ripemd320(ripemd160):
     """
-    Ripemd-320 is base Ripemd-160,
-    but instead of combining both sets of intermediate hash values at the end of each round,
+    RIPEMD-320 is based on RIPEMD-160
+    
+    uses doubled RIPEMD-160 IVs.
+    instead of combining both sets of intermediate hash values at the end of each round,
     it stores them separately, with an extra swap.
-    thus, it doesn't increase security over Ripemd-160, but just extends
-    the size of the hash.
+    thus, it doesn't increase security over Ripemd-160,
+    but just extends the size of the hash.
     """
     def __init__(self):
         ripemd160.__init__(self)
@@ -163,8 +172,12 @@ class ripemd128_u():
 
     @staticmethod
     def round_f(round, a, b, c, d, A, B, C, D, words):
-        f = [ripemd160_u.f1, ripemd160_u.f2, ripemd160_u.f3, ripemd160_u.f4][round]
-        F = [ripemd160_u.f4, ripemd160_u.f3, ripemd160_u.f2, ripemd160_u.f1][round]
+        functions = [md4_u.h, md4_u.f, ripemd160_u.f3, md5_u.g]
+        Functions = list(reversed(functions))
+        f = functions[round]
+        F = Functions[round]
+        f = [md4_u.h, md4_u.f, ripemd160_u.f3, md5_u.g][round]
+        F = [md5_u.g, ripemd160_u.f3, md4_u.f, md4_u.h][round]
         k, K = [j[round] for j in ripemd128_u.ks, ripemd128_u.Ks] #round-dependant parameters
         for i in range(16):
             # iteration dependant parameters
@@ -177,7 +190,8 @@ class ripemd128_u():
 
 class ripemd128(ripemd160):
     """
-    Ripemd-128 is a cut version of Ripemd-160.
+    Ripemd-128 is based on Ripemd-160.
+    
     one round less, with 2 small changes in the functions and constants.
     also, the Rol10 on the last hash value of ripemd-160 is not included.
     """

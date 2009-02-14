@@ -6,6 +6,7 @@ from md4 import *
 from sha import sha_u
 
 class has160_u():
+    """utility class for has-160 cryptographic hash"""
     constants = [hsqrt(i) for i in [0, 2, 3, 5]]
     extensions = [
         [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]],
@@ -19,6 +20,14 @@ class has160_u():
             for lists in extensions]
 
 class has160(md4):
+    """
+    has-160 is based on md4 and very similar sha-0
+    
+    it uses sha's IVs and round function, and 4 rounds of 20 iterations as well.
+    the round-specific functions are md4.f, md4.h, md5.i, md4.h respectively
+    it only uses 20 words, which are recomputed for each round.
+    a and b rotation parameter are different at each iteration, unlike sha hashes.
+    """
     def __init__(self):
         md4.__init__(self)
         self.IVs = sha_u.IVs
