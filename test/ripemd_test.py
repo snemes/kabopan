@@ -21,8 +21,8 @@ R = [
     (8, 6, 4, 1, 3, 11, 15, 0, 5, 12, 2, 13, 9, 7, 10, 14),
     (12, 15, 10, 4, 1, 5, 8, 7, 6, 2, 13, 14, 0, 3, 9, 11)]
 
-r_values = zip(*[ripemd160_.rs[i] for i in range(16)])
-R_values = zip(*[ripemd160_.Rs[i] for i in range(16)])
+r_values = zip(*[ripemd160_u.rs[i] for i in range(16)])
+R_values = zip(*[ripemd160_u.Rs[i] for i in range(16)])
 
 ripemd160_test_vectors = [
     0x9c1185a5c5e9fc54612808977ee8f548b2258d31,
@@ -78,21 +78,21 @@ hash128 = lambda x:ripemd128().compute(x).digest()
 hash320 = lambda x:ripemd320().compute(x).digest()
 hash256 = lambda x:ripemd256().compute(x).digest()
 
-ass(ripemd160_.ks, k , "ripemd160 K")
-ass(ripemd160_.Ks, K, "ripemd160 K'")
+ass(ripemd160_u.ks, k , "ripemd160 K")
+ass(ripemd160_u.Ks, K, "ripemd160 K'")
 ass(r_values, r, "ripemd160 r")
 ass(R_values, R, "ripemd160 r'")
 ass(ripemd160_test_vectors, [hash160(s) for s in test_vector_strings], "ripemd160 test vectors")
 
-ass(ripemd320_IVs, ripemd320_.IVs, "ripemd320 IVs")
+ass(ripemd320_IVs, ripemd320_u.IVs, "ripemd320 IVs")
 ass(ripemd320_test_vectors, [hash320(s) for s in test_vector_strings], "ripemd320 test vectors")
 
-ass(ripemd128_.IVs, ripemd128_IVs, "ripemd128 IVs")
-ass(ripemd128_.ks, [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC], "ripemd128 K")
-ass(ripemd128_.Ks, [0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x00000000], "ripemd128 K'")
+ass(ripemd128_u.IVs, ripemd128_IVs, "ripemd128 IVs")
+ass(ripemd128_u.ks, [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC], "ripemd128 K")
+ass(ripemd128_u.Ks, [0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x00000000], "ripemd128 K'")
 ass(ripemd128_test_vectors, [hash128(s) for s in test_vector_strings], "ripemd128 test vectors")
 
-ass(ripemd256_.IVs, ripemd256_IVs, "ripemd256 IVs")
+ass(ripemd256_u.IVs, ripemd256_IVs, "ripemd256 IVs")
 ass(ripemd256_test_vectors, [hash256(s) for s in test_vector_strings], "ripemd256 test vectors")
 
 #for s, S, r, R, f, F, k, K in rounds_parameters():

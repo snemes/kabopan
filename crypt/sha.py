@@ -6,11 +6,12 @@ RFC 3174
 from md4 import *
 from _int import DWORD
 
-class sha_():
+class sha_u():
+    """utility class for sha"""
     constants = [hsqrt(i) for i in [2, 3, 5, 10]]
-    f, g, h = md4_.f, md4_.h, md4_.g
+    f, g, h = md4_u.f, md4_u.h, md4_u.g
     functions = [f, g, h, g]
-    IVs = list(md4_.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
+    IVs = list(md4_u.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
 
     @staticmethod
     def round_f(a, b, c, d, e, f, rol1, rol2, words, words_index, k):
@@ -25,13 +26,14 @@ class sha_():
 class sha0(md4):
     """
     sha-0 is based on md4. 
+
     size padding, block splitting and merging are big endian.
     it extends the words from 16 to 80 by combining.
     it adds an extra round, and uses the same function and constant for each round
     """
     def __init__(self):
         md4.__init__(self)
-        self.IVs = sha_.IVs
+        self.IVs = sha_u.IVs
         self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = True
         # function names are swapped
 
@@ -45,15 +47,18 @@ class sha0(md4):
     def rounds(self, words):
         [a, b, c, d, e] = list(self.ihvs)
         for round_ in range(4):
-            f = sha_.functions[round_]
-            k = sha_.constants[round_]
+            f = sha_u.functions[round_]
+            k = sha_u.constants[round_]
             for i in range(20):
-                [a, b, c, d, e] = sha_.round_f(a, b, c, d, e, f, 5, 30, words, i + 20 * round_, k)
+                [a, b, c, d, e] = sha_u.round_f(a, b, c, d, e, f, 5, 30, words, i + 20 * round_, k)
         return [a, b, c, d, e]
 
 
 class sha1(sha0):
-    """sha-1 is a revision of sha-0. a 1-bit left rotation is added during word compression"""
+    """
+    sha-1 is a revision of sha-0.
+
+    a 1-bit left rotation is added during word compression"""
     def compress(self, block, words):
         words.extend(0 for i in xrange(80 - 16))
         for i in range(16, 80):

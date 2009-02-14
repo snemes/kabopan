@@ -3,9 +3,9 @@
 from _misc import *
 from _int import *
 from md4 import *
-from sha import sha_
+from sha import sha_u
 
-class has160_():
+class has160_u():
     constants = [hsqrt(i) for i in [0, 2, 3, 5]]
     extensions = [
         [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]],
@@ -21,28 +21,28 @@ class has160_():
 class has160(md4):
     def __init__(self):
         md4.__init__(self)
-        self.IVs = sha_.IVs
+        self.IVs = sha_u.IVs
 
     def rounds(self, words):
         words.extend((0 for i in xrange(20-16)))
         a, b, c, d, e = list(self.ihvs)
         for r in range(4):
-            f = [md4_.f, md4_.h, md5_.i, md4_.h][r]
-            k = has160_.constants[r]
+            f = [md4_u.f, md4_u.h, md5_u.i, md4_u.h][r]
+            k = has160_u.constants[r]
             b_rot = [10, 17, 25, 30][r]
 
             for i in range(4):
                 w = QWORD(0)
                 for j in xrange(4):
-                    w ^= words[has160_.extensions[r][i][j]]
+                    w ^= words[has160_u.extensions[r][i][j]]
                 words[16 + i] = w
 
             for i in range(20):
-                index = has160_.indexes[r][i]
+                index = has160_u.indexes[r][i]
                 a_rot = [5, 11, 7, 15, 6, 13, 8, 14, 7, 12, 9, 11, 8, 15, 6, 12, 9, 14, 5, 13][i]
 
-                a,b,c,d,e = sha_.round_f(a, b, c, d, e, f, a_rot, b_rot, words, index, k)
+                a,b,c,d,e = sha_u.round_f(a, b, c, d, e, f, a_rot, b_rot, words, index, k)
         return [a, b, c, d, e]
 
 if __name__ == "__main__":
-    import test.has160_test
+    import test.has_test

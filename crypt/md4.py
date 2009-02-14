@@ -14,7 +14,7 @@ from _misc import *
 from _int import *
 import Hash
 
-class md4_():
+class md4_u():
     """utility class for MD4 cryptographic hash"""
     constants = [hsqrt(i) for i in [0, 2, 3]]
 
@@ -53,7 +53,7 @@ class md4(Hash.merkledamgaard):
         self.block_length = 512
         self.padding_size_encoding_length = 64
         self.hv_size = 32
-        self.IVs = md4_.IVs
+        self.IVs = md4_u.IVs
         self.pad_bit_7 = True
 
     def compress(self, block, words):
@@ -66,13 +66,13 @@ class md4(Hash.merkledamgaard):
     def rounds(self, words):
         bhv = list(self.ihvs) # block hash values
         for self.round in range(3):  # rounds
-            F = [md4_.f, md4_.g, md4_.h][self.round]
-            constant = md4_.constants[self.round]
+            F = [md4_u.f, md4_u.g, md4_u.h][self.round]
+            constant = md4_u.constants[self.round]
             for self.iteration in range(16): # iterations per round
                 #iteration-dependant parameters
                 [a, b, c, d] = [((j - self.iteration) % 4) for j in range(4)]
-                s = md4_.shifts[self.round][self.iteration % 4]
-                k = md4_.r[self.iteration][self.round]
+                s = md4_u.shifts[self.round][self.iteration % 4]
+                k = md4_u.r[self.iteration][self.round]
                 bhv[a] = (bhv[a] + F(bhv[b], bhv[c], bhv[d]) + words[k] + constant).rol(s)
         return bhv
 
@@ -88,7 +88,7 @@ class md4(Hash.merkledamgaard):
         #integration
         self.combine(bhvs)
 
-class md5_():
+class md5_u():
     """utility class for MD5 cryptographic hash"""
     g_coefficients = [[1,0], [5, 1], [3, 5], [7,0]]
     K = DWORDS([abs(sin(i + 1)) * (2**32) for i in range(16 * 4)])
@@ -119,11 +119,11 @@ class md5(md4):
     def rounds(self, words):
         [a,b,c,d] = list(self.ihvs)
         for self.round in range(4):
-            function = [md4_.f, md5_.g, md4_.h, md5_.i][self.round]
+            function = [md4_u.f, md5_u.g, md4_u.h, md5_u.i][self.round]
             for self.iteration in range(16):
-                shift = md5_.shifts[self.round][self.iteration % 4]
-                k = md5_.K[self.iteration + self.round * 16]
-                mul, add = md5_.g_coefficients[self.round]
+                shift = md5_u.shifts[self.round][self.iteration % 4]
+                k = md5_u.K[self.iteration + self.round * 16]
+                mul, add = md5_u.g_coefficients[self.round]
                 g = (mul * self.iteration + add) % 16
                 [a,b,c,d] = [
                     d,

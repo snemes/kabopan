@@ -61,8 +61,8 @@ sha512_test_vectors = [
     0x1e07be23c26a86ea37ea810c8ec7809352515a970e9253c26f536cfc7a9996c45c8370583e0a78fa4a90041d71a4ceab7423f19c71b9d5a3e01249f0bebd5894,
     0x72ec1ef1124a45b047e8b7c75a932195135bb61de24ec0d1914042246e0aec3a2354e093d76f3048b456764346900cb130d2a4fd5dd16abb5e30bcb850dee843]
 
-ass(sha512_IVs, sha512_.IVs, "sha-512 IVs")
-ass(sha512_K, sha512_.K, "sha-512 K")
+ass(sha512_IVs, sha512_u.IVs, "sha-512 IVs")
+ass(sha512_K, sha512_u.K, "sha-512 K")
 ass(sha512_test_vectors, [sha512().compute(s).digest() for s in test_vector_strings], "sha-512 test vectors")
 
 
@@ -86,8 +86,8 @@ sha256_test_vectors = [
     0xdb4bfcbd4da0cd85a60c3c37d3fbd8805c77f15fc6b1fdfe614ee0a7c8fdb4c0,
     0xf371bc4a311f2b009eef952dd83ca80e2b60026c8e935592d0f9c308453c813e]
 
-ass(sha256_IVs, sha256_.IVs, "sha-256 IVs")
-ass(sha256_K, sha256_.K, "sha-256 K")
+ass(sha256_IVs, sha256_u.IVs, "sha-256 IVs")
+ass(sha256_K, sha256_u.K, "sha-256 K")
 ass(sha256_test_vectors, [sha256().compute(s).digest() for s in test_vector_strings], "sha-256 test vectors")
 
 sha224_IVs = [
@@ -102,7 +102,7 @@ sha224_test_vectors = [
     0xbff72b4fcb7d75e5632900ac5f90d219e05e97a7bde72e740db393d9,
     0xb50aecbe4e9bb0b57bc5f3ae760a8e01db24f203fb3cdcd13148046e]
 
-ass(sha224_IVs, sha224_.IVs, "sha-224 IVs")
+ass(sha224_IVs, sha224_u.IVs, "sha-224 IVs")
 ass(sha224_test_vectors, [sha224().compute(s).digest() for s in test_vector_strings], "sha-224 test vectors")
 
 sha384_IVs = [
@@ -124,5 +124,5 @@ sha384_test_vectors = [
     0x1761336e3f7cbfe51deb137f026f89e01a448e3b1fafa64039c1464ee8732f11a5341a6f41e0c202294736ed64db1a84,
     0xb12932b0627d1c060942f5447764155655bd4da0c9afa6dd9b9ef53129af1b8fb0195996d2de9ca0df9d821ffee67026]
 
-ass(sha384_IVs, sha384_.IVs, "sha-384 IVs")
+ass(sha384_IVs, sha384_u.IVs, "sha-384 IVs")
 ass(sha384_test_vectors, [sha384().compute(s).digest() for s in test_vector_strings], "sha-384 test vectors")

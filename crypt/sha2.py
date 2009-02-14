@@ -9,7 +9,7 @@ from _sha2 import nroot_primes
 
 import _pickle as p
 
-class sha512_():
+class sha512_u():
     """utility class for sha-512"""
     pickled = p.get_variables("sha512", ["IVs", "K"])
     if pickled is None:
@@ -32,8 +32,8 @@ class sha512(md4):
         self.hv_size = 64
         self.padding_size_encoding_length = 128
         self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = True
-        self.IVs = sha512_.IVs
-        self.K = sha512_.K
+        self.IVs = sha512_u.IVs
+        self.K = sha512_u.K
 
 
     def f1(self, x):    return x.ror(28) ^ x.ror(34) ^ x.ror(39)
@@ -63,7 +63,7 @@ class sha512(md4):
                 ]
         return [a, b, c, d, e, f, g, h]
 
-class sha384_():
+class sha384_u():
     """utility class for sha-384"""
     pickled = p.get_variables("sha384", ["IVs"])
     if pickled is None:
@@ -84,17 +84,17 @@ class sha384(sha512):
     """
     def __init__(self):
         sha512.__init__(self)
-        self.IVs = sha384_.IVs
+        self.IVs = sha384_u.IVs
 
     def digest(self):
         return sha512.digest(self)[:384 / 8]
 
 
-class sha256_():
+class sha256_u():
     """utility class for sha-256"""
     #highest 4 bytes of sha512 IVs and K
-    IVs = [i[:32 / 8] for i in  sha512_.IVs]
-    K = [i[:32 / 8] for i in sha512_.K[:64]]
+    IVs = [i[:32 / 8] for i in  sha512_u.IVs]
+    K = [i[:32 / 8] for i in sha512_u.K[:64]]
 
 class sha256(sha512):
     """
@@ -112,8 +112,8 @@ class sha256(sha512):
         self.block_length = 512
         self.hv_size = 32
         self.padding_size_encoding_length = 64
-        self.K = sha256_.K
-        self.IVs = sha256_.IVs
+        self.K = sha256_u.K
+        self.IVs = sha256_u.IVs
 
 
     def f1(self, x):    return x.ror( 2) ^ x.ror(13) ^ x.ror(22)
@@ -121,28 +121,28 @@ class sha256(sha512):
     def f3(self, x):    return x.ror( 7) ^ x.ror(18) ^ (x >>  3)
     def f4(self, x):    return x.ror(17) ^ x.ror(19) ^ (x >> 10)
 
-
-class sha224_():
+class sha224_u():
     """utility class for sha-224"""
     pickled = p.get_variables("sha224", ["IVs"])
     if pickled is None:
-
-        IVs = DWORDS(sha384_.IVs)
+        # lowest 32 bits of sha384 IVs
+        IVs = DWORDS(sha384_u.IVs)
 
         p.save_variables("sha256", {"IVs": IVs})
     else:
         IVs = pickled["IVs"]
 
+
 class sha224(sha256):
     """
     sha-224 is based on sha-256
     
-    it's sha-224 with sha-384 IVs
-    and the final digest is the first 224 bits of sha-256's
+    it's sha-256 with different IVs
+    and the digest is truncated to 224 bits
     """
     def __init__(self):
         sha256.__init__(self)
-        self.IVs = sha224_.IVs
+        self.IVs = sha224_u.IVs
 
     def digest(self):
         return sha256.digest(self)[:224 / 8]

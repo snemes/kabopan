@@ -30,7 +30,7 @@ b4 = [
 md4_a, md4_b = [hex2bin("".join(s).replace(" ", "")) for s in [a4, b4]]
 
 
-ass(md4_.IVs, md4_IVs, "md4 IVs")
+ass(md4_u.IVs, md4_IVs, "md4 IVs")
 ass(md4_test_vectors, [hashmd4(s) for s in test_vector_strings], "md4 test vectors")
 assert hashmd4(md4_a) == hashmd4(md4_b)
 
