@@ -12,9 +12,9 @@ except:
     pass
 
 import checksum.crc
-import crypt.has160
 import crypt.md2
 import crypt.md4
+import crypt.has
 import crypt.sha
 import crypt.sha2
 import crypt.ripemd
@@ -28,7 +28,7 @@ families = [
     ]
 algorithms = {
     "crc32_ieee":checksum.crc.crc32_ieee_hexhash,
-    "has-160":lambda x:crypt.has160.has160().compute(x).hexdigest(),
+    "has-160":lambda x:crypt.has.has160().compute(x).hexdigest(),
     "md2":lambda x:crypt.md2.md2().compute(x).hexdigest(),
     "md4":lambda x:crypt.md4.md4().compute(x).hexdigest(),
     "md5":lambda x:crypt.md4.md5().compute(x).hexdigest(),
