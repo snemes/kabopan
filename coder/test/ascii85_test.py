@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from code.ascii85 import *
+from coder.ascii85 import *
 
 assert ASCII85 == """!"#$%&'()*+,-./""" + DIGITS + ":;<=>?@" + ALPHABET + "[\]^_`" + char_range("a", "u")
 

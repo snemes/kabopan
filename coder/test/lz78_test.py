@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from code.lz78 import *
+from coder.lz78 import *
 
 assert compress("abracadabra") == [
     {'index': 0, 'symbol': 'a'}, {'index': 0, 'symbol': 'b'}, {'index': 0, 'symbol': 'r'},

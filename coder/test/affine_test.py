@@ -1,5 +1,5 @@
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
-from code.affine import *
+from coder.affine import *
 
 assert inverse(17,26) == 23
 

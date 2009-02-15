@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from code.base import *
+from coder.base import *
 
 assert base8 == "01234567"
 assert base16 =="0123456789ABCDEF"

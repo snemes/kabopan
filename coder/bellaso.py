@@ -80,4 +80,4 @@ def second_sifra(data, key, alphabet_key):
 #not enough information for his autokey cipher
 
 if __name__ == "__main__":
-    import test.bellaso
+    import test.bellaso_test

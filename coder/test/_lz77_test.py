@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from code._lz77 import *
+from coder._lz77 import *
 
 assert find_longest_match("abc","a") == (3,1)
 assert find_longest_match("abc","d") == (0,0)

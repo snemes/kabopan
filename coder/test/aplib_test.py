@@ -1,5 +1,5 @@
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
-from code.aplib import *
+from coder.aplib import *
 
 assert decompress(compress("a").do()).do() == ("a", 3)
 assert decompress(compress("ababababababab").do()).do() == ('ababababababab', 9)

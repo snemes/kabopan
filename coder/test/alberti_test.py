@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from code.alberti import *
+from coder.alberti import *
 
 
 assert switch_alphabet("ab", "cd", "b") == "d"

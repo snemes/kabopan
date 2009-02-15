@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from code.brieflz import *
+from coder.brieflz import *
 
 assert compress("aba").do()         == 'a\x00\x00ba'
 assert compress("abababababa").do() == 'a\x00\x18bab\x03ba'

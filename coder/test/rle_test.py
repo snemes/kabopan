@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from code.rle import *
+from coder.rle import *
 
 test = "abababababaaaaaaccccccccbcdbcksjcblsauiaaaauu"
 

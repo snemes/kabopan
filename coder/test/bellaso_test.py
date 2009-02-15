@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from code.bellaso import *
+from coder.bellaso import *
 
 assert first_sifra("larmatatvrchescapa rtiraacinqvedilvgl io", "virtvtiomniaparent virtvtiomniaparent vi") == \
         "syboveyldanvofszlp iincvpnshmlrnxoizn rd"

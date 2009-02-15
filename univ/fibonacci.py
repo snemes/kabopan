@@ -73,7 +73,7 @@ def decode(string):
     encode = _str(string[:string.find("11") + 1])
     num = generate_numbers(len(encode))
     value = 0
-    for i in encode.indexes("1"):
+    for i in encoder.indexes("1"):
         value += num[i + 1]
     return value
 
