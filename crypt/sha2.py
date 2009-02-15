@@ -25,6 +25,11 @@ class sha512_u():
 
 
 class sha512(md4):
+    """
+    sha-512 is based on md4
+    
+    ...
+    """
     def __init__(self):
         md4.__init__(self)
         self.block_length = 1024
@@ -78,9 +83,9 @@ class sha384_u():
 class sha384(sha512):
     """
     sha-384 is based on sha-512
-    
-    it's sha-512 with different (but similarly computed) initialisation vectors,
-    and the final digest is the first 384 bits of sha-512's
+
+     - different (but similarly computed) initialisation vectors,
+     - the digest is truncated to 384 bits
     """
     def __init__(self):
         sha512.__init__(self)
@@ -101,10 +106,10 @@ class sha256(sha512):
     sha-256 is based on sha-512
     
     it's sha-512 with IHVs on 32 bits instead of 64: 
-    * the initialisations vectors and the constants K are the highest 32bits of their sha-512 counterparts.
-    also it's using 64 rounds instead of 80, thus:
-    * the F1-4 functions need different constants
-    the message length is is encoded on 64 bits instead of 128, during the padding
+     - the initialisations vectors and the constants K are the highest 32bits of their sha-512 counterparts.
+     - it's using 64 rounds instead of 80, thus:
+      - the F1-4 functions need different constants
+     - the message length is is encoded on 64 bits instead of 128, during the padding
     """
     def __init__(self):
         sha512.__init__(self)
@@ -137,8 +142,8 @@ class sha224(sha256):
     """
     sha-224 is based on sha-256
     
-    it's sha-256 with different IVs
-    and the digest is truncated to 224 bits
+     - different IVs (DWORD of sha-384's)
+     - the digest is truncated to 224 bits
     """
     def __init__(self):
         sha256.__init__(self)

@@ -45,13 +45,13 @@ class merkledamgaard(Hash):
     """
     Merkle-Damgaard model of cryptographic hashes
 
-    the message is padded, 
-    the Intermediate Hash Values are initialised with the Initialisation Vectors values.
-    the message is processed by blocks.
-    for each of this block:
-    * some block intermediate hash values are computed
-    * then those block IHVs are combined with the current IHVs, usually by summing both sets.
-    the digest is computed from the final IHVs, usually by concatenation
+     1. the message is padded, 
+     2. the Intermediate Hash Values are initialised with the Initialisation Vectors values.
+     3. the message is processed by blocks.
+     4. for each of this block:
+      - some block intermediate hash values are computed
+      - then those block IHVs are combined with the current IHVs, usually by summing both sets.
+     5. the digest is computed from the final IHVs, usually by concatenation
     """
 
     def as_words(self, block):

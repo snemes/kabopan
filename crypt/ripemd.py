@@ -85,8 +85,8 @@ class ripemd160(md5):
     """
     RIPEMD-160 is based on md5
     
-    uses sha-0 IVs
-    each round computes 2 sets of IHVs in parallel which are combined in a special way
+     - uses sha-0 IVs
+     - each round computes 2 sets of IHVs in parallel which are combined in a special way
     """
     def __init__(self):
         md5.__init__(self)
@@ -115,8 +115,8 @@ class ripemd320(ripemd160):
     """
     RIPEMD-320 is based on RIPEMD-160
     
-    uses doubled RIPEMD-160 IVs.
-    instead of combining both sets of intermediate hash values at the end of each round,
+     - uses doubled RIPEMD-160 IVs.
+     - instead of combining both sets of intermediate hash values at the end of each round,
     it stores them separately, with an extra swap.
     thus, it doesn't increase security over Ripemd-160,
     but just extends the size of the hash.
@@ -192,8 +192,9 @@ class ripemd128(ripemd160):
     """
     Ripemd-128 is based on Ripemd-160.
     
-    one round less, with 2 small changes in the functions and constants.
-    also, the Rol10 on the last hash value of ripemd-160 is not included.
+     - one round less
+     - 2 small changes in the functions and constants.
+     - the Rol10 on the last hash value of ripemd-160 is not included.
     """
     def __init__(self):
         ripemd160.__init__(self)
@@ -220,7 +221,7 @@ class ripemd256(ripemd128):
     """
     Ripemd-256 is based on Ripemd-128
 
-    instead of combining both sets of intermediate hash values at the end of each round,
+     - instead of combining both sets of intermediate hash values at the end of each round,
     it stores them separately, with an extra swap at the end of each round
     thus, it doesn't increase security over Ripemd-128, but just extends
     the size of the hash.
