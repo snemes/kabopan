@@ -20,7 +20,8 @@ class Feistel:
     def decrypt(self, ciphertext, key):
         #L = ciphertext[:self.middle]
         #R = ciphertext[self.middle:]
-        L, R = DWORDS([0x41ea3a0a, 0x94baa940]) #DWORDS([0xdee9d4d8, 0xf7131ed9]) for xtea
+        #L, R = DWORDS([0x41ea3a0a, 0x94baa940]) 
+        L, R = DWORDS([0xdee9d4d8, 0xf7131ed9]) # for xtea
         for F, extra in self.round_parameters(backward=True):
             L, R = self.out_f(R, F(L, key, *extra)), L
         return L, R
