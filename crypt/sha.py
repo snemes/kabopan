@@ -27,11 +27,12 @@ class sha0(md4):
     """
     sha-0 is based on md4. 
 
-    size padding, block splitting and merging are big endian.
-    it extends the words from 16 to 80 by combining.
-    it adds an extra round, and uses the same function and constant for each round
-    4 rounds of 20 iterations
-    the round-specific function are md4.f, md4.h, md5.i, md4.h respectively
+    changes:
+     - size padding, block splitting and merging are big endian.
+     - it extends the words from 16 to 80 by combining.
+     - it adds an extra round, and uses the same function and constant for each round
+     - 4 rounds of 20 iterations
+     - the round-specific function are md4.f, md4.h, md5.i, md4.h respectively
     """
     def __init__(self):
         md4.__init__(self)

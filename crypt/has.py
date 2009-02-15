@@ -1,9 +1,11 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+cryptographic hash has/160
+"""
 
 from _misc import *
 from _int import *
-from md4 import *
-from sha import sha_u
+from sha import *
 
 class has160_u():
     """utility class for has-160 cryptographic hash"""
@@ -19,18 +21,19 @@ class has160_u():
         for i, j in enumerate(lists)), [])
             for lists in extensions]
 
-class has160(md4):
+class has160(sha0):
     """
-    has-160 is based on md4 and very similar sha-0
+    has-160 is based on sha-0.
     
-    it uses sha's IVs and round function, and 4 rounds of 20 iterations as well.
-    the round-specific functions are md4.f, md4.h, md5.i, md4.h respectively
-    it only uses 20 words, which are recomputed for each round.
-    a and b rotation parameter are different at each iteration, unlike sha hashes.
+    changes:
+     - output, input, and size encoding are little endian
+     - a and b rotation parameter are different at each iteration
+     - only 20 words, which are recomputed differently, for each round.
+     - the round-specific functions are md4.f, md4.h, md5.i, md4.h respectively
     """
     def __init__(self):
-        md4.__init__(self)
-        self.IVs = sha_u.IVs
+        sha0.__init__(self)
+        self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = False
 
     def rounds(self, words):
         words.extend((0 for i in xrange(20-16)))
