@@ -1,7 +1,6 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
-from elias import *
+from univ.elias import *
 
 assert elias_split(1) == (0, "")
 assert elias_split(14) == (3, "110")

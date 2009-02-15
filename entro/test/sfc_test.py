@@ -1,8 +1,7 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
-from sfc import *
-import _encoding
+from entro.sfc import *
+import entro._encoding as encoding
 
 assert split([0,1,2,3],1) == ([0,1], [2,3])
 assert split([0,1,2,3],0) == ([0], [1,2,3])
@@ -25,8 +24,8 @@ assert test_tree == {'left0': {'symbol': 'a'},
                                            'right1': {'left0': {'symbol': 'c'},
                                                       'right1': {'symbol': 'd'}}}}}
 
-test_codes = _encoding.generate_codes(test_tree)
+test_codes = encoding.generate_codes(test_tree)
 assert test_codes == {'a':'0', 'b':'10', 'r':'110', 'c':'1110', 'd':'1111'}
-test_encoding = _encoding.encode(test_codes, test_string)
+test_encoding = encoding.encode(test_codes, test_string)
 assert test_encoding == 'Y\xcfX'
-assert _encoding.decode(test_tree, test_encoding) == test_string
+assert encoding.decode(test_tree, test_encoding) == test_string

@@ -1,7 +1,6 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _encoding import *
+from entro._encoding import *
 
 assert generate_codes({'left0': {'symbol': 'a', 'weight': 1},
                      'right1': {'symbol': 'b', 'weight': 1},

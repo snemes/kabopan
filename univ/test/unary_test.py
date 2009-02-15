@@ -1,7 +1,6 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
-from unary import *
+from univ.unary import *
 
 assert encode(0) == "1"
 assert encode(1) == "01"

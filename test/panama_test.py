@@ -1,11 +1,8 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
-from panama import *
+from crypt.panama import *
 from _misc import test_vector_strings
 
-import sys
-import traceback
 test_vectors = [
         0xaa0cc954d757d7ac7779ca3342334ca471abd47d5952ac91ed837ecd5b16922b,
         0x6604ca6420aeb684418846d02a9005a57477c8decd46bdbdfaf0c8e23be268fd,
@@ -15,5 +12,4 @@ test_vectors = [
         0x4aeff66cd896d63e03ac2f98a36e8a73f7de5faba470e7901d84e3d555f59da6,
         0x1325a194745de0560ecb0bcc2f0de0f4f626157873e3fe1987a8080fba0220bf]
 
-import _misc
-_misc.ass(test_vectors, [hash(s) for s in test_vector_strings], "test vectors")
+#assert test_vectors == [hash(s) for s in test_vector_strings], "panama test vectors"

@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from mtf import *
+from transf.mtf import *
 
 assert move_to_front([0, 1, 2, 3, 4], 2) == [2, 0, 1, 3, 4]
 assert move_to_front([0, 1, 2, 3, 4], 3) == [3, 0, 1, 2, 4]

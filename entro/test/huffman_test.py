@@ -1,8 +1,7 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
-from huffman import *
-import _encoding
+from entro.huffman import *
+import entro._encoding as _encoding
 
 assert pop_entry([{"symbol":"a", "weight" : 15}]) == {"symbol":"a", "weight":15}
 assert pop_entry([{"node":"this"}]) == "this"

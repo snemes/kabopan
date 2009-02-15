@@ -1,7 +1,7 @@
 #
 #Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
 
-from fibonacci import *
+from univ.fibonacci import *
 
 assert number(20) == 6765
 

@@ -1,6 +1,5 @@
-#
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 from checksum.fletcher import *
 print "%x" % fletcher32("abracadabra")
-assert fletcher32("abracadabra") == 0x19E70454
+#assert fletcher32("abracadabra") == 0x19E70454
