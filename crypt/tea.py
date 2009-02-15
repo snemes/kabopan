@@ -45,7 +45,7 @@ class tea(cipher.Feistel):
 
 class xtea(tea):
     """
-    XTEA is based on TEA
+    XTEA is based on L{tea}
     
      - different round function
      - delta is modified between the 2 rounds of each cycle
