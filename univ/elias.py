@@ -1,7 +1,7 @@
 #Elias Delta, Gamma, Omega encoding
 #universal coder
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 
@@ -103,4 +103,4 @@ def omega_decode(binary_string, digits_to_read=1, consumed_bits=0):
         return omega_decode(next_part, digits_to_read_next, consumed_bits + digits_to_read + 1)
 
 if __name__ == "__main__":
-    import elias_test
+    import test.elias_test

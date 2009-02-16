@@ -3,7 +3,7 @@
 #Data compression via textual substitution
 #James A. Storer, Thomas G. Szymanski, 1982
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 import _lz77

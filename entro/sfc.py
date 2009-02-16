@@ -3,7 +3,7 @@
 #A Mathematical Theory of Communication
 #Claude E. Shannon, 1948
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 import _encoding
@@ -57,4 +57,4 @@ def encode(data_to_compress):
 
 
 if __name__ == "__main__":
-    import sfc_test
+    import test.sfc_test

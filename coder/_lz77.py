@@ -1,6 +1,6 @@
 #Useful Functions for sliding window compression algorithms, such as LZ77
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 #TODO: proper longest match implementation
@@ -45,4 +45,4 @@ def back_copy(string, length, offset):
     return string
     
 if __name__ == "__main__":
-    import _lz77_test
+    import test._lz77_test

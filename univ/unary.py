@@ -1,7 +1,7 @@
 #unary encoding
 #universal coder
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 """unary is the simplest but least efficient universal coder. the encoded value is presented by a sequence of 'value' encoding bits, followed by one stopper bits.
@@ -29,4 +29,4 @@ def decode(string, stopper_is_1=True):
     return encoded_value, consumed_bits
 
 if __name__ == "__main__":
-    import unary_test
+    import test.unary_test

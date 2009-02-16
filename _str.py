@@ -1,6 +1,6 @@
 #custom string class with added methods and operators
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 __all__ = ["_str"]
@@ -70,4 +70,4 @@ class _str(str):
 
 
 if __name__ == "__main__":
-    import _str_test
+    import test._str_test

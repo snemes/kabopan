@@ -1,6 +1,6 @@
 #useful functions for substitution ciphers
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 from _misc import *
 
@@ -43,4 +43,4 @@ def mix_alphabet(key_string, alphabet):
 
 
 if __name__ == "__main__":
-    import _subst_test
+    import test._subst_test

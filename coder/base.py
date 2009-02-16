@@ -3,7 +3,7 @@
 #The Base16, Base32, and Base64 Data Encodings, rfc 3548
 #S. Josefsson, 2003
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 from _misc import *

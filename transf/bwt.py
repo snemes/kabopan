@@ -2,7 +2,7 @@
 #A Block-sorting Lossless Data Compression Algorithm
 #M.Burrows, D.J. Wheeler, 1994
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 def rotate_string(string, count):
@@ -77,4 +77,4 @@ def revert(last_column, primary_index):
 
 
 if __name__ == "__main__":
-    import bwt_test
+    import test.bwt_test

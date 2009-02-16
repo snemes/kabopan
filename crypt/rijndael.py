@@ -1,6 +1,6 @@
 #Rijndael - Advanced Encryption Standard - AES
 #Vincent Rijmen, Joan Daemen, 1998
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 if __name__ == "__main__":
-    import rijndael_test
+    import test.rijndael_test

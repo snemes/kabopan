@@ -2,7 +2,7 @@
 #LZSS based lossless compression algorithm
 #Jorgen Ibsen, http://www.ibsensoftware.com/
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 #todo working but need cleaning and maybe bugfixing

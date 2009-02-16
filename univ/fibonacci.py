@@ -2,7 +2,7 @@
 #universal coder
 #
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 from _str import *
@@ -79,4 +79,4 @@ def decode(string):
 
 
 if __name__ == "__main__":
-    import fibonacci_test
+    import test.fibonacci_test

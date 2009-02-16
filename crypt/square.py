@@ -2,7 +2,7 @@
 #the Block cipher Square
 #Vincent Rijmen, Joan Daemen, 1998
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 if __name__ == "__main__":
-    import square_test
+    import test.square_test

@@ -3,7 +3,7 @@
 #Jeremy Collake http://www.bitsum.com
 #compress not working yet
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 import _bits

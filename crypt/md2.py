@@ -3,7 +3,7 @@
 #The MD2 Message-Digest Algorithm
 #B. Kaliski, 1992
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 import _misc as misc
 from _int import *

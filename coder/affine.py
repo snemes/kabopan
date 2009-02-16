@@ -1,7 +1,7 @@
 #Affine cipher
 #substitution cipher
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 from _subst import *

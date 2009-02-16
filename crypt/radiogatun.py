@@ -5,4 +5,4 @@ Guido Bertoni, Joan Daemen, Gilles Van Assche, 2006
 """
 
 if __name__ == "__main__":
-    import radiogatun_test
+    import test.radiogatun_test

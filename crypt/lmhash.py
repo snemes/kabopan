@@ -1,5 +1,5 @@
 #LM Hash - Lan Manager Hash
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 if __name__ == "__main__":
-    import lmhash_test
+    import test.lmhash_test

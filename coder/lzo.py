@@ -1,6 +1,6 @@
 #Lempel Ziv Oberhumer
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 if __name__ == "__main__":
-    import lzo_test
+    import test.lzo_test

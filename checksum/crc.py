@@ -1,5 +1,5 @@
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 import _misc as m
 """a CRC is actually the remainder of a division of the message by a specific polynom, in GF(2).
@@ -213,7 +213,7 @@ def crc32_ieee_hexhash(message):
     return ("%X" % value).ljust(width / 4, "0")
 
 if __name__ == '__main__':
-    import crc_test
+    import test.crc_test
 
     tests = [
     #TODO: lack of support for uneven sizes

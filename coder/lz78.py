@@ -3,7 +3,7 @@
 #Compression of Individual Sequences via Variable-Rate Coding
 #Jacob Ziv and Abraham Lempel, 1978
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 

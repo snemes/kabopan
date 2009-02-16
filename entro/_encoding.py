@@ -1,6 +1,6 @@
 #Useful Functions for entropy encoding algorithms, such as Shannon Fano or Huffman
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 def generate_codes(node, codes=None, current_code=""):
@@ -48,4 +48,4 @@ def decode(tree_root, data_to_decode):
     return result
     
 if __name__ == "__main__":
-    import _encoding_test
+    import test._encoding_test

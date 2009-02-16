@@ -2,7 +2,7 @@
 #Fletcher, J. G., An Arithmetic Checksum for Serial Transmissions
 #1982
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 from _int import *
 def compute(data_to_checksum, size, modulo, limit=None):

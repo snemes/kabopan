@@ -3,7 +3,7 @@
 #A Method for the Construction of Minimum-Redundancy Codes
 #D.A. Huffman 1952
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 import _encoding
@@ -56,4 +56,4 @@ def generate_tree(data_to_compress):
 
 
 if __name__ == "__main__":
-    import huffman_test
+    import test.huffman_test

@@ -1,5 +1,5 @@
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 from _misc import nroot, frac, generate_primes
 from _int import Int

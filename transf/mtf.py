@@ -3,7 +3,7 @@
 #A Locally Adaptive Data Compression Scheme
 #J. L. Bentley, D. D. Sleator, R. E. Tarjan, V. K. Wei, 1986
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 
@@ -46,4 +46,4 @@ def revert(chars, vector):
     return result
 
 if __name__ == "__main__":
-    import mtf_test
+    import test.mtf_test

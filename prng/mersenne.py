@@ -2,7 +2,7 @@
 #Makoto Matsumoto and Takuji Nishimura, 1998
 #http://www.graviness.com/js/mt19937ar.c.js.phtml
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 global index, MT

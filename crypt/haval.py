@@ -5,7 +5,7 @@ Yuliang Zheng, Josef Pieprzyk, Jennifer Seberry 1992
 http://labs.calyptix.com/haval.php
 """
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 # collision, XiaoyunWang, Dengguo Feng, Xuejia Lai, Hongbo Yu, 2004

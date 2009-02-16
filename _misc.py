@@ -1,6 +1,6 @@
 #various functions for binary calculations, display...
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 from _int import *
 #todo : a lot of cleaning is likely required
@@ -443,4 +443,4 @@ def printh(l):
     print ["%x" % i for i in l]
 
 if __name__ == "__main__":
-    import _misc_test
+    import test._misc_test

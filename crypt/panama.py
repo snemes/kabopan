@@ -5,4 +5,4 @@ Joan Daemen, Craig Clapp, 1998
 """
 
 if __name__ == "__main__":
-    import panama_test
+    import test.panama_test

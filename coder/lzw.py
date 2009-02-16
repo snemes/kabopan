@@ -3,7 +3,7 @@
 #A Technique for High-Performance Data Compression
 #Terry A. Welch, 1984
 #
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 def compress(data_to_compress):

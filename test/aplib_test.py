@@ -1,4 +1,4 @@
-#Kabopan (http://kabopan.corkami.com) public domain, readable, working pseudocode-style python
+#Kabopan - Readable Algorithms. Public Domain, 2009
 from coder.aplib import *
 
 assert decompress(compress("a").do()).do() == ("a", 3)
