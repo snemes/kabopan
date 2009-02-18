@@ -3,6 +3,7 @@
 
 from _misc import rol, hex2bin, test_vector_strings
 from crypt.md4 import *
+from _int import *
 
 hashmd4 = lambda x: md4().compute(x).digest()
 
@@ -19,20 +20,23 @@ md4_test_vectors = [
 
 # collision, XiaoyunWang, Dengguo Feng, Xuejia Lai, Hongbo Yu, 2004
 
-a4 = [
-"839c7a4d 7a92cb56 78a5d5b9 eea5a757 3c8a74de b366c3dc 20a083b6 9f5d2a3b",
-"b3719dc6 9891e9f9 5e809fd7 e8b23ba6 318edd45 e51fe397 08bf9427 e9c3e8b9"]
+a4 = \
+ "839c7a4d 7a92cb56 78a5d5b9 eea5a757 3c8a74de b366c3dc 20a083b6 9f5d2a3b"\
+ "b3719dc6 9891e9f9 5e809fd7 e8b23ba6 318edd45 e51fe397 08bf9427 e9c3e8b9"
 
-b4 = [
-"839c7a4d 7a92cbd6 78a5d529 eea5a757 3c8a74de b366c3dc 20a083b6 9f5d2a3b",
-"b3719dc6 9891e9f9 5e809fd7 e8b23ba6 318edc45 e51fe397 08bf9427 e9c3e8b9"]
+delta4 = \
+ "_______________d________2______________________________________________"\
+ "_________________________________________c_____________________________"
 
-md4_a, md4_b = [hex2bin("".join(s).replace(" ", "")) for s in [a4, b4]]
+b4 = add_string(a4, delta4)
+b4 = b4.replace(" ","")
+a4, b4 = [hex2bin(s) for s in [a4, b4]]
+
 
 
 ass(md4_u.IVs, md4_IVs, "md4 IVs")
 ass(md4_test_vectors, [hashmd4(s) for s in test_vector_strings], "md4 test vectors")
-assert hashmd4(md4_a) == hashmd4(md4_b)
+assert hashmd4(a4) == hashmd4(b4)
 
 # MD5
 hashmd5 = lambda x: md5().compute(x).digest()
@@ -47,18 +51,19 @@ md5_test_vectors = [
     0x57edf4a22be3c955ac49da2e2107b67a]
 
 # collision, XiaoyunWang, Dengguo Feng, Xuejia Lai, Hongbo Yu, 2004
-a5 = [
-"d131dd02c5e6eec4693d9a0698aff95c 2fcab58712467eab4004583eb8fb7f89",
-"55ad340609f4b30283e488832571415a 085125e8f7cdc99fd91dbdf280373c5b",
-"d8823e3156348f5bae6dacd436c919c6 dd53e2b487da03fd02396306d248cda0",
-"e99f33420f577ee8ce54b67080a80d1e c69821bcb6a8839396f9652b6ff72a70"]
+a5 = \
+ "d131dd02c5e6eec4693d9a0698aff95c 2fcab58712467eab4004583eb8fb7f89"\
+ "55ad340609f4b30283e488832571415a 085125e8f7cdc99fd91dbdf280373c5b"\
+ "d8823e3156348f5bae6dacd436c919c6 dd53e2b487da03fd02396306d248cda0"\
+ "e99f33420f577ee8ce54b67080a80d1e c69821bcb6a8839396f9652b6ff72a70"
 
-b5 = [
-"d131dd02c5e6eec4693d9a0698aff95c 2fcab50712467eab4004583eb8fb7f89",
-"55ad340609f4b30283e4888325f1415a 085125e8f7cdc99fd91dbd7280373c5b",
-"d8823e3156348f5bae6dacd436c919c6 dd53e23487da03fd02396306d248cda0",
-"e99f33420f577ee8ce54b67080280d1e c69821bcb6a8839396f965ab6ff72a70"]
+delta5 = \
+ "_______________________________________0_________________________"\
+ "__________________________f____________________________7_________"\
+ "_______________________________________3_________________________"\
+ "__________________________2____________________________a_________"
 
+b5 = add_string(a5, delta5)
 md5_a, md5_b = [hex2bin("".join(s).replace(" ", "")) for s in [a5, b5]]
 
 
