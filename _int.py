@@ -1,5 +1,6 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 """customised standard type classes"""
+
 class List(list):
     """list with left and right rotation, as << and >>"""
     def __lshift__(self, other):
@@ -12,10 +13,34 @@ class List(list):
         limit = (l - other) % l
         return List(self[limit:] + self[:limit])
 
+    def __sub__(self, other):
+        """returns a List made of other's elements that are not in self, else None"""
+        l_diff = lambda x, y: None if x == y else y
+        return List(l_diff(x, y) for x, y in zip(self, other))
+
+    def __add__(self, other):
+        """returns a list made of 'self' elements if other's is None else other's"""
+        l_merge = lambda x, y: x if y == None else y
+        return List(l_merge(x, y) for x, y in zip(self, other))
+
+    def replace(self, a, b):
+        return List(b if i == a else i for i in self)
+
+#TODO: move to Str ?
+def sub_string(a,b):
+    """returns a string made of _ if the chars in a and b are the same, else b's"""
+    return str().join((List(a) - list(b)).replace(None, "_"))
+
+assert sub_string("abc", "aBc") == "_B_"
+def add_string(a,d):
+    """returns a string made of a char if d's char is '_' else d's char"""
+    return str().join(List(a) + List(d).replace("_", None))
+
+assert add_string("abc", "_B_") == "aBc"
+
 class Int():
     """
     integers with limited length encoding, and extra methods
-    
     """
     def __init__(self, number, width):
         self.width = width
