@@ -1,4 +1,4 @@
-#Burrows Wheeler Transform
+#  Burrows Wheeler Transform
 #A Block-sorting Lossless Data Compression Algorithm
 #M.Burrows, D.J. Wheeler, 1994
 #

@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#K abopan - Readable Algorithms. Public Domain, 2009
 """customised standard type classes"""
 
 class List(list):
