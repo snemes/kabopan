@@ -1,7 +1,7 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from entro.sfc import *
-import entro._encoding as encoding
+from kbp.entro.sfc import *
+import kbp.entro._encoding as encoding
 
 assert split([0,1,2,3],1) == ([0,1], [2,3])
 assert split([0,1,2,3],0) == ([0], [1,2,3])

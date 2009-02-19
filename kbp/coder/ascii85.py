@@ -4,8 +4,8 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
 
-from _misc import *
-from _subst import *
+from kbp._misc import *
+from kbp._subst import *
 
 
 ASCII85_1924  = DIGITS + ALPHABET + ALPHABET_LOWERCASE +  "!#$%&()*+-;<=>?@^_`{|}~" # for reference only, for RFC 1924
@@ -74,4 +74,4 @@ def decode(target):
     return result
 
 if __name__ == "__main__":
-    import test.ascii85_test
+    import kbp.test.ascii85_test

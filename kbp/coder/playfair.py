@@ -4,8 +4,8 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _misc import *
-from _subst import *
+from kbp._misc import *
+from kbp._subst import *
 
 ALPHABET25 = "ABCDEFGHIJKLMNOPRSTUVWXYZ" # no Q
 ALPHABET25_NOJ = "ABCDEFGHIKLMNOPQRSTUVWXYZ" # no J, alternative possibility
@@ -95,4 +95,4 @@ def decode(ciphertext, key):
 
 
 if __name__ == "__main__":
-    import test.playfair_test
+    import kbp.test.playfair_test

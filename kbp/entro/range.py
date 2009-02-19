@@ -87,4 +87,4 @@ Loop_until_the_last_symbol_output
 """
 
 if __name__ == "__main__":
-    import test.range_test
+    import kbp.test.range_test

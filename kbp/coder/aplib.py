@@ -7,8 +7,8 @@
 
 #todo working but need cleaning and maybe bugfixing
 
-import _bits
-import _lz77
+import kbp._bits as _bits
+import kbp.coder._lz77 as _lz77
 
 def lengthdelta(offset):
     if offset < 0x80 or 0x7D00 <= offset:
@@ -169,4 +169,4 @@ class decompress(_bits.decompress):
         return self.out, self.getoffset()
 
 if __name__ == "__main__":
-    import test.aplib_test
+    import kbp.test.aplib_test

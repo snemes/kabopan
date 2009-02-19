@@ -1,7 +1,7 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from crypt.has import *
-from _misc import test_vector_strings, ass
+from kbp.crypt.has import *
+from kbp._misc import test_vector_strings, ass
 
 ass([has160().compute(s).digest() for s in test_vector_strings],[
     0x307964ef34151d37c8047adec7ab50f4ff89762d,

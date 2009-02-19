@@ -5,4 +5,4 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
 if __name__ == "__main__":
-    import test.square_test
+    import kbp.test.square_test

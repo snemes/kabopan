@@ -4,8 +4,8 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
 
-from _subst import *
-from _misc import gcd
+from kbp._subst import *
+from kbp._misc import gcd
 
 def inverse(number, modulo):
     for i in range(modulo):
@@ -29,4 +29,4 @@ def decode(ciphertext, alphabet, increment, multiplier):
 
 
 if __name__ == "__main__":
-    import test.affine_test
+    import kbp.test.affine_test

@@ -9,8 +9,8 @@ http://homes.esat.kuleuven.be/~bosselae/ripemd160.html
 RIPEMD-160, a strengthened version of RIPEMD, 1996
 """
 
-import _misc as misc
-from sha import sha_u
+import kbp._misc as misc
+from kbp.crypt.sha import sha_u
 from md4 import *
 
 class ripemd160_u():
@@ -252,4 +252,4 @@ class ripemd256(ripemd128):
         return a, b, c, d, A, B, C, D
 
 if __name__ == "__main__":
-    import test.ripemd_test
+    import kbp.test.ripemd_test

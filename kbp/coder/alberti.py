@@ -4,8 +4,8 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _misc import *
-from _subst import *
+from kbp._misc import *
+from kbp._subst import *
 
 from random import randrange
 DISK1="ABCDEFGILMNOPQRSTVXZ1234" # uppercase, stationary, plaintext
@@ -82,4 +82,4 @@ def decrypt_mode2(plaintext, start_position):
 
 
 if __name__ == "__main__":
-    import test.alberti_test
+    import kbp.test.alberti_test

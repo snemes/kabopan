@@ -1,6 +1,6 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from entro.range import *
+from kbp.entro.range import *
 
 assert common_string(0.123,0.125) == "0.124"
 

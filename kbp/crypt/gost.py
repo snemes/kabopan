@@ -4,4 +4,4 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
 if __name__ == "__main__":
-    import test.gost_test
+    import kbp.test.gost_test

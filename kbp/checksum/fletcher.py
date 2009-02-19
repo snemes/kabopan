@@ -4,7 +4,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _int import *
+from kbp._int import *
 def compute(data_to_checksum, size, modulo, limit=None):
     sum, sum_of_sum = 1, 0
 
@@ -30,4 +30,4 @@ def fletcher32(data_to_checksum):
 
 
 if __name__ == "__main__":
-    import test.fletcher_test
+    import kbp.test.fletcher_test

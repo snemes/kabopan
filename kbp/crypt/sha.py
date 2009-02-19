@@ -4,7 +4,7 @@ Secure Hash Standard - SHS - SHA-0
 RFC 3174
 """
 from md4 import *
-from _int import DWORD
+from kbp._int import DWORD
 
 class sha_u():
     """utility class for sha"""
@@ -72,4 +72,4 @@ class sha1(sha0):
         return words
 
 if __name__ == "__main__":
-    import test.sha_test
+    import kbp.test.sha_test

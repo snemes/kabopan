@@ -11,9 +11,9 @@ try:
     psyco.run()
 except:
     pass
-import _misc as m
+import kbp._misc as m
 from md4 import *
-from _int import QWORD, BYTE, List
+from kbp._int import QWORD, BYTE, List
 
 import tiger_const
 
@@ -193,4 +193,4 @@ class tiger2(tiger):
 #sys.exit()
 
 if __name__ == "__main__":
-    import test.tiger_test
+    import kbp.test.tiger_test

@@ -1,8 +1,8 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 """tests for tiger family: tiger, tiger-2, tiger-160, tiger-128"""
 
-from crypt.tiger import *
-from _misc import test_vector_strings, ass
+from kbp.crypt.tiger import *
+from kbp._misc import test_vector_strings, ass
 
 IVs = [0x0123456789abcdef, 0xfedcba9876543210, 0xf096a5b4c3b2e187]
 

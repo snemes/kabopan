@@ -25,7 +25,7 @@ def get_weights_and_symbols(data):
 
 
 def encode(codes, data_to_encode):
-    import _bits
+    import kbp._bits as _bits
     comp = _bits.compress(1)
     for char in data_to_encode:
         comp.write_bitstring(codes[char])
@@ -34,7 +34,7 @@ def encode(codes, data_to_encode):
 
 def decode(tree_root, data_to_decode):
     result = ""
-    import _bits
+    import kbp._bits as _bits
     decomp = _bits.decompress(data_to_decode, 1)
     while not decomp.is_end():
         node = tree_root
@@ -48,4 +48,4 @@ def decode(tree_root, data_to_decode):
     return result
     
 if __name__ == "__main__":
-    import test._encoding_test
+    import kbp.test._encoding_test

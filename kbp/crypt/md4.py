@@ -10,9 +10,9 @@ Ron Rivest, 1992
 
 import struct
 from math import sin
-from _misc import *
-from _int import *
-import Hash
+from kbp._misc import *
+from kbp._int import *
+import kbp.crypt.Hash as Hash
 
 class md4_u():
     """utility class for MD4 cryptographic hash"""
@@ -133,4 +133,4 @@ class md5(md4):
         return [a, b, c, d]
 
 if __name__ == "__main__":
-    import test.md4_test
+    import kbp.test.md4_test

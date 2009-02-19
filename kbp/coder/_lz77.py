@@ -45,4 +45,4 @@ def back_copy(string, length, offset):
     return string
     
 if __name__ == "__main__":
-    import test._lz77_test
+    import kbp.test._lz77_test

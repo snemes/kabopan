@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _bits import *
+from kbp._bits import *
 
 assert "".join(str(int(i)) for i in bits("AE")) == "01000001" + "01000101"
 assert "".join(str(int(i)) for i in bits("AE",bit7_first=False)) == "10000010" + "10100010"

@@ -3,4 +3,4 @@
 
 
 if __name__ == "__main__":
-    import test.lzo_test
+    import kbp.test.lzo_test

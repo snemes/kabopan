@@ -70,4 +70,4 @@ class _str(str):
 
 
 if __name__ == "__main__":
-    import test._str_test
+    import kbp.test._str_test

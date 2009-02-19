@@ -57,4 +57,4 @@ def encode(data_to_compress):
 
 
 if __name__ == "__main__":
-    import test.sfc_test
+    import kbp.test.sfc_test

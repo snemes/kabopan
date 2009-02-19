@@ -1,7 +1,7 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from entro.huffman import *
-import entro._encoding as _encoding
+from kbp.entro.huffman import *
+import kbp.entro._encoding as _encoding
 
 assert pop_entry([{"symbol":"a", "weight" : 15}]) == {"symbol":"a", "weight":15}
 assert pop_entry([{"node":"this"}]) == "this"

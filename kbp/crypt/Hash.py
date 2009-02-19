@@ -1,6 +1,6 @@
-import _misc
+import kbp._misc as _misc
 import struct
-from _int import Int
+from kbp._int import Int
 class Hash:
     """
     base class for cryptographic hashes

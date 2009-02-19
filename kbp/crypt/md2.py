@@ -5,8 +5,8 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-import _misc as misc
-from _int import *
+import kbp._misc as misc
+from kbp._int import *
 from Hash import merkledamgaard
 
 class md2(merkledamgaard):
@@ -90,4 +90,4 @@ class md2(merkledamgaard):
 
 
 if __name__ == "__main__":
-    import test.md2_test
+    import kbp.test.md2_test

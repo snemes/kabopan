@@ -443,4 +443,4 @@ def printh(l):
     print ["%x" % i for i in l]
 
 if __name__ == "__main__":
-    import test._misc_test
+    import kbp.test._misc_test

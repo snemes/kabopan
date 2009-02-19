@@ -1,5 +1,5 @@
 #Ron's Code 4, Rivest's Cipher, RC4, ARC4, ARCFOUR
-from _int import BYTE
+from kbp._int import BYTE
 
 def init_states(key):
     keylength = len(key)
@@ -30,4 +30,4 @@ def crypt(key, message):
 
 
 if __name__ == "__main__":
-    import test.rc4_test
+    import kbp.test.rc4_test

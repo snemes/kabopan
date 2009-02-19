@@ -1,8 +1,8 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 """tests for sha-2 family: sha-512; sha-256, sha-224, sha0 and sha-1"""
 
-from crypt.sha2 import *
-from _misc import test_vector_strings
+from kbp.crypt.sha2 import *
+from kbp._misc import test_vector_strings
 
 sha512_IVs = [
     0x6a09e667f3bcc908, 0xbb67ae8584caa73b,

@@ -79,4 +79,4 @@ def decode(string):
 
 
 if __name__ == "__main__":
-    import test.fibonacci_test
+    import kbp.test.fibonacci_test

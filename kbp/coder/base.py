@@ -6,7 +6,7 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
 
-from _misc import *
+from kbp._misc import *
 
 base2 = "01"
 base8 = char_range("0", "7")
@@ -158,4 +158,4 @@ def decode_base16(data):
 
 
 if __name__ == "__main__":
-    import test.base_test
+    import kbp.test.base_test

@@ -1,6 +1,6 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from univ.elias import *
+from kbp.univ.elias import *
 
 assert elias_split(1) == (0, "")
 assert elias_split(14) == (3, "110")

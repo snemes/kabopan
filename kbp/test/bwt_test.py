@@ -1,6 +1,6 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from transf.bwt import *
+from kbp.transf.bwt import *
 
 assert transform('abraca') == ('caraab', 1)
 

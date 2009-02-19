@@ -1,9 +1,9 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 """tests for MD4 and MD5"""
 
-from _misc import rol, hex2bin, test_vector_strings
-from crypt.md4 import *
-from _int import *
+from kbp._misc import rol, hex2bin, test_vector_strings
+from kbp.crypt.md4 import *
+from kbp._int import *
 
 hashmd4 = lambda x: md4().compute(x).digest()
 

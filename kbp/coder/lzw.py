@@ -70,4 +70,4 @@ def decompress(roots, compressed_data):
 
 
 if __name__ == "__main__":
-    import test.lzw_test
+    import kbp.test.lzw_test

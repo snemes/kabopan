@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _misc import *
+from kbp._misc import *
 
 assert char_range("A", "Z") == "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 

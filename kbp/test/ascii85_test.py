@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from coder.ascii85 import *
+from kbp.coder.ascii85 import *
 
 assert ASCII85 == """!"#$%&'()*+,-./""" + DIGITS + ":;<=>?@" + ALPHABET + "[\]^_`" + char_range("a", "u")
 

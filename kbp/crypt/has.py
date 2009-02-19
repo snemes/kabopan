@@ -3,9 +3,9 @@
 cryptographic hash has/160
 """
 
-from _misc import *
-from _int import *
-from sha import *
+from kbp._misc import *
+from kbp._int import *
+from kbp.crypt.sha import *
 
 class has160_u():
     """utility class for has-160 cryptographic hash"""
@@ -57,4 +57,4 @@ class has160(sha0):
         return [a, b, c, d, e]
 
 if __name__ == "__main__":
-    import test.has_test
+    import kbp.test.has_test

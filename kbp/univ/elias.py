@@ -5,7 +5,7 @@
 
 
 
-from _misc import *
+from kbp._misc import *
 import unary
 
 def elias_split(value):
@@ -103,4 +103,4 @@ def omega_decode(binary_string, digits_to_read=1, consumed_bits=0):
         return omega_decode(next_part, digits_to_read_next, consumed_bits + digits_to_read + 1)
 
 if __name__ == "__main__":
-    import test.elias_test
+    import kbp.test.elias_test

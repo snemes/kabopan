@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from coder.base import *
+from kbp.coder.base import *
 
 assert base8 == "01234567"
 assert base16 =="0123456789ABCDEF"

@@ -1,5 +1,5 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from checksum.fletcher import *
+from kbp.checksum.fletcher import *
 print "%x" % fletcher32("abracadabra")
 #assert fletcher32("abracadabra") == 0x19E70454

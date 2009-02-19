@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _subst import *
+from kbp._subst import *
 
 assert substitute("a","abcd") == "c"
 assert substitute("a","abcd", lambda x: x + 3) == "d"

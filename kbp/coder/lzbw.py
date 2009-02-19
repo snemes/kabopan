@@ -2,4 +2,4 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
 if __name__ == "__main__":
-    import test.lzbw_test
+    import kbp.test.lzbw_test

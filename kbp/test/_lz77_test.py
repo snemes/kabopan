@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from coder._lz77 import *
+from kbp.coder._lz77 import *
 
 assert find_longest_match("abc","a") == (3,1)
 assert find_longest_match("abc","d") == (0,0)

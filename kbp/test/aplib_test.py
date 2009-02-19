@@ -1,5 +1,5 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
-from coder.aplib import *
+from kbp.coder.aplib import *
 
 assert decompress(compress("a").do()).do() == ("a", 3)
 assert decompress(compress("ababababababab").do()).do() == ('ababababababab', 9)

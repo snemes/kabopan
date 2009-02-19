@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from coder.brieflz import *
+from kbp.coder.brieflz import *
 
 assert compress("aba").do()         == 'a\x00\x00ba'
 assert compress("abababababa").do() == 'a\x00\x18bab\x03ba'

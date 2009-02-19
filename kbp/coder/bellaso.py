@@ -5,9 +5,9 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
 
-from _subst import *
-from _str import *
-from _misc import *
+from kbp._subst import *
+from kbp._str import *
+from kbp._misc import *
 
 
 def first_sifra(data, key):
@@ -80,4 +80,4 @@ def second_sifra(data, key, alphabet_key):
 #not enough information for his autokey cipher
 
 if __name__ == "__main__":
-    import test.bellaso_test
+    import kbp.test.bellaso_test

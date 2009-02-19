@@ -1,8 +1,8 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 """tests for ripemd-160, ripemd-128, ripemd-256 and ripemd-320"""
 
-from crypt.ripemd import *
-from _misc import test_vector_strings, ass, nibbleswap
+from kbp.crypt.ripemd import *
+from kbp._misc import test_vector_strings, ass, nibbleswap
 
 k = [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC, 0xA953FD4E]
 K = [0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x7A6D76E9, 0x00000000]

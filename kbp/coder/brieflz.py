@@ -7,8 +7,8 @@
 
 #TODO working, but need cleaning and bugfixing
 
-import _bits
-import _lz77
+import kbp._bits as _bits
+import kbp.coder._lz77 as _lz77
 
 debug = False
 
@@ -83,4 +83,4 @@ class decompress(_bits.decompress):
 
 
 if __name__ == "__main__":
-    import test.brieflz_test
+    import kbp.test.brieflz_test

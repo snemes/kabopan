@@ -29,4 +29,4 @@ def decode(string, stopper_is_1=True):
     return encoded_value, consumed_bits
 
 if __name__ == "__main__":
-    import test.unary_test
+    import kbp.test.unary_test

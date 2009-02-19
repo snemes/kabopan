@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from coder.rle import *
+from kbp.coder.rle import *
 
 test = "abababababaaaaaaccccccccbcdbcksjcblsauiaaaauu"
 

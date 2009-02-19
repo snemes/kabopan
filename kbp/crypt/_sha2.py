@@ -1,8 +1,8 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _misc import nroot, frac, generate_primes
-from _int import Int
+from kbp._misc import nroot, frac, generate_primes
+from kbp._int import Int
 primes = generate_primes(409)
 
 def nroot_primes(start, end, root, precision):

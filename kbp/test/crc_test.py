@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from checksum.crc import *
+from kbp.checksum.crc import *
 
 
 assert or_all ([1, 1 << 31]) == 0x80000001

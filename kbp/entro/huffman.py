@@ -56,4 +56,4 @@ def generate_tree(data_to_compress):
 
 
 if __name__ == "__main__":
-    import test.huffman_test
+    import kbp.test.huffman_test

@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from coder.lz77 import *
+from kbp.coder.lz77 import *
 
 assert compress("abracadabra") == [
     {'length': 0, 'offset': 0, 'symbol': 'a'},

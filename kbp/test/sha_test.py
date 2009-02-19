@@ -1,9 +1,9 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 """tests for sha-0 and sha-1"""
 
-from crypt.sha import *
-from _misc import test_vector_strings, hex2bin, ass
-from _int import add_string
+from kbp.crypt.sha import *
+from kbp._misc import test_vector_strings, hex2bin, ass
+from kbp._int import add_string
 
 hash0 = lambda x: sha0().compute(x).digest()
 

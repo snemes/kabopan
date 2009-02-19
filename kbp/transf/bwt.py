@@ -77,4 +77,4 @@ def revert(last_column, primary_index):
 
 
 if __name__ == "__main__":
-    import test.bwt_test
+    import kbp.test.bwt_test

@@ -7,7 +7,7 @@ sha-512, sha-384, sha-256, sha-224
 from md4 import *
 from _sha2 import nroot_primes
 
-import _pickle as p
+import kbp._pickle as p
 
 class sha512_u():
     """utility class for sha-512"""
@@ -153,4 +153,4 @@ class sha224(sha256):
         return sha256.digest(self)[:224 / 8]
 
 if __name__ == "__main__":
-    import test.sha2_test
+    import kbp.test.sha2_test

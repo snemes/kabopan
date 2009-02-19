@@ -6,7 +6,7 @@
 
 
 
-from _subst import *
+from kbp._subst import *
 
 def vigenere(plaintext, key):
     ciphertext = str()
@@ -19,4 +19,4 @@ def vigenere(plaintext, key):
 
 
 if __name__ == "__main__":
-    import test.vigenere_test
+    import kbp.test.vigenere_test

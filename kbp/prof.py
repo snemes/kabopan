@@ -1,2 +1,2 @@
 import profile
-profile.run("import test.ALL","profile.out")
+profile.run("import kbp.test.ALL","profile.out")

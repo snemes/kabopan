@@ -43,4 +43,4 @@ def mix_alphabet(key_string, alphabet):
 
 
 if __name__ == "__main__":
-    import test._subst_test
+    import kbp.test._subst_test

@@ -3,7 +3,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _subst import *
+from kbp._subst import *
 
 ASCII33_126 = char_range("!", "~")
 
@@ -26,4 +26,4 @@ def caesar_decode(ciphertext):
     return substitute(ciphertext, ALPHABET, lambda x: x - 3)
 
 if __name__ == "__main__":
-    import test.rot_test
+    import kbp.test.rot_test

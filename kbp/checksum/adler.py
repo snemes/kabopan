@@ -1,6 +1,6 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from checksum.fletcher import *
+from kbp.checksum.fletcher import *
 
 
 def get_adler_limit():
@@ -11,4 +11,4 @@ def adler32(data_to_checksum):
     return compute(data_to_checksum, 32, 65521, limit=5552)
 
 if __name__ == "__main__":
-    import test.adler_test
+    import kbp.test.adler_test

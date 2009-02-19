@@ -46,4 +46,4 @@ def revert(chars, vector):
     return result
 
 if __name__ == "__main__":
-    import test.mtf_test
+    import kbp.test.mtf_test
