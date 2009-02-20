@@ -34,11 +34,11 @@ fff4b3a7 40000096 7f466aac fffffbc0 5f4016d2 5f4016d0   12e2b0 f4307f87"""
 #_1310_digits_of_float_part_of_pi_in_hex = 
 #print "%x" % int((pi.evalf(n=2000) - 3)* 2 ** (32 * 136))
 
-import kbp._pickle as pickle
-from _int import DWORD
+from kbp._pickle import get_variables, save_variables
+from kbp._int import DWORD
 from decimal import Decimal, getcontext
 
-pickled = pickle.get_variables("haval", ["K"])
+pickled = get_variables("haval", ["K"])
 if pickled is None:
     import decimal
     decimal.getcontext().prec=1320
@@ -73,6 +73,6 @@ if pickled is None:
         K += [all_K[lower: lower + length]]
         lower += length
 
-    pickle.save_variables("haval", {"K":K})
+    save_variables("haval", {"K":K})
 else:
     K = pickled["K"]

@@ -6,8 +6,8 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
 
-import _bits
-import _lz77
+from kbp._bits import compress, decompress
+import kbp.coder._lz77
 
 def lengthdelta(x):
     if x >= 0x10000:
@@ -20,10 +20,10 @@ def lengthdelta(x):
         return 4;
     return 0
 
-class compress(_bits.compress):
+class compress(compress):
     """not working correctly yet"""
     def __init__(self, data, length=None):
-        _bits.compress.__init__(self, 4)
+        compress.__init__(self, 4)
         self.__in = data
         self.__length = length if length is not None else len(data)
         self.__lastindex = 1
@@ -106,10 +106,10 @@ class compress(_bits.compress):
 
 
 
-class decompress(_bits.decompress):
+class decompress(decompress):
     """jcalg decompression class"""
     def __init__(self, data):
-        _bits.decompress.__init__(self, data, tagsize=4)
+        decompress.__init__(self, data, tagsize=4)
         self.__lastindex = 1
         self.__indexbase = 8
         self.__literalbits = 0
