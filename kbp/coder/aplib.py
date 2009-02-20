@@ -1,8 +1,9 @@
-#aPLib
-#LZSS based lossless compression algorithm
-#Jorgen Ibsen, http://www.ibsensoftware.com/
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+aPLib, LZSS based lossless compression algorithm
+
+Jorgen Ibsen, U{http://www.ibsensoftware.com}
+"""
 
 
 #todo working but need cleaning and maybe bugfixing
