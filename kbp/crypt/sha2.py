@@ -4,14 +4,16 @@ Secure Hash Algorithm 2 - SHA-2
 sha-512, sha-384, sha-256, sha-224
 """
 
-from md4 import *
-from _sha2 import nroot_primes
+from kbp.crypt.md4 import md4
+from kbp._int import DWORDS
+from kbp._misc import ass
+from kbp.crypt._sha2 import nroot_primes
 
-import kbp._pickle as p
+from kbp._pickle import get_variables, save_variables
 
 class sha512_u():
     """utility class for sha-512"""
-    pickled = p.get_variables("sha512", ["IVs", "K"])
+    pickled = get_variables("sha512", ["IVs", "K"])
     if pickled is None:
 
         # 64bits representation of fractional parts of square root of the 8th first primes
@@ -19,7 +21,7 @@ class sha512_u():
         # 64bits representation of fractional parts of cube root of the 80th first primes
         K = nroot_primes(0, 80, 3, 64)
 
-        p.save_variables("sha512", {"IVs": IVs,"K":K})
+        save_variables("sha512", {"IVs": IVs,"K":K})
     else:
         IVs, K = pickled["IVs"], pickled["K"]
 
@@ -70,13 +72,13 @@ class sha512(md4):
 
 class sha384_u():
     """utility class for sha-384"""
-    pickled = p.get_variables("sha384", ["IVs"])
+    pickled = get_variables("sha384", ["IVs"])
     if pickled is None:
 
         # 64bits representation of fractional parts of square root of the 8th to 16th first primes
         IVs = nroot_primes(8, 16, 2, 64)
 
-        p.save_variables("sha384", {"IVs": IVs})
+        save_variables("sha384", {"IVs": IVs})
     else:
         IVs = pickled["IVs"]
 
@@ -128,12 +130,12 @@ class sha256(sha512):
 
 class sha224_u():
     """utility class for sha-224"""
-    pickled = p.get_variables("sha224", ["IVs"])
+    pickled = get_variables("sha224", ["IVs"])
     if pickled is None:
         # lowest 32 bits of sha384 IVs
         IVs = DWORDS(sha384_u.IVs)
 
-        p.save_variables("sha256", {"IVs": IVs})
+        save_variables("sha256", {"IVs": IVs})
     else:
         IVs = pickled["IVs"]
 

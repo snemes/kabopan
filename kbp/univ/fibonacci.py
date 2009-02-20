@@ -1,11 +1,11 @@
-#fibonacci encoding
-#universal coder
-#
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+fibonacci encoding
+Leonardo Fibonacci
+universal coder
+"""
 
-
-from _str import *
+from kbp._str import _str
 
 def number(n):
     """returns the n-th fibonacci number"""

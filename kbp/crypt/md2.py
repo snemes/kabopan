@@ -1,12 +1,13 @@
-#MD2 - Message Digest 2
-#Cryptographic hash
-#The MD2 Message-Digest Algorithm
-#B. Kaliski, 1992
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+MD2 - Message Digest 2
+Cryptographic hash
+The MD2 Message-Digest Algorithm
+B. Kaliski, 1992
+"""
 
-import kbp._misc as misc
-from kbp._int import *
+from kbp._misc import as_bytes_blocks
+from kbp._int import BYTES, BYTE
 from Hash import merkledamgaard
 
 class md2(merkledamgaard):
@@ -50,7 +51,7 @@ class md2(merkledamgaard):
     def checksum(self, message):
         checksum_bytes = [0 for i in xrange(16)]
         previous = 0
-        for block in misc.as_bytes_blocks(message, 16):
+        for block in as_bytes_blocks(message, 16):
             for i,char in enumerate(block):
                 # careful, RFC1319 is wrong there. - rfcc209
                 # Set C[j] to S[c xor L]
@@ -73,7 +74,7 @@ class md2(merkledamgaard):
         message += self.pad(message)
         block_bytes = [0 for i in xrange(16)]
         xor = BYTES([0 for i in xrange(16)])
-        blocks = misc.as_bytes_blocks(message, 16)
+        blocks = as_bytes_blocks(message, 16)
     
         for block in blocks:
             block_bytes = [ord(i) for i in block]

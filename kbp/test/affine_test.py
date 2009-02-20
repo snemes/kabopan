@@ -1,6 +1,10 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
-from kbp.coder.affine import *
+"""
+Affine substitution cipher
+"""
 
+from kbp.coder.affine import *
+from kbp._misc import ALPHABET
 assert inverse(17,26) == 23
 
 assert encode(ALPHABET, ALPHABET, multiplier=17, increment=5) == "FWNEVMDULCTKBSJARIZQHYPGXO"

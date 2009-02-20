@@ -1,10 +1,10 @@
-#Flechter checksum - Flechter-16/32
-#Fletcher, J. G., An Arithmetic Checksum for Serial Transmissions
-#1982
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Flechter checksum - Flechter-16/32
+Fletcher, J. G., An Arithmetic Checksum for Serial Transmissions
+1982
+"""
 
-from kbp._int import *
 def compute(data_to_checksum, size, modulo, limit=None):
     sum, sum_of_sum = 1, 0
 
@@ -25,9 +25,6 @@ def fletcher16(data_to_checksum):
 
 def fletcher32(data_to_checksum):
     return compute(data_to_checksum, 32, 65535, limit=360)
-
-
-
 
 if __name__ == "__main__":
     import kbp.test.fletcher_test

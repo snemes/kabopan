@@ -2,8 +2,9 @@
 """
 Tiny Encryption Algorithm Tea, XTEA
 """
-import cipher
-from _int import *
+from kbp.crypt.cipher import Feistel
+from _int import DWORD, DWORDS
+
 class tea_u():
     """utility class for tea"""
     phi = (1 + 5**(1./2)) /2 #: golden ratio
@@ -11,12 +12,12 @@ class tea_u():
 
 assert tea_u.constant == 0x9e3779b9
 
-class tea(cipher.Feistel):
+class tea(Feistel):
     """
     Tiny Encryption Algorithm
     """
     def __init__(self, rounds):
-        cipher.Feistel.__init__(self)
+        Feistel.__init__(self)
         self.in_f = lambda x, y: x + y
         self.out_f = lambda x, y : x - y
         self.rounds = rounds

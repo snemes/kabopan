@@ -1,11 +1,10 @@
+#Kabopan - Readable Algorithms. Public Domain, 2009
 """
 cryptographic hash
 HAVAL --- a one-way hashing algorithm with variable length of output
 Yuliang Zheng, Josef Pieprzyk, Jennifer Seberry 1992
 http://labs.calyptix.com/haval.php
 """
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
 
 
 # collision, XiaoyunWang, Dengguo Feng, Xuejia Lai, Hongbo Yu, 2004
@@ -25,7 +24,6 @@ fff4b3a7 40000096 7f466aac fffffbc0 5f4016d2 5f4016d0   12e2b0 f4307f87"""
 #from mpmath import *
 #mp.dps = 50
 #from fractions import *
-from decimal import Decimal, getcontext
 #getcontext().prec=2000
 #p = Fraction(0)
 #for i in range(1000):
@@ -36,8 +34,9 @@ from decimal import Decimal, getcontext
 #_1310_digits_of_float_part_of_pi_in_hex = 
 #print "%x" % int((pi.evalf(n=2000) - 3)* 2 ** (32 * 136))
 
-import _pickle as pickle
-from _int import *
+import kbp._pickle as pickle
+from _int import DWORD
+from decimal import Decimal, getcontext
 
 pickled = pickle.get_variables("haval", ["K"])
 if pickled is None:

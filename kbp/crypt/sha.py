@@ -3,7 +3,8 @@
 Secure Hash Standard - SHS - SHA-0
 RFC 3174
 """
-from md4 import *
+from md4 import md4, md4_u
+from kbp._misc import hsqrt
 from kbp._int import DWORD
 
 class sha_u():

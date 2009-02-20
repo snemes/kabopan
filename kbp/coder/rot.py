@@ -1,9 +1,11 @@
-#ROT5 / ROT13 / ROT18 / ROT47 / Caesar
-#substitution cipher
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+ROT5 / ROT13 / ROT18 / ROT47 / Caesar
+substitution cipher
+"""
 
-from kbp._subst import *
+from kbp._subst import substitute
+from kbp._misc import char_range, DIGITS, ALPHABET, ALPHABET_LOWERCASE
 
 ASCII33_126 = char_range("!", "~")
 

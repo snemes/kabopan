@@ -1,10 +1,10 @@
-#various functions for binary calculations, display...
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
-
-from _int import *
+"""
+various functions for binary calculations, display...
+"""
 #todo : a lot of cleaning is likely required
 
+from kbp._int import Int
 import struct
 
 def char_range(start, end):

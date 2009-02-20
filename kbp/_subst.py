@@ -1,8 +1,8 @@
-#useful functions for substitution ciphers
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+useful functions for substitution ciphers
+"""
 
-from _misc import *
 
 def substitute(original, alphabet, substitution=None):
     """substitute all characters in 'original' that are present in 'alphabet'

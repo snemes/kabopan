@@ -1,11 +1,11 @@
-#Ascii85 / Base85
-#base coder
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Ascii85 / Base85
+base coder
+"""
 
-
-from kbp._misc import *
-from kbp._subst import *
+from kbp._misc import ASCII, DIGITS, ALPHABET, ALPHABET_LOWERCASE, char_range
+from kbp._subst import substitute
 
 
 ASCII85_1924  = DIGITS + ALPHABET + ALPHABET_LOWERCASE +  "!#$%&()*+-;<=>?@^_`{|}~" # for reference only, for RFC 1924

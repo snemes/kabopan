@@ -1,8 +1,7 @@
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from _misc import *
 import base
+from kbp._misc import char_range
 
 LENGTHS = "`" + char_range(chr(33), chr(33 + 45 - 1)) # 0 is encoded as `, the other char starting from 33"
 UUENCODE = char_range(" ", "_").replace(" ", "`")
@@ -37,6 +36,7 @@ def decode(filename):
         print data
         decoded = base.decode(data, base.base256, UUENCODE)
         print decoded
-import sys
-filename = sys.argv[1]
-decode(filename)
+
+#import sys
+#filename = sys.argv[1]
+#decode(filename)

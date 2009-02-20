@@ -1,7 +1,6 @@
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
 
-from univ.fibonacci import *
+from kbp.univ.fibonacci import *
 
 assert number(20) == 6765
 

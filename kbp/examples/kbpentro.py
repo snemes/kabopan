@@ -1,7 +1,9 @@
-from getopt import *
+from getopt import GetoptError, getopt
 from sys import argv, exit
 
-import huffman, sfc, _encoding
+import kbp.entro.huffman    as huffman
+import kbp.entro.sfc        as sfc
+import kbp.entro._encoding  as encoding
 
 families = {
     "huffman":{
@@ -55,4 +57,4 @@ except GetoptError, error:
     exit()
 
 for s in requested_algorithms:
-        print "%s\t%s" % (s, _encoding.generate_codes(algorithms[s](input)))
+        print "%s\t%s" % (s, generate_codes(algorithms[s](input)))

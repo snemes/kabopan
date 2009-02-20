@@ -1,13 +1,13 @@
-#Bellaso cipher (sifra)
-#Giovan Battista Bellaso, 1555
-#substitution cipher
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Bellaso cipher (sifra)
+Giovan Battista Bellaso, 1555
+substitution cipher
+"""
 
-
-from kbp._subst import *
-from kbp._str import *
-from kbp._misc import *
+from kbp._subst import substitute, mix_alphabet
+from kbp._str import _str
+from kbp._misc import split_string_blocks, zip_extend
 
 
 def first_sifra(data, key):

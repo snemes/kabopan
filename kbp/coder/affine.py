@@ -1,10 +1,10 @@
-#Affine cipher
-#substitution cipher
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Affine cipher
+substitution cipher
+"""
 
-
-from kbp._subst import *
+from kbp._subst import substitute
 from kbp._misc import gcd
 
 def inverse(number, modulo):

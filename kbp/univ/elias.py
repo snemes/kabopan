@@ -1,12 +1,12 @@
-#Elias Delta, Gamma, Omega encoding
-#universal coder
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Elias Delta, Gamma, Omega encoding
+Peter Elias
+universal coder
+"""
 
-
-
-from kbp._misc import *
-import unary
+import kbp.univ.unary as unary
+from kbp._misc import getbinstr, getvaluefrombinarystring, prin
 
 def elias_split(value):
     binary = getbinstr(value)
@@ -102,5 +102,9 @@ def omega_decode(binary_string, digits_to_read=1, consumed_bits=0):
         prin (binary_string, digits_to_read, bits, next_part, digits_to_read_next)
         return omega_decode(next_part, digits_to_read_next, consumed_bits + digits_to_read + 1)
 
+
+
 if __name__ == "__main__":
     import kbp.test.elias_test
+    
+    

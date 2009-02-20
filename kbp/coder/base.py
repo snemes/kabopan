@@ -1,12 +1,16 @@
-#Base16, base32, base64 encoding
-#coder
-#The Base16, Base32, and Base64 Data Encodings, rfc 3548
-#S. Josefsson, 2003
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Base16, base32, base64 encoding
+coder
+The Base16, Base32, and Base64 Data Encodings, rfc 3548
+S. Josefsson, 2003
+"""
 
+from kbp._misc import (
+ DIGITS, ALPHABET, ALPHABET_LOWERCASE, ASCII, char_range,
+ getbinlen, getpadbinstr, getvaluefrombinarystring,
+ lcm)
 
-from kbp._misc import *
 
 base2 = "01"
 base8 = char_range("0", "7")

@@ -1,4 +1,6 @@
-from _int import *
+#Kabopan - Readable Algorithms. Public Domain, 2009
+
+from _int import DWORD, DWORDS
 
 class Feistel:
     def __init__(self):

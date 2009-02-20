@@ -1,7 +1,8 @@
-from getopt import *
+from getopt import GetoptError, getopt
 from sys import argv, exit
-
-import elias, unary, fibonacci
+import kbp.univ.elias     as elias
+import kbp.univ.unary     as unary
+import kbp.univ.fibonacci as fibonacci
 
 
 families = {

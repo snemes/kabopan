@@ -1,12 +1,12 @@
-#vigenere cipher
-#Blaide de Vigenere, 1586
-#substitution cipher
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+vigenere cipher
+Blaise de Vigenere, 1586
+substitution cipher
+"""
 
-
-
-from kbp._subst import *
+from kbp._misc import ALPHABET, ALPHABET_LOWERCASE
+from kbp._subst import substitute
 
 def vigenere(plaintext, key):
     ciphertext = str()

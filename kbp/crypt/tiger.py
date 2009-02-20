@@ -11,9 +11,11 @@ try:
     psyco.run()
 except:
     pass
-import kbp._misc as m
-from md4 import *
-from kbp._int import QWORD, BYTE, List
+
+from kbp._misc import xor, hex2bin
+from md4 import md4
+from kbp._int import QWORD, BYTE, List, QWORDS
+import struct
 
 import tiger_const
 
@@ -68,8 +70,8 @@ class tiger(md4):
         a, b, c = round_indexes
         bhvs[c] ^= x
         c = bhvs[c]
-        ta = m.xor((sbox[c[7 - index]] for sbox, index in zip(self.sboxes, [0, 2, 4, 6])), QWORD(0))
-        tb = m.xor((sbox[c[7 - index]] for sbox, index in zip(self.Sboxes, [1, 3, 5, 7])), QWORD(0))
+        ta = xor((sbox[c[7 - index]] for sbox, index in zip(self.sboxes, [0, 2, 4, 6])), QWORD(0))
+        tb = xor((sbox[c[7 - index]] for sbox, index in zip(self.Sboxes, [1, 3, 5, 7])), QWORD(0))
         bhvs[a] -= ta
         bhvs[b] += tb
         bhvs[b] *= mul

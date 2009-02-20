@@ -1,11 +1,12 @@
-#Playfair cipher/square
-#Charles Wheatstone, 1854
-#substitution cipher
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+Playfair cipher/square
+Charles Wheatstone, 1854
+substitution cipher
+"""
 
-from kbp._misc import *
-from kbp._subst import *
+from kbp._misc import insert_string, split_string_blocks
+from kbp._subst import substitute, mix_alphabet
 
 ALPHABET25 = "ABCDEFGHIJKLMNOPRSTUVWXYZ" # no Q
 ALPHABET25_NOJ = "ABCDEFGHIKLMNOPQRSTUVWXYZ" # no J, alternative possibility

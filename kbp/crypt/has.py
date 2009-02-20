@@ -3,9 +3,10 @@
 cryptographic hash has/160
 """
 
-from kbp._misc import *
-from kbp._int import *
-from kbp.crypt.sha import *
+from kbp._misc import hsqrt
+from kbp._int import QWORD
+from kbp.crypt.sha import sha0, sha_u
+from kbp.crypt.md4 import md4_u, md5_u
 
 class has160_u():
     """utility class for has-160 cryptographic hash"""
