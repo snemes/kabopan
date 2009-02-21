@@ -12,4 +12,4 @@ test_vectors = [
         0x4aeff66cd896d63e03ac2f98a36e8a73f7de5faba470e7901d84e3d555f59da6,
         0x1325a194745de0560ecb0bcc2f0de0f4f626157873e3fe1987a8080fba0220bf]
 
-#assert test_vectors == [hash(s) for s in test_vector_strings], "panama test vectors"
+assert test_vectors == [hash(s) for s in test_vector_strings], "panama test vectors"

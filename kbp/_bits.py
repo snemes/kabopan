@@ -1,6 +1,7 @@
-#classes for variable-sized auto-reloading tag, sliding window, compression and decompression algorithms
-#
 #Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+classes for variable-sized auto-reloading tag, sliding window, compression and decompression algorithms
+"""
 
 
 #todo : working, but needs a lot of cleaning, and bugfixing

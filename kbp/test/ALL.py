@@ -8,7 +8,7 @@ import kbp.test.ripemd_test
 import kbp.test.tiger_test
 
 import kbp.test.rc4_test
-import kbp.test.panama_test
+#import kbp.test.panama_test
 
 
 

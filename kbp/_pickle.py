@@ -1,3 +1,7 @@
+#Kabopan - Readable Algorithms. Public Domain, 2009
+"""
+loading and saving variables
+"""
 import sys, os.path, pickle
 def getfilename():
     return os.path.splitext(os.path.split(sys.argv[0])[1])[0]
