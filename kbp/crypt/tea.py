@@ -3,7 +3,7 @@
 Tiny Encryption Algorithm Tea, XTEA
 """
 from kbp.crypt.cipher import Feistel
-from kbp._int import DWORD, DWORDS
+from kbp.types import DWORD, DWORDS
 
 class tea_u():
     """utility class for tea"""

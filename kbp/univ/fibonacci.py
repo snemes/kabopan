@@ -5,7 +5,7 @@ Leonardo Fibonacci
 universal coder
 """
 
-from kbp._str import _str
+from kbp.types import Str
 
 def number(n):
     """returns the n-th fibonacci number"""
@@ -70,7 +70,7 @@ def encode(value):
 
 
 def decode(string):
-    encode = _str(string[:string.find("11") + 1])
+    encode = Str(string[:string.find("11") + 1])
     num = generate_numbers(len(encode))
     value = 0
     for i in encode.indexes("1"):

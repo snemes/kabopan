@@ -35,7 +35,7 @@ fff4b3a7 40000096 7f466aac fffffbc0 5f4016d2 5f4016d0   12e2b0 f4307f87"""
 #print "%x" % int((pi.evalf(n=2000) - 3)* 2 ** (32 * 136))
 
 from kbp._pickle import get_variables, save_variables
-from kbp._int import DWORD
+from kbp.types import DWORD
 from decimal import Decimal, getcontext
 
 pickled = get_variables("haval", ["K"])

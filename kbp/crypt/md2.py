@@ -7,7 +7,7 @@ B. Kaliski, 1992
 """
 
 from kbp._misc import as_bytes_blocks
-from kbp._int import BYTES, BYTE
+from kbp.types import BYTES, BYTE
 from Hash import merkledamgaard
 
 class md2(merkledamgaard):

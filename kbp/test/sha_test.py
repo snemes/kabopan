@@ -3,7 +3,7 @@
 
 from kbp.crypt.sha import *
 from kbp._misc import test_vector_strings, hex2bin, ass
-from kbp._int import add_string
+from kbp.types import add_string
 
 hash0 = lambda x: sha0().compute(x).digest()
 

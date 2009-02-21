@@ -4,7 +4,7 @@ various functions for binary calculations, display...
 """
 #todo : a lot of cleaning is likely required
 
-from kbp._int import Int
+from kbp.types import Int
 import struct
 
 def char_range(start, end):

@@ -58,7 +58,7 @@ import kbp.test.mtf_test
 import kbp.test._bits_test
 import kbp.test._lz77_test
 import kbp.test._misc_test
-import kbp.test._str_test
+import kbp.test.types_test
 import kbp.test._subst_test
 import kbp.test.affine_test
 import kbp.test.alberti_test

@@ -11,7 +11,7 @@ Ron Rivest, 1992
 import struct
 from math import sin
 from kbp._misc import hsqrt, hex2bin, ass, pad_0_1_size
-from kbp._int import DWORDS
+from kbp.types import DWORDS
 import kbp.crypt.Hash as Hash
 
 class md4_u():

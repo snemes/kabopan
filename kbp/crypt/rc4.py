@@ -1,5 +1,5 @@
 #Ron's Code 4, Rivest's Cipher, RC4, ARC4, ARCFOUR
-from kbp._int import BYTE
+from kbp.types import BYTE
 
 def init_states(key):
     keylength = len(key)

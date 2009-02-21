@@ -5,7 +5,7 @@ sha-512, sha-384, sha-256, sha-224
 """
 
 from kbp.crypt.md4 import md4
-from kbp._int import DWORDS
+from kbp.types import DWORDS
 from kbp._misc import ass
 from kbp.crypt._sha2 import nroot_primes
 

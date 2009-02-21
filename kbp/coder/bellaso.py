@@ -6,7 +6,7 @@ substitution cipher
 """
 
 from kbp._subst import substitute, mix_alphabet
-from kbp._str import _str
+from kbp.types import Str
 from kbp._misc import split_string_blocks, zip_extend
 
 
@@ -14,7 +14,7 @@ def first_sifra(data, key):
     """first bellaso substitution cipher"""
     alphabet = "abcdefghilmnopqrstvxyz" # bellaso didn't use a 26 chars alphabet
 
-    constant_part, rotated_part = alphabet[:11], _str(alphabet[11:]) # and it was split in two parts, used differently
+    constant_part, rotated_part = alphabet[:11], Str(alphabet[11:]) # and it was split in two parts, used differently
 
     pairs = [alphabet[i:i + 2] for i in range(0, len(alphabet), 2)] #each pair of letters of the key gets a different substitution alphabet
     order = "aeiovcgmqsy" # this is the order of pairs, rotation-wise.
@@ -50,12 +50,12 @@ def second_sifra(data, key, alphabet_key):
     alphabet = "".join(i + j for i, j in zip_extend(consonants_blocks, list(vowels)))
 
     #assert alphabet == "rmqacntupsbidfgehlxoyz"
-    constant_part, rotated_part = alphabet[:11], _str(alphabet[11:])
+    constant_part, rotated_part = alphabet[:11], Str(alphabet[11:])
 
     #now to generate the pairs, we'll do the same, but merge the vowel every char blocks
     consonants_blocks = split_string_blocks(consonants, 1)
-    pairs_string = _str("".join(i + j for i, j in zip_extend(consonants_blocks, list(vowels))))
-    pairs = pairs_string.splitblock(2)
+    pairsString = Str("".join(i + j for i, j in zip_extend(consonants_blocks, list(vowels))))
+    pairs = pairsString.splitblock(2)
 
     #now we have the pairs, the initial substitution alphabet
     #let's generate the 'rotated' alphabet for each pair

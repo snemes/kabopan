@@ -1,6 +1,72 @@
 #K abopan - Readable Algorithms. Public Domain, 2009
 """customised standard type classes"""
 
+
+class Str(str):
+    def __init__(self, seq):
+            if isinstance(seq, basestring):
+                    self.data = seq
+            else:
+                    self.data = str(seq)
+
+    def __lshift__(self, other):
+        if not isinstance(other, int):
+            return NotImplemented
+        string = self.data
+        length = len(string)
+        other = other % length
+        return self.__class__(string[other:] + string[:other])
+
+    def __rshift__(self, other):
+        if not isinstance(other, int):
+            return NotImplemented
+        string = self.data
+        length = len(string)
+        other = (length - other) % length
+        return self.__class__(string[other:] + string[:other])
+
+    def setstart(self, char):
+        """rotate string so that 'char' is the first character"""
+        if not isinstance(char, str):
+            return NotImplemented
+        string = self.data
+        if char not in string:
+            raise ValueError, "substring not found"
+        index = string.index(char)
+        return self.__class__(self.__lshift__(index))
+
+    def indexes(self, char):
+        if not isinstance(char, str):
+            return NotImplemented
+        string = self.data
+        if char not in string:
+            return list()
+
+        result = []
+        offset = 0
+
+        while string[offset:].find(char) != -1:
+            index = string[offset:].index(char)
+            result.append(index + offset)
+            offset += index + 1
+        return result
+
+    def splitblock(self, block_length):
+        if not isinstance(block_length, int):
+            return NotImplemented
+        string = self.data
+        return [self.__class__(string[i: i + block_length]) for i in range(0, len(string), block_length)]
+
+    def insert(self, substring, offset):
+        string = self.data
+        return self.__class__(string[:offset] + substring + string[offset:])
+
+    def overwrite(self, substring, offset):
+        """overwrites 'sub' at 'offset' of 's'"""
+        string = self.data
+        return self.__class__(string[:offset] + substring + string[offset + len(substring):])
+
+
 class List(list):
     """list with left and right rotation, as << and >>"""
     def __lshift__(self, other):
@@ -31,12 +97,11 @@ def sub_string(a,b):
     """returns a string made of _ if the chars in a and b are the same, else b's"""
     return str().join((List(a) - list(b)).replace(None, "_"))
 
-assert sub_string("abc", "aBc") == "_B_"
+
 def add_string(a,d):
     """returns a string made of a char if d's char is '_' else d's char"""
     return str().join(List(a) + List(d).replace("_", None))
 
-assert add_string("abc", "_B_") == "aBc"
 
 class Int():
     """
@@ -101,6 +166,7 @@ class Int():
         else:
             raise TypeError
 
+
 class DQWORD(Int):
     def __init__(self, number):
         Int.__init__(self, number, 128)
@@ -123,6 +189,7 @@ class BYTE(Int):
     def __init__(self, number):
         Int.__init__(self, number, 8)
 
+
 def DWORDS(l):
     return [DWORD(i) for i in l]
 
@@ -133,27 +200,5 @@ def BYTES(l):
     return [BYTE(i) for i in l]
 
 
-def _test():
-    assert List([1,2,3,4]) >> 1 == [4, 1,2,3]
-    assert List([1,2,3,4]) >> 4 == [1,2,3,4]
-    assert List([1,2,3,4]) << 1 == [2,3,4, 1]
-
-    assert 0xFFCD9AD6 == DWORD(251972843051734)
-    assert 0x9AD6 == WORD(251972843051734)
-    assert 0xD6 == BYTE(251972843051734)
-    assert str(QWORD(17)) == "0000000000000011"
-    assert 214 == BYTE(251972843051734)
-    assert BYTE(15 + 1)  == BYTE(15) + 1
-
-    # casting is important
-    assert BYTE(0xF) + DWORD(0xFFFFF00) == 0xF
-    assert DWORD(0xFFFFF00) + BYTE(0xF) == 0xFFFFF0F
-    assert DWORD(BYTE(0xF)) + DWORD(0xFFFFF00) == 0xFFFFF0F
-    assert int(BYTE(0xF)) + DWORD(0xFFFFF00) == 0xFFFFF0F
-    assert DQWORD(0xF) == OWORD(0xE) + 1
-
-    i = DWORD(0x4345669)
-    assert i[:3].concat(i[3:]) == i
-
 if __name__ == "__main__":
-    _test()
+    import test.types_test

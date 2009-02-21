@@ -14,7 +14,7 @@ except:
 
 from kbp._misc import xor, hex2bin
 from md4 import md4
-from kbp._int import QWORD, BYTE, List, QWORDS
+from kbp.types import QWORD, BYTE, List, QWORDS
 import struct
 
 import tiger_const

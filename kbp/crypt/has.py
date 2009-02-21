@@ -4,7 +4,7 @@ cryptographic hash has/160
 """
 
 from kbp._misc import hsqrt
-from kbp._int import QWORD
+from kbp.types import QWORD
 from kbp.crypt.sha import sha0, sha_u
 from kbp.crypt.md4 import md4_u, md5_u
 
