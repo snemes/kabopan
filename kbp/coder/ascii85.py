@@ -1,7 +1,8 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 Ascii85 / Base85
 base coder
+Paul E. Rutter
 """
 
 from kbp._misc import ASCII, DIGITS, ALPHABET, ALPHABET_LOWERCASE, char_range

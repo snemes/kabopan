@@ -1,6 +1,7 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 Playfair cipher/square
+
 Charles Wheatstone, 1854
 substitution cipher
 """

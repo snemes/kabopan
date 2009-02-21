@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
 from kbp.coder.rot import *
 from kbp._misc import (DIGITS, ALPHABET, ALPHABET_LOWERCASE)

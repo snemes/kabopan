@@ -1,9 +1,11 @@
-#Range encoding
-#entropy encoding
-#Range encoding: an algorithm for removing redundancy from a digitized message
-#G.N.N Martin, 1979
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Range encoding
+
+entropy encoding
+Range encoding: an algorithm for removing redundancy from a digitized message
+G.N.N Martin, 1979
+"""
 
 import pprint
 from fractions import Fraction

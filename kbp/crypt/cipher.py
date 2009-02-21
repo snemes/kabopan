@@ -1,4 +1,7 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+base classes for (block) ciphers
+"""
 
 from kbp.types import DWORD, DWORDS
 

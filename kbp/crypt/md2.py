@@ -1,6 +1,7 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 MD2 - Message Digest 2
+
 Cryptographic hash
 The MD2 Message-Digest Algorithm
 B. Kaliski, 1992
@@ -11,6 +12,12 @@ from kbp.types import BYTES, BYTE
 from Hash import merkledamgaard
 
 class md2(merkledamgaard):
+    """
+    MD2 is based on the Merkle-Damgaard model.
+
+    padding is done according to pkcs7 standard, then an full block checksum is padded.
+    """
+
     def __init__(self):
         merkledamgaard.__init__(self)
         self.block_length = 16
@@ -59,7 +66,7 @@ class md2(merkledamgaard):
                 # Set C[j] to (C[j] xor S[c xor L])
                 checksum_bytes[i] = checksum_bytes[i] ^ self.PI_SUBST[ord(char) ^ previous]
                 previous = checksum_bytes[i]
-    
+
         checksum_string = str().join(chr(i) for i in checksum_bytes)
         return checksum_string
 
@@ -75,12 +82,12 @@ class md2(merkledamgaard):
         block_bytes = [0 for i in xrange(16)]
         xor = BYTES([0 for i in xrange(16)])
         blocks = as_bytes_blocks(message, 16)
-    
+
         for block in blocks:
             block_bytes = [ord(i) for i in block]
             for i in xrange(16):
                 xor[i] = self.ihvs[i] ^ block_bytes[i]
-    
+
             previous = BYTE(0)
             for round in xrange(18):
                 for l in [self.ihvs, block_bytes, xor]:

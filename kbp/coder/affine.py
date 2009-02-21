@@ -1,7 +1,6 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
-Affine cipher
-substitution cipher
+Affine substitution cipher
 """
 
 from kbp._subst import substitute

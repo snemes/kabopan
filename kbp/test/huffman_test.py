@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
 from kbp.entro.huffman import *
 import kbp.entro._encoding as _encoding

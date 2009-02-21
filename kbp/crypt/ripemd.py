@@ -1,10 +1,10 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
-RIPEMD
-RIPEMD-128/160/256/320
 RACE Integrity Primitives Evaluation Message Digest
+
+RIPEMD-128/160/256/320
 Hans Dobbertin, Antoon Bosselaers and Bart Preneel, 1960
-http://homes.esat.kuleuven.be/~bosselae/ripemd160.html
+U{http://homes.esat.kuleuven.be/~bosselae/ripemd160.html}
 
 RIPEMD-160, a strengthened version of RIPEMD, 1996
 """

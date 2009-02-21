@@ -1,9 +1,11 @@
-#Huffman coding - Huffman tree
-#entropy encoding
-#A Method for the Construction of Minimum-Redundancy Codes
-#D.A. Huffman 1952
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Huffman coding - Huffman tree
+
+entropy encoding
+A Method for the Construction of Minimum-Redundancy Codes
+D.A. Huffman 1952
+"""
 
 
 import _encoding

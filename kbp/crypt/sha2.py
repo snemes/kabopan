@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 Secure Hash Algorithm 2 - SHA-2
 sha-512, sha-384, sha-256, sha-224

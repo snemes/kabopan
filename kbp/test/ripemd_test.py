@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """tests for ripemd-160, ripemd-128, ripemd-256 and ripemd-320"""
 
 from kbp.crypt.ripemd import *

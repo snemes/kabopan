@@ -1,6 +1,10 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
-cryptographic hash has/160
+Hash function Algorithm Standard, HAS-160
+
+cryptographic hash
+TTAS.KO-12.0011/R1
+Telecommunications Technology Association
 """
 
 from kbp._misc import hsqrt

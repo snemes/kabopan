@@ -1,8 +1,9 @@
-#BriefLZ
-#LZSS-based compression algorithm
-#Jorgen Ibsen, http://www.ibsensoftware.com/
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+BriefLZ: LZSS-based compression algorithm
+
+Jorgen Ibsen U{http://www.ibsensoftware.com/}
+"""
 
 
 #TODO working, but need cleaning and bugfixing
@@ -14,6 +15,9 @@ debug = False
 
 
 class compress(_bits.compress):
+    """
+    Brielfz compression is based on lz77
+    """
     def __init__(self, data, length=None):
         _bits.compress.__init__(self, 2)
         self.__in = data
@@ -54,6 +58,9 @@ class compress(_bits.compress):
 
 
 class decompress(_bits.decompress):
+    """
+    Brielfz decompression is based on lz77
+    """
     def __init__(self, data, length=None):
         _bits.decompress.__init__(self, data, 2)
         if length is None:

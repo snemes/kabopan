@@ -1,8 +1,11 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 Alberti cipher (disk) / Captain Midnight Decoder Badge
-De Cifris, Leone Battista Alberti, 1467
+
 substitution cipher
+De Cifris
+Leone Battista Alberti
+1467
 """
 
 from kbp._misc import setstr

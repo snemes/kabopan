@@ -1,6 +1,7 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
-Base16, base32, base64 encoding
+Base2, Base8, Base16, Base32, Base32hex, Base64
+
 coder
 The Base16, Base32, and Base64 Data Encodings, rfc 3548
 S. Josefsson, 2003

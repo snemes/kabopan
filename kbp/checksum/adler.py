@@ -1,4 +1,7 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Adler8/16/32 checksum. Mark Adler
+"""
 
 from kbp.checksum.fletcher import compute
 

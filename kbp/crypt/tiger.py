@@ -1,6 +1,7 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 Tiger Hash, Cryptographic Hash
+
 Tiger - A Fast New Hash Function
 Ross Anderson and Eli Biham, 1996
 tiger/192, tiger/160, tiger/128, tiger-2

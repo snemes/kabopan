@@ -1,8 +1,10 @@
-#  Burrows Wheeler Transform
-#A Block-sorting Lossless Data Compression Algorithm
-#M.Burrows, D.J. Wheeler, 1994
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Burrows Wheeler Transform
+
+A Block-sorting Lossless Data Compression Algorithm
+M.Burrows, D.J. Wheeler, 1994
+"""
 
 
 def rotate_string(string, count):

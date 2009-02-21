@@ -1,9 +1,11 @@
-#Lempel Ziv Welch - LZW
-#lossless dictionary (dynamic) coder (compression algorithm)
-#A Technique for High-Performance Data Compression
-#Terry A. Welch, 1984
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Lempel Ziv Welch - LZW
+
+lossless dictionary (dynamic) coder (compression algorithm)
+A Technique for High-Performance Data Compression
+Terry A. Welch, 1984
+"""
 
 
 def compress(data_to_compress):

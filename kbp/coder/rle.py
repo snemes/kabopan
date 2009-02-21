@@ -1,7 +1,7 @@
-#Run-length encoding
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
-
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Run-length encoding
+"""
 
 def compress(data_to_compress):
     offset = 0

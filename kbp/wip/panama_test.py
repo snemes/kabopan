@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
 from kbp.crypt.panama import *
 from kbp._misc import test_vector_strings

@@ -1,11 +1,11 @@
-#Lempel Ziv 78 - LZ78 - LZ2
-#lossless dictionary (dynamic dictionary) coder (compression algorithm)
-#Compression of Individual Sequences via Variable-Rate Coding
-#Jacob Ziv and Abraham Lempel, 1978
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Lempel Ziv 78 - LZ78 - LZ2
 
-
+lossless dictionary (dynamic dictionary) coder (compression algorithm)
+Compression of Individual Sequences via Variable-Rate Coding
+Jacob Ziv and Abraham Lempel, 1978
+"""
 
 def compress(data_to_compress):
     offset = 0

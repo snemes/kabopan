@@ -1,10 +1,11 @@
-#JCALG1
-#LZSS based lossless compression algorithm
-#Jeremy Collake http://www.bitsum.com
-#compress not working yet
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+JCALG1, LZSS based lossless compression algorithm
 
+Jeremy Collake U{http://www.bitsum.com}
+"""
+
+#compress not working yet
 
 from kbp._bits import compress, decompress
 import kbp.coder._lz77

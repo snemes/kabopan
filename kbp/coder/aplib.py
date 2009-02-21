@@ -1,8 +1,8 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 aPLib, LZSS based lossless compression algorithm
 
-Jorgen Ibsen, U{http://www.ibsensoftware.com}
+Jorgen Ibsen U{http://www.ibsensoftware.com}
 """
 
 
@@ -20,6 +20,9 @@ def lengthdelta(offset):
 
 
 class compress(_bits.compress):
+    """
+    aplib compression is based on lz77
+    """
     def __init__(self, data, length=None):
         _bits.compress.__init__(self, 1)
         self.__in = data

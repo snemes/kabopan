@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """tests for sha-0 and sha-1"""
 
 from kbp.crypt.sha import *

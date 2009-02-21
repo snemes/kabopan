@@ -1,9 +1,11 @@
-#Lempel Ziv 77 -  LZ77 - LZ1
-#lossless dictionary (sliding window) coder (compression algorithm)
-#A Universal Algorithm for Sequential Data Compression
-#Jacob Ziv and Abraham Lempel, 1977
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Lempel Ziv 77 -  LZ77 - LZ1
+
+lossless dictionary (sliding window) coder (compression algorithm)
+A Universal Algorithm for Sequential Data Compression
+Jacob Ziv and Abraham Lempel, 1977
+"""
 
 
 import _lz77

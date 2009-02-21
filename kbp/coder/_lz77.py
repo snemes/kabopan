@@ -1,7 +1,7 @@
-#Useful Functions for sliding window compression algorithms, such as LZ77
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
-
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Useful Functions for sliding window compression algorithms, such as LZ77
+"""
 
 #TODO: proper longest match implementation
 

@@ -1,8 +1,8 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
-vigenere cipher
+vigenere cipher, substitution cipher
+
 Blaise de Vigenere, 1586
-substitution cipher
 """
 
 from kbp._misc import ALPHABET, ALPHABET_LOWERCASE

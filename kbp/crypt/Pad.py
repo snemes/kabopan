@@ -1,3 +1,7 @@
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+padding functions
+"""
 def remaining(size, alignment):
     """returns the minimum value to add size to be aligned"""
     return (alignment - (size % alignment)) % alignment

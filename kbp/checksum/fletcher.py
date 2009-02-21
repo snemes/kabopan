@@ -1,7 +1,9 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 Flechter checksum - Flechter-16/32
-Fletcher, J. G., An Arithmetic Checksum for Serial Transmissions
+
+An Arithmetic Checksum for Serial Transmissions.
+Fletcher, J. G.
 1982
 """
 

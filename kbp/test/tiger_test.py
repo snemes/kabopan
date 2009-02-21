@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """tests for tiger family: tiger, tiger-2, tiger-160, tiger-128"""
 
 from kbp.crypt.tiger import *

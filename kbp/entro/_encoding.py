@@ -1,7 +1,7 @@
-#Useful Functions for entropy encoding algorithms, such as Shannon Fano or Huffman
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
-
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Useful Functions for entropy encoding algorithms, such as Shannon Fano or Huffman
+"""
 
 def generate_codes(node, codes=None, current_code=""):
     """walk the encoding tree and generates code for symbol (in leaves)"""

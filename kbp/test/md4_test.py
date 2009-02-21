@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """tests for MD4 and MD5"""
 
 from kbp._misc import rol, hex2bin, test_vector_strings

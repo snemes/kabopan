@@ -1,4 +1,4 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 classes for variable-sized auto-reloading tag, sliding window, compression and decompression algorithms
 """

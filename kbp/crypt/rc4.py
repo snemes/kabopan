@@ -1,4 +1,7 @@
-#Ron's Code 4, Rivest's Cipher, RC4, ARC4, ARCFOUR
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+RC4, ARC4, ARCFOUR, Ron's Code 4, Rivest's Cipher 4
+"""
 from kbp.types import BYTE
 
 def init_states(key):

@@ -1,9 +1,11 @@
-#Lempel Ziv Storer Szymanski - LZSS
-#lossless dictionary (sliding window) coder (compression algorithm)
-#Data compression via textual substitution
-#James A. Storer, Thomas G. Szymanski, 1982
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Lempel Ziv Storer Szymanski - LZSS
+
+lossless dictionary (sliding window) coder (compression algorithm)
+Data compression via textual substitution
+James A. Storer, Thomas G. Szymanski, 1982
+"""
 
 
 import _lz77

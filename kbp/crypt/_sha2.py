@@ -1,5 +1,7 @@
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+utility functions for Sha-2 family
+"""
 
 from kbp._misc import nroot, frac, generate_primes
 from kbp.types import Int

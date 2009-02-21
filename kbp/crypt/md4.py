@@ -1,6 +1,6 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
-#MD4 - Message Digest 4
+MD4 - Message Digest 4
 
 Cryptographic hash 
 The MD4 Message-Digest Algorithm
@@ -48,6 +48,13 @@ class md4_u():
 
 
 class md4(Hash.merkledamgaard):
+    """
+    MD4 is based on the Merkle-Damgaard model.
+    
+    padding is done by adding a 1 bit, then a number of 0, then size of the original messages (in bits) is encoded.
+    
+    so at least, one bit + the size are padded.
+    """
     def __init__(self):
         Hash.merkledamgaard.__init__(self)
         self.block_length = 512

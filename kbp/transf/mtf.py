@@ -1,10 +1,10 @@
-#Move to front
-#entropy encoding
-#A Locally Adaptive Data Compression Scheme
-#J. L. Bentley, D. D. Sleator, R. E. Tarjan, V. K. Wei, 1986
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Move to front
 
+A Locally Adaptive Data Compression Scheme
+J. L. Bentley, D. D. Sleator, R. E. Tarjan, V. K. Wei, 1986
+"""
 
 
 def move_to_front(list, offset):

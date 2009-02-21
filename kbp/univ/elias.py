@@ -1,6 +1,7 @@
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """
 Elias Delta, Gamma, Omega encoding
+
 Peter Elias
 universal coder
 """

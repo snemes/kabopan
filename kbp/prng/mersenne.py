@@ -1,8 +1,11 @@
-#Mersenne twister: a 623-dimensionally equidistributed uniform pseudorandom number generator
-#Makoto Matsumoto and Takuji Nishimura, 1998
-#http://www.graviness.com/js/mt19937ar.c.js.phtml
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Mersenne twister
+
+a 623-dimensionally equidistributed uniform pseudorandom number generator
+Makoto Matsumoto and Takuji Nishimura, 1998
+U{http://www.graviness.com/js/mt19937ar.c.js.phtml}
+"""
 
 
 global index, MT

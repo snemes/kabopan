@@ -1,10 +1,11 @@
-#Shannon-Fano coding
-#Entropy encoding
-#A Mathematical Theory of Communication
-#Claude E. Shannon, 1948
-#
-#Kabopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Shannon-Fano coding
 
+Entropy encoding
+A Mathematical Theory of Communication
+Claude E. Shannon, 1948
+"""
 
 import _encoding
 

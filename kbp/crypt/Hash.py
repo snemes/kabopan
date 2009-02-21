@@ -1,3 +1,8 @@
+#Kabopan - Readable Algorithms. Public Domain, 2007-2009
+"""
+Base classes for cryptographic hashes
+"""
+
 import kbp._misc as _misc
 import struct
 from kbp.types import Int
@@ -52,6 +57,8 @@ class merkledamgaard(Hash):
       - some block intermediate hash values are computed
       - then those block IHVs are combined with the current IHVs, usually by summing both sets.
      5. the digest is computed from the final IHVs, usually by concatenation
+     
+    Ralph Merkle, Ivan Damgaard
     """
 
     def as_words(self, block):
