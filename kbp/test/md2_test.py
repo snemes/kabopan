@@ -15,7 +15,8 @@ test_vectors = [
 hash = lambda x: md2().compute(x).digest()
 assert [hash(s) for s in test_vector_strings] == test_vectors
 
-octal_paddings = [      # in typical MD2 source code, paddings are stored in octal
+# in typical MD2 source code, paddings are stored in octal
+octal_paddings = [
     "20202020202020202020202020202020",
     "171717171717171717171717171717",
     "1616161616161616161616161616",
@@ -33,10 +34,5 @@ octal_paddings = [      # in typical MD2 source code, paddings are stored in oct
     "0202",
     "01"]
 
-class test(md2):
-    def __init__(self):
-        md2.__init__(self)
-
-        for i in range(32):
-            assert octal_paddings[i % 16] == str().join("%02o" % ord(c) for c in self.padpkcs7(i))
-test()
+for i in range(32):
+    assert octal_paddings[i % 16] == str().join("%02o" % ord(c) for c in md2_u.padpkcs7(i))
