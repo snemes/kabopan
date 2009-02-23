@@ -39,26 +39,26 @@ class tiger(md4):
 
 
     def key_schedule(self, words):
-          x0, x1, x2, x3, x4, x5, x6, x7 = words
-
-          x0 -= x7 ^ 0xA5A5A5A5A5A5A5A5
-          x1 ^= x0
-          x2 += x1
-          x3 -= x2 ^ ((~x1) << 19)
-          x4 ^= x3
-          x5 += x4
-          x6 -= x5 ^ ((~x4) >> 23)
-          x7 ^= x6
-
-          x0 += x7
-          x1 -= x0 ^ ((~x7) << 19)
-          x2 ^= x1
-          x3 += x2
-          x4 -= x3 ^ ((~x2) >> 23)
-          x5 ^= x4
-          x6 += x5
-          x7 -= x6 ^ 0x0123456789ABCDEF
-          return x0, x1, x2, x3, x4, x5, x6, x7
+        x0, x1, x2, x3, x4, x5, x6, x7 = words
+        
+        x0 -= x7 ^ 0xA5A5A5A5A5A5A5A5
+        x1 ^= x0
+        x2 += x1
+        x3 -= x2 ^ ((~x1) << 19)
+        x4 ^= x3
+        x5 += x4
+        x6 -= x5 ^ ((~x4) >> 23)
+        x7 ^= x6
+        
+        x0 += x7
+        x1 -= x0 ^ ((~x7) << 19)
+        x2 ^= x1
+        x3 += x2
+        x4 -= x3 ^ ((~x2) >> 23)
+        x5 ^= x4
+        x6 += x5
+        x7 -= x6 ^ 0x0123456789ABCDEF
+        return x0, x1, x2, x3, x4, x5, x6, x7
 
 
     def combine(self, bhvs): #: feed forward

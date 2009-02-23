@@ -166,7 +166,7 @@ def checkfindest(dic, stream, offset, length):
     """checks that findlongeststring result is correct"""
     temp = dic[:]
     for i in xrange(length):
-            temp += temp[-offset]
+        temp += temp[-offset]
     if temp != dic + stream[:length]:
         print temp
         print dic + stream[:length]
@@ -270,8 +270,8 @@ def merge_number(list, bigendian=False, bits=32):
 def byteswap(number, bytesize):
     result = 0
     for b in range(bytesize):
-         current_byte = (number >> ((bytesize - 1 - b) * 8)) & 0xFF
-         result |= current_byte << (b * 8)
+        current_byte = (number >> ((bytesize - 1 - b) * 8)) & 0xFF
+        result |= current_byte << (b * 8)
     return result
 
 assert byteswap(0x12345678, 4) == 0x78563412
@@ -280,9 +280,9 @@ assert byteswap(0x12345678, 2) == 0x7856    #incorrect use but expected result
 def nibbleswap(number, bytesize):
     result = 0
     for b in range(bytesize):
-         current_byte = (number >> (b * 8)) & 0xFF
-         current_byte =  ((current_byte & 0xF) << 4) | ((current_byte & 0xF0) >> 4)
-         result |= current_byte << (b * 8)
+        current_byte = (number >> (b * 8)) & 0xFF
+        current_byte =  ((current_byte & 0xF) << 4) | ((current_byte & 0xF0) >> 4)
+        result |= current_byte << (b * 8)
     return result
 
 assert nibbleswap(0x1234, 2) == 0x2143

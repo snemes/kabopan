@@ -4,10 +4,10 @@
 
 class Str(str):
     def __init__(self, seq):
-            if isinstance(seq, basestring):
-                    self.data = seq
-            else:
-                    self.data = str(seq)
+        if isinstance(seq, basestring):
+                self.data = seq
+        else:
+                self.data = str(seq)
 
     def __lshift__(self, other):
         if not isinstance(other, int):

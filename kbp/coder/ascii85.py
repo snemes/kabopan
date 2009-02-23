@@ -27,10 +27,10 @@ def split(number, base, max_digits=0):
     digits = 0
     remainder = number
     while remainder != 0:
-            number = remainder % base
-            remainder /= base
-            digits += 1
-            result = [number] + result
+        number = remainder % base
+        remainder /= base
+        digits += 1
+        result = [number] + result
     if digits < max_digits:
         result = [0 for i in range (max_digits - digits)] + result
     return result

@@ -12,8 +12,8 @@ from kbp._misc import setstr
 from kbp._subst import substitute
 
 from random import randrange
-DISK1="ABCDEFGILMNOPQRSTVXZ1234" # uppercase, stationary, plaintext
-DISK2="gklnprtuz&xysomqihfdbace" # lowercase, mobile, cyphertext
+DISK1 ="ABCDEFGILMNOPQRSTVXZ1234" # uppercase, stationary, plaintext
+DISK2 ="gklnprtuz&xysomqihfdbace" # lowercase, mobile, cyphertext
 NUMBERS = "1234"
 
 # two disks. align them to a start position.

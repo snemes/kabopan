@@ -84,7 +84,7 @@ CRCs = {
 }
 
 
-DISABLED_CRCs= {
+DISABLED_CRCs = {
     #the parameters for these CRCs and polynoms are unknown
     "CRC-1":{
             "polynom": "x + 1",},
@@ -198,7 +198,7 @@ def crc(message, polynom, init=0, in_reflection=False, out_reflection=False, out
 
 
     for new_read_bit in bits:
-        highest_reg_bit_set= (((reg >> (width - 1)) & 1) == 1)
+        highest_reg_bit_set = (((reg >> (width - 1)) & 1) == 1)
         reg = ((reg << 1) & mask) | int(new_read_bit)
         if highest_reg_bit_set:
             reg ^= root
