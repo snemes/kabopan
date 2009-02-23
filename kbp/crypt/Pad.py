@@ -36,7 +36,7 @@ def ansix923(message, block_length, length_encoding=32, big_endianness=True):
     return pad
 
 
-def iso10126(message, block_length, random=lambda :"\x00",length_encoding=32, big_endianness=True):
+def iso10126(message, block_length, random=lambda :"\x00", length_encoding=32, big_endianness=True):
     length = len(message)
     needed = (length - (length_encoding / 8)) % block_length
     pad = str()

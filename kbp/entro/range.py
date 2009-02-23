@@ -10,7 +10,7 @@ G.N.N Martin, 1979
 import pprint
 from fractions import Fraction
 
-def common_string(a,b):
+def common_string(a, b):
     """return a string made of all the common digits and the half of the first different digits"""
     assert a != b
     string_a = `a`
@@ -46,7 +46,7 @@ def do(data_to_compress):
     # we'll calculate the probabilistic range for each symbol
     last_low = 0
     for e in elements:
-        probability = Fraction(e["weight"],total_weight)
+        probability = Fraction(e["weight"], total_weight)
         low, high = last_low, last_low + probability
         e["range"] = [low, high]
 

@@ -68,7 +68,7 @@ if pickled is None:
     lower = 0
     
     K = []
-    for l in (1,4,4,4,4):
+    for l in (1, 4, 4, 4, 4):
         length = l * 8
         K += [all_K[lower: lower + length]]
         lower += length

@@ -16,13 +16,13 @@ ALPHABET = char_range("A", "Z")
 ALPHABET_LOWERCASE = char_range("a", "z")
 ASCII = char_range("\x00", "\xff")
 
-def gcd(a,b):
+def gcd(a, b):
     """returns the greatest common divisor of both parameters"""
     return gcd(b, a % b) if b != 0 else a
 
-def lcm(a,b):
+def lcm(a, b):
     """returns the least common multiplier of both parameters"""
-    return a * b / gcd(a,b)
+    return a * b / gcd(a, b)
 
 def getbinlen(value):
     """return the bit length of an integer"""
@@ -86,11 +86,11 @@ def prin(*arg):
 
 
 
-def getpadbinstr(value,bits):
+def getpadbinstr(value, bits):
     """return a 0-padded binary string."""
     s = getbinstr(value)
     l = len(s)
-    mod = countmissing(l,bits)
+    mod = countmissing(l, bits)
     return "0" * mod + s
 
 
@@ -178,22 +178,22 @@ def insert_string(string, offset, char):
 
 
 
-def zip_extend(a,b, null=""):
+def zip_extend(a, b, null=""):
     """zip 2 sequences after extending the smallest with null elements"""
     if len(a) == len(b):
-        return zip(a,b)
+        return zip(a, b)
 
     smaller = a if len(a) < len(b) else b
     bigger = a if len(a) > len(b) else b
-    max_length = max(len(i) for i in (a,b))
+    max_length = max(len(i) for i in (a, b))
     smaller.extend([null] * (max_length - len(smaller)))
     return zip(bigger, smaller)
 
 
-def zip_extend_str(a,b, null=""):
+def zip_extend_str(a, b, null=""):
     a = list(a)
     b = list(b)
-    return zip_extend(a,b,null)
+    return zip_extend(a, b, null)
 
 def split_string_blocks(string, block_length):
     return [string[i: i + block_length] for i in range(0, len(string), block_length)]
@@ -262,7 +262,7 @@ def split_number(number, bits, amount, bigendian=False):
 
 def merge_number(list, bigendian=False, bits=32):
     result = 0
-    for i,l in enumerate(list[::-1]):
+    for i, l in enumerate(list[::-1]):
         value = l if bigendian else byteswap(l, bits / 8)
         result += (int(value) << (bits * i))
     return result
@@ -285,7 +285,7 @@ def nibbleswap(number, bytesize):
          result |= current_byte << (b * 8)
     return result
 
-assert nibbleswap(0x1234,2) == 0x2143
+assert nibbleswap(0x1234, 2) == 0x2143
 
 def xor(gen, start = 0):
     result = start
@@ -299,7 +299,7 @@ def nroot(integer, n):
     return Decimal(integer) ** (Decimal(1) / Decimal(n))
 
 def generate_primes(last_prime):
-    result = range(2,last_prime + 1)
+    result = range(2, last_prime + 1)
     for i in xrange(2, last_prime):
         for j in result:
             if j != i and j % i == 0:
@@ -320,8 +320,8 @@ def hcbrt(i):
     """hex representation of cube root of i"""
     return int(2 ** 30 * i ** (1. / 3))
 
-import traceback,sys
-def ass(x,y, msg=None, details=False):
+import traceback, sys
+def ass(x, y, msg=None, details=False):
     try:
         assert x == y, msg
     except AssertionError, msg:
@@ -335,7 +335,7 @@ def ass(x,y, msg=None, details=False):
         sys.exit()
 
 def add(out_, in_, width):
-    for i,j in enumerate(out_):
+    for i, j in enumerate(out_):
         out_[i] += in_[i]
         out_[i] &= MASK[width]
     return out_ # unneeded if we didn't do a shallow copy of out_

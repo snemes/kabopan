@@ -93,12 +93,12 @@ class List(list):
         return List(b if i == a else i for i in self)
 
 #TODO: move to Str ?
-def sub_string(a,b):
+def sub_string(a, b):
     """returns a string made of _ if the chars in a and b are the same, else b's"""
     return str().join((List(a) - list(b)).replace(None, "_"))
 
 
-def add_string(a,d):
+def add_string(a, d):
     """returns a string made of a char if d's char is '_' else d's char"""
     return str().join(List(a) + List(d).replace("_", None))
 

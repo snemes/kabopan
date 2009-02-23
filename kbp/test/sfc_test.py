@@ -3,13 +3,13 @@
 from kbp.entro.sfc import *
 import kbp.entro._encoding as encoding
 
-assert split([0,1,2,3],1) == ([0,1], [2,3])
-assert split([0,1,2,3],0) == ([0], [1,2,3])
+assert split([0, 1, 2, 3], 1) == ([0, 1], [2, 3])
+assert split([0, 1, 2, 3], 0) == ([0], [1, 2, 3])
 
-assert split_weights([1,1]) == 0
-assert split_weights([1,2,3]) == 1
-assert split_weights([8,7,1]) == 0
-assert split_weights([1,1,8]) == 1
+assert split_weights([1, 1]) == 0
+assert split_weights([1, 2, 3]) == 1
+assert split_weights([8, 7, 1]) == 0
+assert split_weights([1, 1, 8]) == 1
 
 assert generate_tree([{"symbol":"a", "weight":35}]) == {"symbol":"a"}
 assert generate_tree([{"symbol":"a", "weight":2},

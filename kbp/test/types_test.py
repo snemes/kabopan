@@ -23,9 +23,9 @@ assert [s.insert("1", 2), s.insert("12", 2), s.overwrite("1", 2), s.overwrite("1
 assert [s.splitblock(2), s.splitblock(3)] == [['ab', 'cd', 'ef', 'gh', 'ij'], ['abc', 'def', 'ghi', 'j']]
  
 
-assert List([1,2,3,4]) >> 1 == [4, 1,2,3]
-assert List([1,2,3,4]) >> 4 == [1,2,3,4]
-assert List([1,2,3,4]) << 1 == [2,3,4, 1]
+assert List([1, 2, 3, 4]) >> 1 == [4, 1, 2, 3]
+assert List([1, 2, 3, 4]) >> 4 == [1, 2, 3, 4]
+assert List([1, 2, 3, 4]) << 1 == [2, 3, 4, 1]
 
 assert 0xFFCD9AD6 == DWORD(251972843051734)
 assert 0x9AD6 == WORD(251972843051734)

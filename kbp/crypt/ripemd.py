@@ -16,8 +16,8 @@ from md4 import md4_u, md5, md5_u
 class ripemd160_u():
     """utility class for RIPEMD-160 cryptographic hash"""
 
-    ks = [misc.hsqrt(i) for i in [0, 2 ,3 , 5, 7]]
-    Ks = [misc.hcbrt(i) for i in [2 ,3 , 5, 7, 0]]
+    ks = [misc.hsqrt(i) for i in [0, 2 , 3, 5, 7]]
+    Ks = [misc.hcbrt(i) for i in [2, 3 , 5, 7, 0]]
 
     ss = [
         [11, 14, 15, 12, 5, 8, 7, 9, 11, 13, 14, 15, 6, 7, 9, 8],
@@ -77,8 +77,8 @@ class ripemd160_u():
             #iteration-dependant parameters
             s, S, r, R = ripemd160_u.ss[round][i], ripemd160_u.Ss[round][i], ripemd160_u.rs[i][round], ripemd160_u.Rs[i][round]
 
-            a, b, c, d, e = ripemd160_u.iteration_f(a,b,c,d,e,f, words[r], k, s)
-            A, B, C, D, E = ripemd160_u.iteration_f(A,B,C,D,E,F, words[R], K, S)    # the same
+            a, b, c, d, e = ripemd160_u.iteration_f(a, b, c, d, e, f, words[r], k, s)
+            A, B, C, D, E = ripemd160_u.iteration_f(A, B, C, D, E, F, words[R], K, S)    # the same
         return a, b, c, d, e, A, B, C, D, E
 
 class ripemd160(md5):
@@ -207,7 +207,7 @@ class ripemd128(ripemd160):
         return a, b, c, d, A, B, C, D
 
     def combine(self, bhvs):
-        a, b, c, d,A, B, C, D = bhvs
+        a, b, c, d, A, B, C, D = bhvs
         h0, h1, h2, h3 = self.ihvs
         self.ihvs = h1 + c + D, h2 + d + A, h3 + a + B, h0 + b + C
 
@@ -246,7 +246,7 @@ class ripemd256(ripemd128):
             elif round == 1:
                 b, B = B, b
             elif round == 2:
-               c, C = C, c
+                c, C = C, c
             elif round == 3:
                 d, D = D, d
         return a, b, c, d, A, B, C, D

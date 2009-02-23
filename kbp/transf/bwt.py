@@ -15,7 +15,7 @@ def rotate_string(string, count):
     return result
 
 
-def get_indexes(string,char):
+def get_indexes(string, char):
     """returns a list of indexes of a character in a string"""
     result = []
     offset = 0
@@ -65,7 +65,7 @@ def revert(last_column, primary_index):
         index_first = get_indexes(first_column, char)
         index_last = get_indexes(last_column, char)
 
-        for i,j in enumerate(index_last):
+        for i, j in enumerate(index_last):
             transformation_vector[j] = index_first[i]
 
     #now that we have the vector, let's generate the original string

@@ -2,7 +2,7 @@
 
 from kbp.entro.range import *
 
-assert common_string(0.123,0.125) == "0.124"
+assert common_string(0.123, 0.125) == "0.124"
 
 assert do('b')   == (Fraction(0, 1), Fraction(1, 1))
 assert do('ba')  == (Fraction(1, 2), Fraction(3, 4))

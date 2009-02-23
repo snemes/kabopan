@@ -58,7 +58,7 @@ class has160(sha0):
                 index = has160_u.indexes[r][i]
                 a_rot = [5, 11, 7, 15, 6, 13, 8, 14, 7, 12, 9, 11, 8, 15, 6, 12, 9, 14, 5, 13][i]
 
-                a,b,c,d,e = sha_u.round_f(a, b, c, d, e, f, a_rot, b_rot, words, index, k)
+                a, b, c, d, e = sha_u.round_f(a, b, c, d, e, f, a_rot, b_rot, words, index, k)
         return [a, b, c, d, e]
 
 if __name__ == "__main__":

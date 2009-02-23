@@ -213,10 +213,10 @@ def crc(message, polynom, init=0, in_reflection=False, out_reflection=False, out
 
 
 def crc32_ieee(message):
-    return crc(message,**CRCs["CRC32_IEEE"])[0]
+    return crc(message, **CRCs["CRC32_IEEE"])[0]
 
 def crc32_ieee_hexhash(message):
-    value, width = crc(message,**CRCs["CRC32_IEEE"])
+    value, width = crc(message, **CRCs["CRC32_IEEE"])
     return ("%X" % value).ljust(width / 4, "0")
 
 if __name__ == '__main__':
@@ -224,30 +224,30 @@ if __name__ == '__main__':
 
     tests = [
     #TODO: lack of support for uneven sizes
-    #['crc-5',0x19],
-    #['crc-15',0x59e],
-    ['crc-8',0xf4],
-    ['dallas-1-wire',0xa1],
-    ['crc-16',0xbb3d],
-    ['crc-16-usb',0xb4c8],
-    ['ccitt',0x29b1],
+    #['crc-5', 0x19],
+    #['crc-15', 0x59e],
+    ['crc-8', 0xf4],
+    ['dallas-1-wire', 0xa1],
+    ['crc-16', 0xbb3d],
+    ['crc-16-usb', 0xb4c8],
+    ['ccitt', 0x29b1],
     #disabled, weird xor_out parameter
-    #['r-crc-16',0x7e], 
-    ['kermit',0x2189],
-    ['x-25',0x906e],
-    ['xmodem',0xc73],
-    ['zmodem',0x31c3],
-    ['crc-24',0x21cf02],
-    ['CRC32_IEEE',0xcbf43926],
-    ['crc-32c',0xe3069283],
-    ['posix',0x765e7680],
-    ['jam',0x340bc6d9],
-    ['xfer',0xbd0be338],
-    ['CRC-64-ISO',0x46a5a9388a5beffe]]
+    #['r-crc-16', 0x7e], 
+    ['kermit', 0x2189],
+    ['x-25', 0x906e],
+    ['xmodem', 0xc73],
+    ['zmodem', 0x31c3],
+    ['crc-24', 0x21cf02],
+    ['CRC32_IEEE', 0xcbf43926],
+    ['crc-32c', 0xe3069283],
+    ['posix', 0x765e7680],
+    ['jam', 0x340bc6d9],
+    ['xfer', 0xbd0be338],
+    ['CRC-64-ISO', 0x46a5a9388a5beffe]]
     
     for crc_name, expected_value in tests:
         try:
-            result, width =  crc("123456789",**CRCs[crc_name])
+            result, width =  crc("123456789", **CRCs[crc_name])
         except AttributeError:
             print "attriberror", crc_name
         if result != expected_value:

@@ -2,7 +2,8 @@
 
 from kbp.crypt.Pad import *
 
-assert [remaining(x,y) for x,y in [[0,4],[1,4],[2,4],[3,4],[4,4]] ] == [0, 3, 2, 1, 0]
+assert [remaining(x, y) for x, y in [[0, 4], [1, 4],[2, 4], [3, 4], [4, 4]] ] \
+ == [0, 3, 2, 1, 0]
 
 
 assert zero("0000" + "0", 32)   == "\x00\x00\x00"

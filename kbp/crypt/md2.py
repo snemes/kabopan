@@ -60,7 +60,7 @@ class md2_u():
         checksum_bytes = [0 for i in xrange(16)]
         previous = 0
         for block in as_bytes_blocks(message, 16):
-            for i,char in enumerate(block):
+            for i, char in enumerate(block):
                 # careful, RFC1319 is wrong there. - rfcc209
                 # Set C[j] to S[c xor L]
                 # should be

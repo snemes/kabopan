@@ -97,7 +97,7 @@ class md4(Hash.merkledamgaard):
 
 class md5_u():
     """utility class for MD5 cryptographic hash"""
-    g_coefficients = [[1,0], [5, 1], [3, 5], [7,0]]
+    g_coefficients = [[1, 0], [5, 1], [3, 5], [7, 0]]
     K = DWORDS([abs(sin(i + 1)) * (2**32) for i in range(16 * 4)])
     shifts = [
         [7, 12, 17, 22],
@@ -124,7 +124,7 @@ class md5(md4):
     """
 
     def rounds(self, words):
-        [a,b,c,d] = list(self.ihvs)
+        [a, b, c, d] = list(self.ihvs)
         for self.round in range(4):
             function = [md4_u.f, md5_u.g, md4_u.h, md5_u.i][self.round]
             for self.iteration in range(16):
@@ -132,11 +132,11 @@ class md5(md4):
                 k = md5_u.K[self.iteration + self.round * 16]
                 mul, add = md5_u.g_coefficients[self.round]
                 g = (mul * self.iteration + add) % 16
-                [a,b,c,d] = [
-                    d,
-                    (a + function(b, c, d) + words[g] + k).rol(shift) + b,
-                    b,
-                    c]
+                [a, b, c, d] = [
+                 d,
+                 (a + function(b, c, d) + words[g] + k).rol(shift) + b,
+                 b,
+                 c]
         return [a, b, c, d]
 
 if __name__ == "__main__":

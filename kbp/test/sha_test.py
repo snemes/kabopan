@@ -73,7 +73,7 @@ class sha1_70r(sha1):
         for round_ in range(4):
             f = sha_u.functions[round_]
             k = sha_u.constants[round_]
-            ranges = [20,20,20,10][round_]
+            ranges = [20, 20, 20, 10][round_]
             for i in range(ranges):
                 [a, b, c, d, e] = sha_u.round_f(a, b, c, d, e, f, 5, 30, words, i + 20 * round_, k)
         return [a, b, c, d, e]

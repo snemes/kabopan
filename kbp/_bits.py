@@ -74,7 +74,7 @@ class compress:
 
     def write_byte(self, b):
         """writes a char or a number"""
-        assert len(b) == 1 if isinstance(b,str) else 0 <= b <= 255
+        assert len(b) == 1 if isinstance(b, str) else 0 <= b <= 255
         self.out += b[0:1] if isinstance(b, str) else chr(b)
         return
 

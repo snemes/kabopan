@@ -82,7 +82,7 @@ def delta_decode(binary_string):
 
 def omega_encode(value, first_step=True):
     if first_step == True:
-        string = omega_encode(value,first_step=False) + "0"
+        string = omega_encode(value, first_step=False) + "0"
     else:
         if value == 1:
             return str()

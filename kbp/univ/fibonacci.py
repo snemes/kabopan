@@ -24,7 +24,7 @@ def generate_numbers(n):
     if n == 0:
         result = [0]
     elif n >= 1:
-        result = [0,1]
+        result = [0, 1]
         for i in xrange(2, n + 1):
             new_number = result[-1] + result[-2]
             result.append(new_number)

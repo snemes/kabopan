@@ -58,7 +58,7 @@ class compress(compress):
 
     def __nullliteral(self):
         self.write_bitstring("110")
-        self.write_fixednumber(1,4)
+        self.write_fixednumber(1, 4)
         self.__ofset += 1
         return
 
@@ -72,14 +72,14 @@ class compress(compress):
 
     def __updateindexbase(self, value):
         self.writebitstr("111")
-        self.write_fixednumber(0,7)
+        self.write_fixednumber(0, 7)
         nb = misc.countbits(value)
         self.write_fixednumber(value, nb - 3)
 
     def __end(self):
         self.write_bitstr("111")
-        self.write_fixednumber(0,7)
-        self.write_fixednumber(0,2)
+        self.write_fixednumber(0, 7)
+        self.write_fixednumber(0, 2)
         return
 
     def do(self):

@@ -88,7 +88,7 @@ class tiger(md4):
         bhvs = list(self.ihvs)
         indexes = List(range(3))
         for i in range(self.nb_pass):
-            multiplier = [5,7][i] if 0 <= i <= 1 else 9
+            multiplier = [5, 7][i] if 0 <= i <= 1 else 9
             self.pass_(bhvs, indexes >> i, multiplier, words)
             #print words[0]
             words = self.key_schedule(words)
