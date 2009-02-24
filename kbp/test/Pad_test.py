@@ -2,7 +2,7 @@
 
 from kbp.crypt.Pad import *
 
-assert [remaining(x, y) for x, y in [[0, 4], [1, 4],[2, 4], [3, 4], [4, 4]] ] \
+assert [remaining(x, y) for x, y in [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4]] ] \
  == [0, 3, 2, 1, 0]
 
 

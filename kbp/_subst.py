@@ -35,8 +35,8 @@ def mix_alphabet(key_string, alphabet):
     mixed_alphabet = str()
     for char in key_string:
         if char in remaining_letters:
-                remaining_letters.remove(char)
-                mixed_alphabet += char
+            remaining_letters.remove(char)
+            mixed_alphabet += char
     mixed_alphabet += "".join(remaining_letters)
 
     return mixed_alphabet

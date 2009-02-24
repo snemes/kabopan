@@ -7,9 +7,9 @@ J. L. Bentley, D. D. Sleator, R. E. Tarjan, V. K. Wei, 1986
 """
 
 
-def move_to_front(list, offset):
+def move_to_front(list_, offset):
     """move to the front of the list the offset-th element"""
-    return [list[offset]] + list[:offset] + list[offset + 1:]
+    return [list_[offset]] + list_[:offset] + list_[offset + 1:]
 
 
 def transform(data_to_compress):

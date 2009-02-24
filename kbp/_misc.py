@@ -8,6 +8,7 @@ from kbp.types import Int
 import struct
 
 def char_range(start, end):
+    """returns a list of char from 'start' to 'end'"""
     return "".join(chr(i) for i in range(ord(start), ord(end) + 1))
 
 LITTLE, BIG = False, True
@@ -67,6 +68,7 @@ def getbinstr(value):
 
 
 def getvaluefrombinarystring(string):
+    """return the value from a binary string"""
     result = 0
     for char in string:
         bit = 1 if char == "1" else 0
@@ -83,8 +85,6 @@ def countmissing(value, modulo):
 
 def prin(*arg):
     pass
-
-
 
 def getpadbinstr(value, bits):
     """return a 0-padded binary string."""
@@ -109,6 +109,7 @@ def getunkbinstr(value, currentbit, maxbit):
 
 
 def gethexstr(string):
+    """convert a string to its hex equivalent"""
     return " ".join("%02X" % (ord(char)) for char in string)
 
 
@@ -143,6 +144,11 @@ def modifystring(s, sub, offset):
 
 #todo : sort what's next
 def brutting_snippet(data, function):
+    """
+    1. run unpacking code on all offsets,
+    2. store consumed bits
+    3. remembers the biggest one
+    """
     maxlen = 0
     result = {}
     for i in xrange(50):
@@ -157,6 +163,7 @@ def brutting_snippet(data, function):
     return result[maxlen]
 
 def write_snippet(filename, data):
+    """simple write file snippet"""
     f = open(filename + ".out", "wb")
     for i in data:
         f.write(i)
@@ -174,6 +181,7 @@ def checkfindest(dic, stream, offset, length):
     return True
 
 def insert_string(string, offset, char):
+    """insert a char in a string"""
     return string[:offset] + char + string[offset:]
 
 
@@ -191,11 +199,13 @@ def zip_extend(a, b, null=""):
 
 
 def zip_extend_str(a, b, null=""):
+    """zip string by padding the shortest one with 'null' char"""
     a = list(a)
     b = list(b)
     return zip_extend(a, b, null)
 
 def split_string_blocks(string, block_length):
+    """returns a list of blocks made of block_length length"""
     return [string[i: i + block_length] for i in range(0, len(string), block_length)]
 
 
@@ -227,30 +237,38 @@ test_vector_strings = [
 
 MASK = dict([i, (1 << i) - 1] for i in [8, 16, 32, 64])
 
+#TODO: obsoleted by Int ?
 def rol(number, shift, width=32):
+    """left rotation"""
     number &= MASK[width]
     result = ((number << shift) | (number >> (width - shift))) & ((1 << width) - 1)
     result &= MASK[width]
     return result
 
-def rol32(n, s):return rol(n, s, 32)
-def rol64(n, s):return rol(n, s, 64)
+def rol32(n, s):
+    """DWORD left rotation"""
+    return rol(n, s, 32)
+def rol64(n, s):
+    """QWORD left rotation"""
+    return rol(n, s, 64)
 
-assert rol(0x12345678, 8, 32) == 0x34567812
-assert rol(0x1234567800, 8, 32) == 0x56780034 # entry value is masked first
-assert rol(0x12345678, 8, 64) == 0x1234567800
 
-
+#TODO: obsoleted by Int ?
 def ror(number, shift, width):
+    """right rotation"""
     return rol(number, (width - shift) % width, width)
 
-def ror32(n, s):return ror(n, s, 32)
-def ror64(n, s):return ror(n, s, 64)
+def ror32(n, s):
+    """DWORD ror """
+    return ror(n, s, 32)
+def ror64(n, s):
+    """QWORD ror """
+    return ror(n, s, 64)
 
-assert ror(0x12345678, 8, 32) == 0x78123456
-assert ror(0x12345678, 8, 64) == 0x7800000000123456
 
+#TODO: obsoleted by Int ?
 def split_number(number, bits, amount, bigendian=False):
+    """split a number made of 'bits' bits in a list of numbers, taking bits separately"""
     result = list()
     mask = (1 << bits) - 1
     for i in range(amount):
@@ -260,24 +278,28 @@ def split_number(number, bits, amount, bigendian=False):
         result.append(value)
     return result
 
-def merge_number(list, bigendian=False, bits=32):
+#TODO: obsoleted by Int ?
+def merge_number(numbers, bigendian=False, bits=32):
+    """merge a list of number as a bigger number"""
     result = 0
-    for i, l in enumerate(list[::-1]):
-        value = l if bigendian else byteswap(l, bits / 8)
-        result += (int(value) << (bits * i))
+    for index, number in enumerate(numbers[::-1]):
+        value = number if bigendian else byteswap(number, bits / 8)
+        result += (int(value) << (bits * index))
     return result
 
+#TODO: obsoleted by Int ?
 def byteswap(number, bytesize):
+    """endian-swap a number"""
     result = 0
     for b in range(bytesize):
         current_byte = (number >> ((bytesize - 1 - b) * 8)) & 0xFF
         result |= current_byte << (b * 8)
     return result
 
-assert byteswap(0x12345678, 4) == 0x78563412
-assert byteswap(0x12345678, 2) == 0x7856    #incorrect use but expected result
 
+#TODO: obsoleted by Int ?
 def nibbleswap(number, bytesize):
+    """swap every nibble of a number"""
     result = 0
     for b in range(bytesize):
         current_byte = (number >> (b * 8)) & 0xFF
@@ -285,9 +307,8 @@ def nibbleswap(number, bytesize):
         result |= current_byte << (b * 8)
     return result
 
-assert nibbleswap(0x1234, 2) == 0x2143
-
 def xor(gen, start = 0):
+    """xor all elements of 'gen', from 'start'"""
     result = start
     for i in gen:
         result ^= i
@@ -296,9 +317,11 @@ def xor(gen, start = 0):
 from decimal import Decimal
 
 def nroot(integer, n):
+    """returns n-root via Decimal module """
     return Decimal(integer) ** (Decimal(1) / Decimal(n))
 
 def generate_primes(last_prime):
+    """generate consecutive primes, until last_prime. inefficient, just working"""
     result = range(2, last_prime + 1)
     for i in xrange(2, last_prime):
         for j in result:
@@ -308,6 +331,7 @@ def generate_primes(last_prime):
 
 
 def frac(i):
+    """returns fractional part"""
     return i % 1
 
 
@@ -322,6 +346,7 @@ def hcbrt(i):
 
 import traceback, sys
 def ass(x, y, msg=None, details=False):
+    """cleaner assert"""
     try:
         assert x == y, msg
     except AssertionError, msg:
@@ -335,6 +360,7 @@ def ass(x, y, msg=None, details=False):
         sys.exit()
 
 def add(out_, in_, width):
+    """add with masking. obsolete? """
     for i, j in enumerate(out_):
         out_[i] += in_[i]
         out_[i] &= MASK[width]
@@ -344,6 +370,7 @@ struct_prefixes = {True:">", False:"<"}
 struct_sizes = {32:"L", 64:"Q"}
 
 def pack128(number, bigendian=False):
+    """pack on OQWORDS"""
     struct_string = struct_prefixes[bigendian] + struct_sizes[64]
     if bigendian:
         return struct.pack(struct_string, number >> 64) + struct.pack(struct_string, number)
@@ -351,17 +378,20 @@ def pack128(number, bigendian=False):
         return struct.pack(struct_string, number) + struct.pack(struct_string, number >> 64)
 
 def pack64(number, bigendian=False):
+    """pack on QWORD"""
     return struct.pack(struct_prefixes[bigendian] + struct_sizes[64], number)
 
 def pack32(number, bigendian=False):
+    """pack on DWORDs"""
     return struct.pack(struct_prefixes[bigendian] + struct_sizes[32], number)
 
 def pack(number, bigendian, width):
+    """returns a dictionary of packing functions"""
     return {32:pack32, 64:pack64, 128:pack128}[width](number, bigendian)
 
-def pad_0_1_size(message, alignment, sizelength, bigendian, pad_bit_7):        
-    pad_char = {True:"\x80", False: "\x01"}[pad_bit_7]
+def pad_0_1_size(message, alignment, sizelength, bigendian, pad_bit_7):
     """ pads 1 bit, then 0 bits until we have enough bits to store the length of the original message"""
+    pad_char = {True:"\x80", False: "\x01"}[pad_bit_7]
     length = len(message)
     bitlength = length * 8
     padding = pad_char    # we have to add 1 bit so let's add 0x80 since we're working on byte-boundary block
@@ -372,32 +402,34 @@ def pad_0_1_size(message, alignment, sizelength, bigendian, pad_bit_7):
     return padding
 
 def as_words(block, block_size, word_size, bigendian=False):
+    """split a string as words by unpacking"""
     count_ = block_size / word_size
     unpack_string = struct_prefixes[bigendian] + str(count_) + struct_sizes[word_size]
     return [Int(i, word_size) for i in list(struct.unpack(unpack_string, block))]
 
 
-assert list(struct.unpack(">16L", ASCII[:64])) == as_words(ASCII[:64], 512, 32, True)
-
 
 def as_bytes_blocks(s, x):
+    """slices s in 'x' blocks """
     return (s[i: i + x] for i in xrange(0, len(s), x))
 
 def simplepad(message):
+    """simple padding"""
     last_block = len(message) % 4
     pad = "1"
     if last_block  == 3:
-        return ["1", "extr"]
+        return [pad, "extr"]
     else:
-        return ["1" + "_" * (3 - last_block)]
-    
+        return [pad + "_" * (3 - last_block)]
+
     return
-    
+
 def slice_and_pad(message, x, pad=simplepad):
+    """generate slices of the message, then pad the last block"""
     length = len(message)
     # div is the number of complete blocks
     # last_block_length is 0 if all blocksmod is the length of the last block if it's too short
-    complete_blocks, last_block_length = divmod(length, x)    
+    complete_blocks, last_block_length = divmod(length, x)
     for block in (message[i: i + x] for i in xrange(0, complete_blocks * x, x)):
         yield block
     padding = pad(message)  #
@@ -411,14 +443,10 @@ def slice_and_pad(message, x, pad=simplepad):
         for block in padding:
             yield block
     return
-        
-assert list(slice_and_pad("0001" + "0000" + "0", 4))    == ['0001', '0000', '01__']        
-assert list(slice_and_pad("0001" + "0000" + "00", 4))   == ['0001', '0000', '001_']        
-assert list(slice_and_pad("0001" + "0000" + "000", 4))  == ['0001', '0000', '0001', 'extr']
-assert list(slice_and_pad("0001" + "0000" + "0000", 4)) == ['0001', '0000', '0000', '1___']
 
 
 def hex2bin(s):
+    """takes a hexadecimal string, returns the binary equivalent"""
     result = str()
     s = s.replace(" ","")
     HEXA = "0123456789ABCDEF"
@@ -426,9 +454,8 @@ def hex2bin(s):
         result += chr( HEXA.index(b[0].upper()) * 16 + HEXA.index(b[1].upper()))
     return result
 
-assert hex2bin("0123456789ABCDEF") == "\x01\x23\x45\x67\x89\xAB\xCD\xEF"
-
 def bin2hex(s):
+    """takes a hex string, return the equivalent number"""
     result = str()
     HEXA = "0123456789ABCDEF"
     for b in s:
@@ -436,10 +463,9 @@ def bin2hex(s):
         result += HEXA[b >> 4] + HEXA[b & 0xF]
     return result
 
-assert "0123456789ABCDEF" == bin2hex("\x01\x23\x45\x67\x89\xAB\xCD\xEF")
-
-
+#TODO obsolete
 def printh(l):
+    """print in hex"""
     print ["%x" % i for i in l]
 
 if __name__ == "__main__":

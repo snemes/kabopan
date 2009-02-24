@@ -23,7 +23,7 @@ def generate():
     global index, MT
     for i in range(624 + 1):
         y = (0x80000000 & MT[i]) + (0x7FFFFFFF & MT[(i + 1) % 624])
-	y &= 0xFFFFFFFF
+        y &= 0xFFFFFFFF
         MT[i] = MT[(i + 397) % 624] ^ (y >> 1)
         if (y % 2) == 1:
             MT[i] ^= 0x9908b0df
@@ -44,4 +44,4 @@ def extract():
 
 init(5489)
 for i in range(1000):
-	print extract()
+    print extract()

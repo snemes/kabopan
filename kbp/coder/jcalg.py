@@ -7,21 +7,22 @@ Jeremy Collake U{http://www.bitsum.com}
 
 #compress not working yet
 
-from kbp._bits import compress, decompress
-import kbp.coder._lz77
+import kbp._bits as _bits
+import kbp.coder._lz77 as _lz77
+from kbp._misc import getbinlen
 
 def lengthdelta(x):
     if x >= 0x10000:
-        return  3;
+        return  3
     elif x >= 0x37FF:
-        return 2;
+        return 2
     elif x >= 0x27F:
-        return 1;
+        return 1
     elif x <= 127:
         return 4;
     return 0
 
-class compress(compress):
+class compress(_bits.compress):
     """not working correctly yet"""
     def __init__(self, data, length=None):
         compress.__init__(self, 4)
@@ -37,7 +38,7 @@ class compress(compress):
     def __literal(self):
         self.write_bit(0)
         self.write_fixednumber(ord(self.__in[self.__offset]) - self.__literaloffset, self.__literalbits)
-        self.__ofset += 1
+        self.__offset += 1
         return
 
     def __block(self, offset, length):
@@ -49,7 +50,7 @@ class compress(compress):
             #tbc
             print("not working yet")
             pass
-        self.writebitstr("10")
+        self.write_bitstring("10")
         return
 
     def __shortblock(self, offset, length):
@@ -59,7 +60,7 @@ class compress(compress):
     def __nullliteral(self):
         self.write_bitstring("110")
         self.write_fixednumber(1, 4)
-        self.__ofset += 1
+        self.__offset += 1
         return
 
     def __singlebyte(self, offset):
@@ -71,13 +72,13 @@ class compress(compress):
         return
 
     def __updateindexbase(self, value):
-        self.writebitstr("111")
+        self.write_bitstring("111")
         self.write_fixednumber(0, 7)
-        nb = misc.countbits(value)
+        nb = getbinlen(value)
         self.write_fixednumber(value, nb - 3)
 
     def __end(self):
-        self.write_bitstr("111")
+        self.write_bitstring("111")
         self.write_fixednumber(0, 7)
         self.write_fixednumber(0, 2)
         return
@@ -90,7 +91,7 @@ class compress(compress):
             if length == 0:
                 c = self.__in[self.__offset]
                 if c == "\x00":
-                    self.__windowbyte(0)
+                    self.__singlebyte(0)
                 else:
                     self.__literal()
             elif length == 1 and 0 <= offset < 16:
@@ -107,7 +108,7 @@ class compress(compress):
 
 
 
-class decompress(decompress):
+class decompress(_bits.decompress):
     """jcalg decompression class"""
     def __init__(self, data):
         decompress.__init__(self, data, tagsize=4)

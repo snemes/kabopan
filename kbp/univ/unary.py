@@ -3,10 +3,10 @@
 unary encoding
 
 universal coder
-"""
 
-
-"""unary is the simplest but least efficient universal coder. the encoded value is presented by a sequence of 'value' encoding bits, followed by one stopper bits.
+unary is the simplest but least efficient universal coder.
+the encoded value is presented by a sequence of 'value' encoding bits,
+followed by one stopper bits.
 
 consumed_bits is thus value + 1.
 """

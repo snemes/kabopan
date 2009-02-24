@@ -2,6 +2,7 @@
 """
 padding functions
 """
+from struct import pack
 def remaining(size, alignment):
     """returns the minimum value to add size to be aligned"""
     return (alignment - (size % alignment)) % alignment
@@ -29,7 +30,8 @@ def bit(message, block_length):
 
 
 def ansix923(message, block_length, length_encoding=32, big_endianness=True):
-    needed = (len(message) - length_encoding) % block_length
+    length = len(message)
+    needed = (length - length_encoding) % block_length
     needed /= 8 # this function works with bytes
     pad = "\x00" * needed
     pad += pack(length, big_endianness, length_encoding)

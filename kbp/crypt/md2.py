@@ -9,7 +9,7 @@ B. Kaliski, 1992
 
 from kbp._misc import as_bytes_blocks
 from kbp.types import BYTES, BYTE
-from Hash import merkledamgaard
+from kbp.crypt.Hash import merkledamgaard
 
 class md2_u():
     """utility class for MD2 cryptographic hash"""

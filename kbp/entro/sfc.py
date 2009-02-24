@@ -7,11 +7,11 @@ A Mathematical Theory of Communication
 Claude E. Shannon, 1948
 """
 
-import _encoding
+import kbp.entro._encoding as _encoding
 
-def split(list, index):
+def split(list_, index):
     """split the list in 2 halves AFTER the index parameter"""
-    return list[:index + 1], list[index + 1:]
+    return list_[:index + 1], list_[index + 1:]
 
 
 def split_weights(weights):

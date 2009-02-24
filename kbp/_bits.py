@@ -6,7 +6,7 @@ classes for variable-sized auto-reloading tag, sliding window, compression and d
 
 #todo : working, but needs a lot of cleaning, and bugfixing
 
-import _misc
+import kbp._misc as _misc
 
 debug = False
 
@@ -174,10 +174,10 @@ class decompress:
             result = (result << 1) + self.read_bit()
         return result
 
-    def read_setbits(self, max, set=1):
+    def read_setbits(self, max_, set_=1):
         """read bits as long as their set or a maximum is reached"""
         result = 0
-        while result < max and self.read_bit() == set:
+        while result < max_ and self.read_bit() == set_:
             result += 1
         return result
 

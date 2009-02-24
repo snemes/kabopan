@@ -45,6 +45,19 @@ assert modifystring("abcde", "=+", 2) == "ab=+e"
 
 assert getlongestcommon("31415926535", "31416")  == 4
 
+assert rol(0x12345678, 8, 32) == 0x34567812
+assert rol(0x1234567800, 8, 32) == 0x56780034 # entry value is masked first
+assert rol(0x12345678, 8, 64) == 0x1234567800
+
+assert ror(0x12345678, 8, 32) == 0x78123456
+assert ror(0x12345678, 8, 64) == 0x7800000000123456
+
+assert byteswap(0x12345678, 4) == 0x78563412
+assert byteswap(0x12345678, 2) == 0x7856    #incorrect use but expected result
+
+assert nibbleswap(0x1234, 2) == 0x2143
+
+
 
 assert gethyphenstr(r"c:\WINDOWS\system32\drivers\http.sys") == r"c:\WINDOW [...] \http.sys"
 
@@ -65,4 +78,16 @@ assert rorstr("abc") == "cab"
 assert [rorstr("abc", i) for i in range(4)] == ['abc', 'cab', 'bca', 'abc']
 
 assert setstr("abcde","d") == "deabc"
+
+assert list(slice_and_pad("0001" + "0000" + "0", 4))    == ['0001', '0000', '01__']
+assert list(slice_and_pad("0001" + "0000" + "00", 4))   == ['0001', '0000', '001_']
+assert list(slice_and_pad("0001" + "0000" + "000", 4))  == ['0001', '0000', '0001', 'extr']
+assert list(slice_and_pad("0001" + "0000" + "0000", 4)) == ['0001', '0000', '0000', '1___']
+
+assert hex2bin("0123456789ABCDEF") == "\x01\x23\x45\x67\x89\xAB\xCD\xEF"
+
+
+assert "0123456789ABCDEF" == bin2hex("\x01\x23\x45\x67\x89\xAB\xCD\xEF")
+
+assert list(struct.unpack(">16L", ASCII[:64])) == as_words(ASCII[:64], 512, 32, True)
 

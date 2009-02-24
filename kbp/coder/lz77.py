@@ -8,7 +8,7 @@ Jacob Ziv and Abraham Lempel, 1977
 """
 
 
-import _lz77
+import kbp.coder._lz77 as _lz77
 
 def compress(data_to_compress):
     offset = 0

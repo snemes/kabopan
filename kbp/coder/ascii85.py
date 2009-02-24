@@ -68,7 +68,6 @@ def decode(target):
         if length < 5:
             l += "u" * (5 - length)
         value = merge((ASCII85.index(i) for i in l), len(ASCII85))
-        encoded_char = 4
         l = split(value, len(ASCII), 4)[:length - 1]
 
         result += "".join((ASCII[i] for i in l))

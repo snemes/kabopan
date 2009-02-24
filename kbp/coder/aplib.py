@@ -95,7 +95,7 @@ class compress(_bits.compress):
             if length == 0:
                 c = self.__in[self.__offset]
                 if c == "\x00":
-                    self.__windowbyte(0)
+                    self.__singlebyte(0)
                 else:
                     self.__literal()
             elif length == 1 and 0 <= offset < 16:
@@ -114,7 +114,7 @@ class decompress(_bits.decompress):
     def __init__(self, data):
         _bits.decompress.__init__(self, data, tagsize=1)
         self.__pair = True    # paired sequence
-        self.__lastcopyoffset = 0
+        self.__lastoffset = 0
         self.__functions = [
             self.__literal,
             self.__block,

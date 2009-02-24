@@ -22,14 +22,16 @@ class has160_u():
         [[7, 2, 13, 8], [3, 14, 9, 4], [15, 10, 5, 0], [11, 6, 1, 12]]]
 
     # indexes are like extensions (flattened), with 18, 19, 16, 17 inserted every 4 value
-    indexes = [ sum(([[18, 19, 16, 17][i]] + j
-        for i, j in enumerate(lists)), [])
-            for lists in extensions]
+    indexes = list()
+    for extension in extensions:
+        #pylint: disable-msg=E0602
+        insert_every_four = ([[18, 19, 16, 17][i]] + j for i, j in enumerate(extension))
+        indexes += [ sum(insert_every_four, [])]
 
 class has160(sha0):
     """
     has-160 is based on sha-0.
-    
+
     changes:
      - output, input, and size encoding are little endian
      - a and b rotation parameter are different at each iteration

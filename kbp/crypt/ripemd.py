@@ -11,7 +11,7 @@ RIPEMD-160, a strengthened version of RIPEMD, 1996
 
 import kbp._misc as misc
 from kbp.crypt.sha import sha_u
-from md4 import md4_u, md5, md5_u
+from kbp.crypt.md4 import md4_u, md5, md5_u
 
 class ripemd160_u():
     """utility class for RIPEMD-160 cryptographic hash"""

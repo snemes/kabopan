@@ -44,19 +44,22 @@ load-plugins=
 #disable-checker=
 
 # Enable all messages in the listed categories (IRCWEF).
-#enable-msg-cat=
+enable-msg-cat=ECWF
 
 # Disable all messages in the listed categories (IRCWEF).
-#disable-msg-cat=
+disable-msg-cat=IR
 
 # Enable the message(s) with the given id(s).
 #enable-msg=
 
 # Disable the message(s) with the given id(s).
-#C010 invalid var name
+#C0103 invalid var name
 #C0111 Missing docstring
 #C0301 Line too long
-disable-msg=W0704,C0103,C0111,C0301
+#W0511 TODO
+#W0611 unused imports (for tests)
+#W0612 unused variables (loops)
+disable-msg=W0704,C0103,C0111,C0301,W0611,W0612,W0511
 
 
 [REPORTS]

@@ -98,7 +98,7 @@ class md4(Hash.merkledamgaard):
 class md5_u():
     """utility class for MD5 cryptographic hash"""
     g_coefficients = [[1, 0], [5, 1], [3, 5], [7, 0]]
-    K = DWORDS([abs(sin(i + 1)) * (2**32) for i in range(16 * 4)])
+    K = DWORDS([abs(sin(index + 1)) * (2**32) for index in range(16 * 4)])
     shifts = [
         [7, 12, 17, 22],
         [5,  9, 14, 20],

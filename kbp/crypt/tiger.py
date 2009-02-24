@@ -9,13 +9,14 @@ tiger/192, tiger/160, tiger/128, tiger-2
 
 try:
     import psyco
+    #pylint: disable-msg=E1101
     psyco.run()
 except:
     pass
 
-from kbp._misc import xor, hex2bin
-from md4 import md4
-from kbp.types import QWORD, BYTE, List, QWORDS
+from kbp._misc import xor, hex2bin, as_words
+from kbp.crypt.md4 import md4
+from kbp.types import QWORD, BYTE, List, QWORDS, DWORD
 import struct
 
 import tiger_const
@@ -26,8 +27,8 @@ class tiger(md4):
         md4.__init__(self)
         self.hv_size = 64
 
-        hex = "0123456789ABCDEF"
-        IVhex = hex + hex[::-1]
+        hex_ = "0123456789ABCDEF"
+        IVhex = hex_ + hex_[::-1]
         self.IVs = QWORDS(list(struct.unpack(">2Q", hex2bin(IVhex)))  + [0xF090A0B0C0B0E080 | 0x0006050403020107])
         self.pad_bit_7 = False
 
@@ -97,7 +98,7 @@ class tiger(md4):
     def gen_const(self):
         nb_passes = 5
         seed_string = "Tiger - A Fast New Hash Function, by Ross Anderson and Eli Biham"
-        words = m.as_words(seed_string, 512, 64, bigendian=False)
+        words = as_words(seed_string, 512, 64, bigendian=False)
         self.ihvs = list(self.IVs)
         print self.ihvs[0]
         self.ihvs = self.rounds(words)

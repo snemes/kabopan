@@ -26,5 +26,5 @@ for function, values in tests:
         test_value = function(s)
         try:
             assert expected_value == test_value
-        except:
+        except AssertionError:
             print "function %s, string %s: expected %x, got %x" % (function.__name__, s, expected_value, test_value)

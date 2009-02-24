@@ -8,7 +8,7 @@ James A. Storer, Thomas G. Szymanski, 1982
 """
 
 
-import _lz77
+import kbp.coder._lz77 as _lz77
 
 def compress(data_to_compress):
     offset = 0
@@ -46,4 +46,4 @@ def decompress(compressed_data):
 
 
 if __name__ == "__main__":
-    import kbp.test.lszz_test
+    import kbp.test.lzss_test

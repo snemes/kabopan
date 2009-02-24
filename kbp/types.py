@@ -4,10 +4,11 @@
 
 class Str(str):
     def __init__(self, seq):
+        #FIXME : call str.__init__?
         if isinstance(seq, basestring):
-                self.data = seq
+            self.data = seq
         else:
-                self.data = str(seq)
+            self.data = str(seq)
 
     def __lshift__(self, other):
         if not isinstance(other, int):
@@ -115,31 +116,53 @@ class Int():
     def __str__(self):
         return ("%x" % (self.number)).rjust(self.width / 4,"0")
 
-    def __add__(self, other):   return Int((self.number + int(other)) % self.modulo, self.width)
-    def __mul__(self, other):   return Int((self.number * int(other)) % self.modulo, self.width)
-    def __sub__(self, other):   return Int((self.number - int(other)) % self.modulo, self.width)
-    def __div__(self, other):   return Int((self.number / int(other)) % self.modulo, self.width)
-    def __xor__(self, other):   return Int((self.number ^ int(other)) % self.modulo, self.width)
-    def __or__(self, other):    return Int((self.number | int(other)) % self.modulo, self.width)
-    def __and__(self, other):   return Int((self.number & int(other)) % self.modulo, self.width)
-    def __mod__(self, other):   return Int((self.number % int(other)) % self.modulo, self.width)
-    def __radd__(self, other):  return self.__add__(other)
-    def __ror__(self, other):   return self.__or__(other)
-    def __rxor__(self, other):   return self.__xor__(other)
-    def __rand__(self, other):  return self.__and__(other)
-    def __rmod__(self, other):  return self.__mod__(other)
-    def __rmul__(self, other):  return self.__mul__(other)
+    def __add__(self, other):
+        return Int((self.number + int(other)) % self.modulo, self.width)
+    def __mul__(self, other):
+        return Int((self.number * int(other)) % self.modulo, self.width)
+    def __sub__(self, other):
+        return Int((self.number - int(other)) % self.modulo, self.width)
+    def __div__(self, other):
+        return Int((self.number / int(other)) % self.modulo, self.width)
+    def __xor__(self, other):
+        return Int((self.number ^ int(other)) % self.modulo, self.width)
+    def __or__(self, other):
+        return Int((self.number | int(other)) % self.modulo, self.width)
+    def __and__(self, other):
+        return Int((self.number & int(other)) % self.modulo, self.width)
+    def __mod__(self, other):
+        return Int((self.number % int(other)) % self.modulo, self.width)
+    def __radd__(self, other):
+        return self.__add__(other)
+    def __ror__(self, other):
+        return self.__or__(other)
+    def __rxor__(self, other):
+        return self.__xor__(other)
+    def __rand__(self, other):
+        return self.__and__(other)
+    def __rmod__(self, other):
+        return self.__mod__(other)
+    def __rmul__(self, other):
+        return self.__mul__(other)
 
-    def __rshift__(self, other):return Int((self.number >> other) % self.modulo, self.width)
-    def __lshift__(self, other):return Int((self.number << other) % self.modulo, self.width)
+    def __rshift__(self, other):
+        return Int((self.number >> other) % self.modulo, self.width)
+    def __lshift__(self, other):
+        return Int((self.number << other) % self.modulo, self.width)
 
-    def __eq__(self, other):    return ((self.number % self.modulo) == other)
+    def __eq__(self, other):    
+        return ((self.number % self.modulo) == other)
 
-    def __invert__(self):      return Int((~self.number) % self.modulo, self.width)
-    def __trunc__(self):       return self.number
-    def __index__(self):       return self.number
-    def rol(self, shift):      return Int(((self.number << shift) | (self.number >> (self.width - shift))) % self.modulo, self.width)
-    def ror(self, shift):      return Int(((self.number >> shift) | (self.number << (self.width - shift))) % self.modulo, self.width)
+    def __invert__(self):      
+        return Int((~self.number) % self.modulo, self.width)
+    def __trunc__(self):       
+        return self.number
+    def __index__(self):       
+        return self.number
+    def rol(self, shift):      
+        return Int(((self.number << shift) | (self.number >> (self.width - shift))) % self.modulo, self.width)
+    def ror(self, shift):      
+        return Int(((self.number >> shift) | (self.number << (self.width - shift))) % self.modulo, self.width)
 
     def endian_swap(self):
         result = 0
@@ -201,4 +224,4 @@ def BYTES(l):
 
 
 if __name__ == "__main__":
-    import test.types_test
+    import kbp.test.types_test

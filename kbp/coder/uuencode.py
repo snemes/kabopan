@@ -2,7 +2,7 @@
 """
 Uuencode format
 """
-import base
+import kbp.coder.base as base
 from kbp._misc import char_range
 
 LENGTHS = "`" + char_range(chr(33), chr(33 + 45 - 1)) # 0 is encoded as `, the other char starting from 33"

@@ -16,7 +16,7 @@ def rot13(data):
     return substitute(substitute(data, ALPHABET), ALPHABET_LOWERCASE)
 
 def rot18(data):
-    return rot13(rot8(data))
+    return rot13(rot5(data))
 
 def rot47(data):
     return substitute(data, ASCII33_126)
