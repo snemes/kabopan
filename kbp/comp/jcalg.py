@@ -8,7 +8,7 @@ Jeremy Collake U{http://www.bitsum.com}
 #compress not working yet
 
 import kbp._bits as _bits
-import kbp.coder._lz77 as _lz77
+from kbp.comp._lz77 import find_longest_match
 from kbp._misc import getbinlen
 
 def lengthdelta(x):
@@ -86,7 +86,7 @@ class compress(_bits.compress):
     def do(self):
         self.__literal(False)
         while self.__offset < self.__length:
-            offset, length = _lz77.find_longest_match(self.__in[:self.__offset],
+            offset, length = find_longest_match(self.__in[:self.__offset],
                 self.__in[self.__offset:])
             if length == 0:
                 c = self.__in[self.__offset]

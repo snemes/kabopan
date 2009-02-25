@@ -3,7 +3,7 @@
 # The list of objects to document.  Objects can be named using
 # dotted names, module filenames, or package directory names.
 # Alases for this option include "objects" and "values".
-modules: kbp\*.py, kbp.crypt, kbp.checksum, kbp.coder, kbp.entro, kbp.prng, kbp.transf, kbp.univ
+modules: kbp\*.py, kbp.crypt, kbp.checksum, kbp.coder, kbp.comp, kbp.entro, kbp.prng, kbp.transf, kbp.univ
 
 # The type of output that should be generated.  Should be one
 # of: html, text, latex, dvi, ps, pdf.

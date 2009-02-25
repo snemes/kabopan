@@ -9,7 +9,7 @@ Jorgen Ibsen U{http://www.ibsensoftware.com}
 #todo working but need cleaning and maybe bugfixing
 
 import kbp._bits as _bits
-import kbp.coder._lz77 as _lz77
+from kbp.comp._lz77 import find_longest_match
 
 def lengthdelta(offset):
     if offset < 0x80 or 0x7D00 <= offset:
@@ -90,7 +90,7 @@ class compress(_bits.compress):
     def do(self):
         self.__literal(False)
         while self.__offset < self.__length:
-            offset, length = _lz77.find_longest_match(self.__in[:self.__offset],
+            offset, length = find_longest_match(self.__in[:self.__offset],
                 self.__in[self.__offset:])
             if length == 0:
                 c = self.__in[self.__offset]

@@ -8,7 +8,7 @@ James A. Storer, Thomas G. Szymanski, 1982
 """
 
 
-import kbp.coder._lz77 as _lz77
+from kbp.comp._lz77 import back_copy, find_longest_match
 
 def compress(data_to_compress):
     offset = 0
@@ -17,7 +17,7 @@ def compress(data_to_compress):
     length = len(data_to_compress)
 
     while offset < length:
-        match_offset, match_length = _lz77.find_longest_match(data_to_compress[:offset],
+        match_offset, match_length = find_longest_match(data_to_compress[:offset],
                                         data_to_compress[offset:])
 
         if match_length == 0:

@@ -9,7 +9,7 @@ Jorgen Ibsen U{http://www.ibsensoftware.com/}
 #TODO working, but need cleaning and bugfixing
 
 import kbp._bits as _bits
-import kbp.coder._lz77 as _lz77
+from kbp.comp._lz77 import find_longest_match
 
 debug = False
 
@@ -48,7 +48,7 @@ class compress(_bits.compress):
         self.write_byte(self.__in[self.__offset])
         self.__offset += 1
         while self.__offset < self.__length:
-            offset, length = _lz77.find_longest_match(self.__in[:self.__offset],
+            offset, length = find_longest_match(self.__in[:self.__offset],
                 self.__in[self.__offset:])
             if offset >= 1 and length >= 4:
                 self.__dictcopy(offset, length)

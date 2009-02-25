@@ -8,7 +8,7 @@ Jacob Ziv and Abraham Lempel, 1977
 """
 
 
-import kbp.coder._lz77 as _lz77
+from kbp.comp._lz77 import back_copy, find_longest_match
 
 def compress(data_to_compress):
     offset = 0
@@ -18,7 +18,7 @@ def compress(data_to_compress):
 
     while offset < length:
         #find the longest match for the next word to encode
-        match_offset, match_length = _lz77.find_longest_match(data_to_compress[:offset],
+        match_offset, match_length = find_longest_match(data_to_compress[:offset],
                          data_to_compress[offset:])
         
         #get the next symbol, if there is something else to compress
@@ -35,7 +35,7 @@ def decompress(compressed_data):
 
     for d in compressed_data:
         if d["length"] != 0:
-            decompressed_string = _lz77.back_copy(decompressed_string, d["length"], d["offset"])
+            decompressed_string = back_copy(decompressed_string, d["length"], d["offset"])
         decompressed_string += d["symbol"]
 
     return decompressed_string
