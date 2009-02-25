@@ -6,25 +6,24 @@ Tiger - A Fast New Hash Function
 Ross Anderson and Eli Biham, 1996
 tiger/192, tiger/160, tiger/128, tiger-2
 """
-
+#pylint: disable-msg=W0105
 try:
     import psyco
-    #pylint: disable-msg=E1101
-    psyco.run()
-except:
+    psyco.full()
+except ImportError:
     pass
 
 from kbp._misc import xor, hex2bin, as_words
-from kbp.crypt.md4 import md4
+from kbp.crypt.md4 import Md4
 from kbp.types import QWORD, BYTE, List, QWORDS, DWORD
 import struct
 
-import tiger_const
+import kbp.crypt.tiger_const as tiger_const
 
-class tiger(md4):
+class Tiger(Md4):
     """tiger/192 cryptographic class"""
     def __init__(self):
-        md4.__init__(self)
+        Md4.__init__(self)
         self.hv_size = 64
 
         hex_ = "0123456789ABCDEF"
@@ -175,21 +174,21 @@ class tiger(md4):
             #in_index = [1024, 8]# 8
 """
 
-class tiger128(tiger):
+class Tiger128(Tiger):
     """tiger/128 is tiger/192 with the digest truncated to 128 bits"""
     def digest(self):
-        return tiger.digest(self)[:128 / 8]
+        return Tiger.digest(self)[:128 / 8]
 
-class tiger160(tiger):
+class Tiger160(Tiger):
     """tiger/160 is tiger/192 with the digest truncated to 160 bits"""
 
     def digest(self):
-        return tiger.digest(self)[:160 / 8]
+        return Tiger.digest(self)[:160 / 8]
 
-class tiger2(tiger):
+class Tiger2(Tiger):
     """tiger-2 is tiger/192 with the same padding as md4: bit 7 is used first"""
     def __init__(self):
-        tiger.__init__(self)
+        Tiger.__init__(self)
         self.pad_bit_7 = True
 
 #tiger()

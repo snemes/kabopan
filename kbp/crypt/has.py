@@ -8,12 +8,14 @@ Telecommunications Technology Association
 """
 
 from kbp._misc import hsqrt
-from kbp.types import QWORD
-from kbp.crypt.sha import sha0, sha_u
-from kbp.crypt.md4 import md4_u, md5_u
+from kbp.types import QWORD, Utility
+from kbp.crypt.sha import Sha0, Sha_u
+from kbp.crypt.md4 import Md4_u, Md5_u
 
-class has160_u():
+
+class Has160_u(Utility):
     """utility class for has-160 cryptographic hash"""
+
     constants = [hsqrt(i) for i in [0, 2, 3, 5]]
     extensions = [
         [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]],
@@ -28,7 +30,7 @@ class has160_u():
         insert_every_four = ([[18, 19, 16, 17][i]] + j for i, j in enumerate(extension))
         indexes += [ sum(insert_every_four, [])]
 
-class has160(sha0):
+class Has160(Sha0):
     """
     has-160 is based on sha-0.
 
@@ -39,28 +41,28 @@ class has160(sha0):
      - the round-specific functions are md4.f, md4.h, md5.i, md4.h respectively
     """
     def __init__(self):
-        sha0.__init__(self)
+        Sha0.__init__(self)
         self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = False
 
     def rounds(self, words):
         words.extend((0 for i in xrange(20-16)))
         a, b, c, d, e = list(self.ihvs)
         for r in range(4):
-            f = [md4_u.f, md4_u.h, md5_u.i, md4_u.h][r]
-            k = has160_u.constants[r]
+            f = [Md4_u.f, Md4_u.h, Md5_u.i, Md4_u.h][r]
+            k = Has160_u.constants[r]
             b_rot = [10, 17, 25, 30][r]
 
             for i in range(4):
                 w = QWORD(0)
                 for j in xrange(4):
-                    w ^= words[has160_u.extensions[r][i][j]]
+                    w ^= words[Has160_u.extensions[r][i][j]]
                 words[16 + i] = w
 
             for i in range(20):
-                index = has160_u.indexes[r][i]
+                index = Has160_u.indexes[r][i]
                 a_rot = [5, 11, 7, 15, 6, 13, 8, 14, 7, 12, 9, 11, 8, 15, 6, 12, 9, 14, 5, 13][i]
 
-                a, b, c, d, e = sha_u.round_f(a, b, c, d, e, f, a_rot, b_rot, words, index, k)
+                a, b, c, d, e = Sha_u.round_f(a, b, c, d, e, f, a_rot, b_rot, words, index, k)
         return [a, b, c, d, e]
 
 if __name__ == "__main__":

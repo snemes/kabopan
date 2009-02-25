@@ -5,6 +5,7 @@ RC4, ARC4, ARCFOUR, Ron's Code 4, Rivest's Cipher 4
 from kbp.types import BYTE
 
 def init_states(key):
+    """init rc4 state"""
     keylength = len(key)
     states = [BYTE(i) for i in xrange(256)]
     index = BYTE(0)
@@ -15,6 +16,7 @@ def init_states(key):
 
 
 def prga(length, states):
+    """generate 'length' prn from 'states'"""
     i = BYTE(0)
     j = BYTE(0)
     for c in xrange(length):
@@ -25,6 +27,12 @@ def prga(length, states):
 
 
 def crypt(key, message):
+    """
+    encrypt/decrypt 'message' from 'key'
+    
+    @param key: key for en/de-cryption
+    @param message: plain/cipher-text to be en/de-crypted
+    @return: cipher/plain-text"""
     states = init_states(key)
     encrypted = str()
     for char, xor in zip(message, prga(len(message), states)):

@@ -1,6 +1,9 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.types import *
+from kbp.types import ( \
+ sub_string, add_string, 
+ Str, List, 
+ BYTE, DWORD, WORD, QWORD, OWORD, DQWORD)
 
 assert sub_string("abc", "aBc") == "_B_"
 assert add_string("abc", "_B_") == "aBc"

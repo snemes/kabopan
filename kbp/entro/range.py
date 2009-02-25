@@ -13,8 +13,8 @@ from fractions import Fraction
 def common_string(a, b):
     """return a string made of all the common digits and the half of the first different digits"""
     assert a != b
-    string_a = `a`
-    string_b = `b`
+    string_a = repr(a)
+    string_b = repr(b)
 
     i = 0
     while string_a[i] == string_b[i]:

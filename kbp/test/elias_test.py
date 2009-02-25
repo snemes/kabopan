@@ -1,7 +1,10 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.univ.elias import *
-
+from kbp.univ.elias import ( \
+ elias_split, gamma_encode, gamma_decode, 
+ interleaved_gamma_encode, interleaved_gamma_decode,
+ delta_encode, delta_decode,
+ omega_encode, omega_decode)
 assert elias_split(1) == (0, "")
 assert elias_split(14) == (3, "110")
 

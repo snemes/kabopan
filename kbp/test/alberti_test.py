@@ -1,7 +1,12 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.coder.alberti import *
+from kbp.coder.alberti import \
+ (
+ switch_alphabet,
+ encrypt_mode1, decrypt_mode1,
+ encrypt_mode2, decrypt_mode2
+ )
 
 
 assert switch_alphabet("ab", "cd", "b") == "d"

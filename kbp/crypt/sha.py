@@ -3,16 +3,16 @@
 Secure Hash Standard - SHS - SHA-0
 RFC 3174
 """
-from kbp.crypt.md4 import md4, md4_u
+from kbp.crypt.md4 import Md4, Md4_u
 from kbp._misc import hsqrt
-from kbp.types import DWORD
+from kbp.types import DWORD, Utility
 
-class sha_u():
+class Sha_u(Utility):
     """utility class for sha"""
     constants = [hsqrt(i) for i in [2, 3, 5, 10]]
-    f, g, h = md4_u.f, md4_u.h, md4_u.g
+    f, g, h = Md4_u.f, Md4_u.h, Md4_u.g
     functions = [f, g, h, g]
-    IVs = list(md4_u.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
+    IVs = list(Md4_u.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
 
     @staticmethod
     def round_f(a, b, c, d, e, f, rol1, rol2, words, words_index, k):
@@ -24,7 +24,7 @@ class sha_u():
             d]
 
 
-class sha0(md4):
+class Sha0(Md4):
     """
     sha-0 is based on md4. 
 
@@ -36,8 +36,8 @@ class sha0(md4):
      - the round-specific function are md4.f, md4.h, md5.i, md4.h respectively
     """
     def __init__(self):
-        md4.__init__(self)
-        self.IVs = sha_u.IVs
+        Md4.__init__(self)
+        self.IVs = Sha_u.IVs
         self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = True
         # function names are swapped
 
@@ -51,14 +51,14 @@ class sha0(md4):
     def rounds(self, words):
         [a, b, c, d, e] = list(self.ihvs)
         for round_ in range(4):
-            f = sha_u.functions[round_]
-            k = sha_u.constants[round_]
+            f = Sha_u.functions[round_]
+            k = Sha_u.constants[round_]
             for i in range(20):
-                [a, b, c, d, e] = sha_u.round_f(a, b, c, d, e, f, 5, 30, words, i + 20 * round_, k)
+                [a, b, c, d, e] = Sha_u.round_f(a, b, c, d, e, f, 5, 30, words, i + 20 * round_, k)
         return [a, b, c, d, e]
 
 
-class sha1(sha0):
+class Sha1(Sha0):
     """
     sha-1 is a revision of sha-0.
 

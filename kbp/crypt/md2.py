@@ -8,12 +8,12 @@ B. Kaliski, 1992
 """
 
 from kbp._misc import as_bytes_blocks
-from kbp.types import BYTES, BYTE
-from kbp.crypt.Hash import merkledamgaard
+from kbp.types import BYTES, BYTE, Utility
+from kbp.crypt.Hash import Merkledamgaard
 
-class md2_u():
+class Md2_u(Utility):
     """utility class for MD2 cryptographic hash"""
-    PI_SUBST = [
+    pi_subst = [ # how to calculate this ?
      0x29, 0x2e, 0x43, 0xc9, 0xa2, 0xd8, 0x7c, 0x01,
      0x3d, 0x36, 0x54, 0xa1, 0xec, 0xf0, 0x06, 0x13,
      0x62, 0xa7, 0x05, 0xf3, 0xc0, 0xc7, 0x73, 0x8c,
@@ -65,29 +65,29 @@ class md2_u():
                 # Set C[j] to S[c xor L]
                 # should be
                 # Set C[j] to (C[j] xor S[c xor L])
-                checksum_bytes[i] = checksum_bytes[i] ^ md2_u.PI_SUBST[ord(char) ^ previous]
+                checksum_bytes[i] = checksum_bytes[i] ^ Md2_u.pi_subst[ord(char) ^ previous]
                 previous = checksum_bytes[i]
 
         checksum_string = str().join(chr(i) for i in checksum_bytes)
         return checksum_string
 
 #todo : more merging with merkledamgaard and md4
-class md2(merkledamgaard):
+class Md2(Merkledamgaard):
     """
-    MD2 is based on the Merkle-Damgaard model.
+    MD2 is based on the L{Merkle-Damgaard<Merkledamgaard>} model.
 
     padding is done according to pkcs7 standard, then an full block checksum is padded.
     """
 
     def __init__(self):
-        merkledamgaard.__init__(self)
+        Merkledamgaard.__init__(self)
         self.block_length = 16
         self.hv_size = 8
         self.IVs = BYTES([0 for i in xrange(16)])
 
     def pad(self, message):
-        padpkcs7 = md2_u.padpkcs7(len(message))
-        checksum = md2_u.checksum(message + padpkcs7)
+        padpkcs7 = Md2_u.padpkcs7(len(message))
+        checksum = Md2_u.checksum(message + padpkcs7)
         return padpkcs7 + checksum
 
     def compute(self, message):
@@ -103,11 +103,11 @@ class md2(merkledamgaard):
                 xor[i] = self.ihvs[i] ^ block_bytes[i]
 
             previous = BYTE(0)
-            for round in xrange(18):
+            for round_ in xrange(18):
                 for l in [self.ihvs, block_bytes, xor]:
                     for k in xrange(16):
-                        previous = l[k] = l[k] ^ md2_u.PI_SUBST[previous]
-                previous = previous + round
+                        previous = l[k] = l[k] ^ Md2_u.pi_subst[previous]
+                previous = previous + round_
         return self
 
 

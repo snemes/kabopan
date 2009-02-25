@@ -8,11 +8,8 @@ rewrite headers
 check epydoc output
 standardize test_vectors for hashes
 create test class, use unittest
-merge hashes by families
-create utility friend class
 create a pickle class
-merge sha_
-merge IVs
+class-ify entro, transform,...
 
 Bugs:
 ascii85
@@ -22,10 +19,3 @@ tiger constants
 missing:
 md2 constant implementation
 ripemd
-
-missing docs:
-everything
-
-roadmap:
-kbpsum gost haval whirlpool panama
-kbpentro adaptive_huffman, range, arithmetic

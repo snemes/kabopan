@@ -13,7 +13,7 @@ def get_variables(filename, variables):
             pi = pickle.load(f)
             #rebuilding the dictionary checks the actual existence of all variables
             return dict([variable, pi[variable]] for variable in variables)
-    except:
+    except IOError:
         return None
 
 def save_variables(filename, variables):
@@ -21,5 +21,5 @@ def save_variables(filename, variables):
     try:
         with open(filename, "wb") as f:
             pickle.dump(variables, f)
-    except:
+    except IOError:
         return None

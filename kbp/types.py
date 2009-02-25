@@ -1,10 +1,16 @@
-#K abopan - Readable Algorithms. Public Domain, 2009
+#Kabopan - Readable Algorithms. Public Domain, 2009
 """customised standard type classes"""
 
 
+class Utility():
+    """empty parent for utility classes"""
+    def __init__(self):
+        """empty"""
+        pass
+
 class Str(str):
     def __init__(self, seq):
-        #FIXME : call str.__init__?
+        str.__init__(self) # necessary ?
         if isinstance(seq, basestring):
             self.data = seq
         else:

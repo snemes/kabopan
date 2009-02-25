@@ -8,7 +8,7 @@ D.A. Huffman 1952
 """
 
 
-import _encoding
+from kbp.entro._encoding import get_weights_and_symbols
 
 def pop_entry(stats):
     """clears the first entry in the list
@@ -25,7 +25,7 @@ def generate_tree(data_to_compress):
 
     # stats first contains symbols and their weights,
     # then parent nodes and their weights as well, while the tree is built
-    stats = _encoding.get_weights_and_symbols(data_to_compress)
+    stats = get_weights_and_symbols(data_to_compress)
     stats = sorted(stats, key = lambda x:x["weight"])
 
     # as long as we have more than one element to process, we'll grow the tree
@@ -34,8 +34,8 @@ def generate_tree(data_to_compress):
         parent_node = {"left0": None, "right1": None, "weight": 0}
 
         # the 2 children are the first and second elements of the list
-        parent_node["left0"]= pop_entry(stats)
-        parent_node["right1"]= pop_entry(stats)
+        parent_node["left0"] = pop_entry(stats)
+        parent_node["right1"] = pop_entry(stats)
 
         # and the weight is the sum of both children's
         cumulative_weight = parent_node["left0"]["weight"] + parent_node["right1"]["weight"]

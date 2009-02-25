@@ -1,6 +1,6 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.univ.unary import *
+from kbp.univ.unary import encode, decode
 
 assert encode(0) == "1"
 assert encode(1) == "01"

@@ -3,16 +3,16 @@
 Tiny Encryption Algorithm Tea, XTEA
 """
 from kbp.crypt.cipher import Feistel
-from kbp.types import DWORD, DWORDS
+from kbp.types import DWORD, DWORDS, Utility
 
-class tea_u():
+class Tea_u(Utility):
     """utility class for tea"""
     phi = (1 + 5**(1./2)) /2 #: golden ratio
     constant = DWORD((1 << 32) / phi)
 
-assert tea_u.constant == 0x9e3779b9
+assert Tea_u.constant == 0x9e3779b9
 
-class tea(Feistel):
+class Tea(Feistel):
     """
     Tiny Encryption Algorithm
     """
@@ -33,18 +33,18 @@ class tea(Feistel):
     def round_parameters(self, backward):
         if not backward:
             delta = 0
-            for i in xrange(self.cycles):
-                delta += tea_u.constant
+            for _ in xrange(self.cycles):
+                delta += Tea_u.constant
                 yield self.F, [0, 1, delta]
                 yield self.F, [2, 3, delta]
         else:
-            delta = self.cycles * tea_u.constant
-            for i in xrange(self.cycles):
+            delta = self.cycles * Tea_u.constant
+            for _ in xrange(self.cycles):
                 yield self.F, [2, 3, delta]
                 yield self.F, [0, 1, delta]
-                delta -= tea_u.constant
+                delta -= Tea_u.constant
 
-class xtea(tea):
+class Xtea(Tea):
     """
     XTEA is based on L{tea}
     
@@ -59,24 +59,24 @@ class xtea(tea):
     def round_parameters(self, backward):
         if not backward:
             delta = 0
-            for i in xrange(self.cycles):
+            for _ in xrange(self.cycles):
                 yield self.F, [delta, 0]
-                delta += tea_u.constant
+                delta += Tea_u.constant
                 yield self.F, [delta, 11]
         else:
-            delta = self.cycles * tea_u.constant
-            for i in xrange(self.cycles):
+            delta = self.cycles * Tea_u.constant
+            for _ in xrange(self.cycles):
                 yield self.F, [delta, 11]
-                delta -= tea_u.constant
+                delta -= Tea_u.constant
                 yield self.F, [delta, 0]
 
 
 if __name__ == "__main__":
-    print [str(i) for i in tea(64).crypt("\x00" * 8, DWORDS([0, 0, 0, 0]))]
-    print [str(i) for i in tea(64).decrypt("\x41\xea\x3a\x0a\x94\xba\xa9\x40", DWORDS([0, 0, 0, 0]))]
+    print [str(i) for i in Tea(64).crypt("\x00" * 8, DWORDS([0, 0, 0, 0]))]
+    print [str(i) for i in Tea(64).decrypt("\x41\xea\x3a\x0a\x94\xba\xa9\x40", DWORDS([0, 0, 0, 0]))]
     print
     #assert tea().crypt("\x00" * 8, DWORDS([0, 0, 0, 0])) == DWORDS([0x41ea3a0a, 0x94baa940])
     #assert tea().decrypt("\x41\xea\x3a\x0a\x94\xba\xa9\x40", DWORDS([0, 0, 0, 0])) == [0, 0]
-    print [str(i) for i in xtea(64).crypt("\x00" * 8, DWORDS([0, 0, 0, 0]))]
+    print [str(i) for i in Xtea(64).crypt("\x00" * 8, DWORDS([0, 0, 0, 0]))]
     #XTEA  ['\xdee9d4d8', '\xf7131ed9']
-    print [str(i) for i in xtea(64).decrypt("\xDE\xE9\xD4\xD8\xF7\x13\x1E\xD9" , DWORDS([0, 0, 0, 0]))]
+    print [str(i) for i in Xtea(64).decrypt("\xDE\xE9\xD4\xD8\xF7\x13\x1E\xD9" , DWORDS([0, 0, 0, 0]))]

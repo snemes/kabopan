@@ -1,6 +1,7 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.coder.rot import *
+from kbp.coder.rot import rot13, rot47, caesar_encode, caesar_decode, ASCII33_126
+
 from kbp._misc import (DIGITS, ALPHABET, ALPHABET_LOWERCASE)
 assert ASCII33_126  == "!\"#$%&'()*+,-./" + DIGITS  + ":;<=>?@" + ALPHABET  + \
     "[\\]^_`" + ALPHABET_LOWERCASE + "{|}~"

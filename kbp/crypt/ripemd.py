@@ -10,10 +10,11 @@ RIPEMD-160, a strengthened version of RIPEMD, 1996
 """
 
 import kbp._misc as misc
-from kbp.crypt.sha import sha_u
-from kbp.crypt.md4 import md4_u, md5, md5_u
+from kbp.types import Utility
+from kbp.crypt.sha import Sha_u
+from kbp.crypt.md4 import Md4_u, Md4, Md5_u
 
-class ripemd160_u():
+class Ripemd160_u(Utility):
     """utility class for RIPEMD-160 cryptographic hash"""
 
     ks = [misc.hsqrt(i) for i in [0, 2 , 3, 5, 7]]
@@ -50,12 +51,14 @@ class ripemd160_u():
     #f2 = md4.f     # mux
 
     @staticmethod
-    def f3(b, c, d): return (b | ~c) ^ d
+    def f3(b, c, d):
+        return (b | ~c) ^ d
 
     #f4 = md5.g     # mux
 
     @staticmethod
-    def f5(b, c, d): return b ^ (c | ~d)    # similar to md5.i
+    def f5(b, c, d): 
+        return b ^ (c | ~d)    # similar to md5.i
 
     @staticmethod
     def T_(a, b, c, d, f, w, k, s, e):
@@ -64,38 +67,38 @@ class ripemd160_u():
     @staticmethod
     def iteration_f(a, b, c, d, e, f, w, k, s):
         """permutation on a, b, c, d, e + transformation on b and d"""
-        return e, ripemd160_u.T_(a, b, c, d, f, w, k, s, e), b, c.rol(10), d
+        return e, Ripemd160_u.T_(a, b, c, d, f, w, k, s, e), b, c.rol(10), d
 
     @staticmethod
-    def round_f(round, a, b, c, d, e, A, B, C, D, E, words):
-        functions = [md4_u.h, md4_u.f, ripemd160_u.f3, md5_u.g, ripemd160_u.f5]
+    def round_f(round_, a, b, c, d, e, A, B, C, D, E, words):
+        functions = [Md4_u.h, Md4_u.f, Ripemd160_u.f3, Md5_u.g, Ripemd160_u.f5]
         Functions = list(reversed(functions))
-        f = functions[round]
-        F = Functions[round]
-        k, K = [j[round] for j in ripemd160_u.ks, ripemd160_u.Ks] # round-dependant parameters
+        f = functions[round_]
+        F = Functions[round_]
+        k, K = [j[round_] for j in Ripemd160_u.ks, Ripemd160_u.Ks] # round-dependant parameters
         for i in range(16):
             #iteration-dependant parameters
-            s, S, r, R = ripemd160_u.ss[round][i], ripemd160_u.Ss[round][i], ripemd160_u.rs[i][round], ripemd160_u.Rs[i][round]
+            s, S, r, R = Ripemd160_u.ss[round_][i], Ripemd160_u.Ss[round_][i], Ripemd160_u.rs[i][round_], Ripemd160_u.Rs[i][round_]
 
-            a, b, c, d, e = ripemd160_u.iteration_f(a, b, c, d, e, f, words[r], k, s)
-            A, B, C, D, E = ripemd160_u.iteration_f(A, B, C, D, E, F, words[R], K, S)    # the same
+            a, b, c, d, e = Ripemd160_u.iteration_f(a, b, c, d, e, f, words[r], k, s)
+            A, B, C, D, E = Ripemd160_u.iteration_f(A, B, C, D, E, F, words[R], K, S)    # the same
         return a, b, c, d, e, A, B, C, D, E
 
-class ripemd160(md5):
+class Ripemd160(Md4):
     """
-    RIPEMD-160 is based on md5
+    RIPEMD-160 is based on L{MD5<Md5>}
     
      - uses sha-0 IVs
      - each round computes 2 sets of IHVs in parallel which are combined in a special way
     """
     def __init__(self):
-        md5.__init__(self)
-        self.IVs = sha_u.IVs
+        Md4.__init__(self)
+        self.IVs = Sha_u.IVs
 
     def rounds(self, words):
         a, b, c, d, e = A, B, C, D, E = list(self.ihvs)
-        for round in range(5):
-            a, b, c, d, e, A, B, C, D, E = ripemd160_u.round_f(round, a, b, c, d, e, A, B, C, D, E, words)
+        for round_ in range(5):
+            a, b, c, d, e, A, B, C, D, E = Ripemd160_u.round_f(round_, a, b, c, d, e, A, B, C, D, E, words)
         return a, b, c, d, e, A, B, C, D, E
 
 
@@ -105,13 +108,13 @@ class ripemd160(md5):
         self.ihvs = h1 + c + D, h2 + d + E, h3 + e + A, h4 + a + B, h0 + b + C
 
 
-class ripemd320_u():
+class Ripemd320_u(Utility):
     """utility class for RIPEMD-320 cryptographic hash"""
     #initialization vectors are extended by nibble-mirroring
-    IVs = list(sha_u.IVs) + [misc.nibbleswap(i, 4) for i in sha_u.IVs]
+    IVs = list(Sha_u.IVs) + [misc.nibbleswap(i, 4) for i in Sha_u.IVs]
 
 
-class ripemd320(ripemd160):
+class Ripemd320(Ripemd160):
     """
     RIPEMD-320 is based on RIPEMD-160
     
@@ -122,41 +125,41 @@ class ripemd320(ripemd160):
     but just extends the size of the hash.
     """
     def __init__(self):
-        ripemd160.__init__(self)
-        self.IVs = ripemd320_u.IVs
+        Ripemd160.__init__(self)
+        self.IVs = Ripemd320_u.IVs
 
     def combine(self, bhvs):
-        #ripemd320 uses standard sum combining, unlike ripemd160
+        """RIPEMD-320 uses standard sum combining, unlike RIPEMD-160"""
         self.ihvs = [sum(i) for i in zip(self.ihvs, bhvs)]
 
     def rounds(self, words):
         a, b, c, d, e, A, B, C, D, E = self.ihvs
         # ripemd standard round...
-        for round in range(5):
-            a, b, c, d, e, A, B, C, D, E = ripemd160_u.round_f(round, a, b, c, d, e, A, B, C, D, E, words)
+        for round_ in range(5):
+            a, b, c, d, e, A, B, C, D, E = Ripemd160_u.round_f(round_, a, b, c, d, e, A, B, C, D, E, words)
             # ...with an extra swap at the end of each round
-            if round == 0L:
+            if round_ == 0L:
                 b, B = B, b
-            elif round == 1:
+            elif round_ == 1:
                 d, D = D, d
-            elif round == 2:
+            elif round_ == 2:
                 a, A = A, a
-            elif round == 3:
+            elif round_ == 3:
                 c, C = C, c
-            elif round == 4:
+            elif round_ == 4:
                 e, E = E, e
 
         return a, b, c, d, e, A, B, C, D, E
 
-class ripemd128_u():
+class Ripemd128_u(Utility):
     """utility class for RIPEMD-128 cryptographic hash"""
     # 4 rounds instead of 5
-    # same as ripemd160, without the last elements, and f5 not beeing used
+    # same as RIPEMD-160, without the last elements, and f5 not beeing used
     IVs, ss, Ss, ks, Ks = [
         l[:4] for l in [
-            md4_u.IVs, ripemd160_u.ss, ripemd160_u.Ss, ripemd160_u.ks, ripemd160_u.Ks]]
-    rs = [ripemd160_u.rs[i][:4] for i in range(16)]
-    Rs = [ripemd160_u.Rs[i][:4] for i in range(16)]
+            Md4_u.IVs, Ripemd160_u.ss, Ripemd160_u.Ss, Ripemd160_u.ks, Ripemd160_u.Ks]]
+    rs = [Ripemd160_u.rs[i][:4] for i in range(16)]
+    Rs = [Ripemd160_u.Rs[i][:4] for i in range(16)]
 
     #excepted
     Ks[3] = 0               # 7^1/3 is replaced by 0
@@ -168,42 +171,42 @@ class ripemd128_u():
     @staticmethod
     def iteration_f(a, b, c, d, f, w, k, s):
         """permutation on a, b, c, d + transformation on b and d"""
-        return d, ripemd128_u.T_(a, b, c, d, f, w, k, s), b, c # no rotation on C for rmd128
+        return d, Ripemd128_u.T_(a, b, c, d, f, w, k, s), b, c # no rotation on C for rmd128
 
     @staticmethod
-    def round_f(round, a, b, c, d, A, B, C, D, words):
-        functions = [md4_u.h, md4_u.f, ripemd160_u.f3, md5_u.g]
+    def round_f(round_, a, b, c, d, A, B, C, D, words):
+        functions = [Md4_u.h, Md4_u.f, Ripemd160_u.f3, Md5_u.g]
         Functions = list(reversed(functions))
-        f = functions[round]
-        F = Functions[round]
-        f = [md4_u.h, md4_u.f, ripemd160_u.f3, md5_u.g][round]
-        F = [md5_u.g, ripemd160_u.f3, md4_u.f, md4_u.h][round]
-        k, K = [j[round] for j in ripemd128_u.ks, ripemd128_u.Ks] #round-dependant parameters
+        f = functions[round_]
+        F = Functions[round_]
+        f = [Md4_u.h, Md4_u.f, Ripemd160_u.f3, Md5_u.g][round_]
+        F = [Md5_u.g, Ripemd160_u.f3, Md4_u.f, Md4_u.h][round_]
+        k, K = [j[round_] for j in Ripemd128_u.ks, Ripemd128_u.Ks] #round-dependant parameters
         for i in range(16):
             # iteration dependant parameters
-            s, S, r, R = ripemd128_u.ss[round][i], ripemd128_u.Ss[round][i], ripemd128_u.rs[i][round], ripemd128_u.Rs[i][round]
+            s, S, r, R = Ripemd128_u.ss[round_][i], Ripemd128_u.Ss[round_][i], Ripemd128_u.rs[i][round_], Ripemd128_u.Rs[i][round_]
 
-            a, b, c, d = ripemd128_u.iteration_f(a, b, c, d, f, words[r], k, s)
-            A, B, C, D = ripemd128_u.iteration_f(A, B, C, D, F, words[R], K, S)
+            a, b, c, d = Ripemd128_u.iteration_f(a, b, c, d, f, words[r], k, s)
+            A, B, C, D = Ripemd128_u.iteration_f(A, B, C, D, F, words[R], K, S)
         return a, b, c, d, A, B, C, D
 
 
-class ripemd128(ripemd160):
+class Ripemd128(Ripemd160):
     """
-    Ripemd-128 is based on Ripemd-160.
+    RIPEMD-128 is based on RIPEMD-160.
     
      - one round less
      - 2 small changes in the functions and constants.
-     - the Rol10 on the last hash value of ripemd-160 is not included.
+     - the Rol10 on the last hash value of RIPEMD-160 is not included.
     """
     def __init__(self):
-        ripemd160.__init__(self)
-        self.IVs = ripemd128_u.IVs
+        Ripemd160.__init__(self)
+        self.IVs = Ripemd128_u.IVs
 
     def rounds(self, words):
         a, b, c, d = A, B, C, D = list(self.ihvs)
-        for round in range(4):
-            a, b, c, d, A, B, C, D = ripemd128_u.round_f(round, a, b, c, d, A, B, C, D, words)
+        for round_ in range(4):
+            a, b, c, d, A, B, C, D = Ripemd128_u.round_f(round_, a, b, c, d, A, B, C, D, words)
         return a, b, c, d, A, B, C, D
 
     def combine(self, bhvs):
@@ -212,42 +215,42 @@ class ripemd128(ripemd160):
         self.ihvs = h1 + c + D, h2 + d + A, h3 + a + B, h0 + b + C
 
 
-class ripemd256_u():
+class Ripemd256_u(Utility):
     """utility class for RIPEMD-256 cryptographic hash"""
     #initialization vectors are extended by nibble-mirroring
-    IVs = list(ripemd128_u.IVs) + [misc.nibbleswap(i, 4) for i in ripemd128_u.IVs]
+    IVs = list(Ripemd128_u.IVs) + [misc.nibbleswap(i, 4) for i in Ripemd128_u.IVs]
 
-class ripemd256(ripemd128):
+class Ripemd256(Ripemd128):
     """
-    Ripemd-256 is based on Ripemd-128
+    RIPEMD-256 is based on RIPEMD-128
 
      - instead of combining both sets of intermediate hash values at the end of each round,
     it stores them separately, with an extra swap at the end of each round
-    thus, it doesn't increase security over Ripemd-128, but just extends
+    thus, it doesn't increase security over RIPEMD-128, but just extends
     the size of the hash.
     """
     def __init__(self):
-        ripemd128.__init__(self)
-        self.IVs = ripemd256_u.IVs
+        Ripemd128.__init__(self)
+        self.IVs = Ripemd256_u.IVs
 
 
     def combine(self, bhvs):
-        #ripemd256 uses standard sum combining, unlike ripemd128
+        """RIPEMD-256 uses standard sum combining, unlike L{RIPEMD-128<Ripemd128>}"""
         self.ihvs = [sum(i) for i in zip(self.ihvs, bhvs)]
 
     def rounds(self, words):
-        a, b, c, d, A, B, C, D,= self.ihvs
-        # ripemd standard round...
-        for round in range(4):
-            a, b, c, d, A, B, C, D = ripemd128_u.round_f(round, a, b, c, d, A, B, C, D, words)
+        a, b, c, d, A, B, C, D = self.ihvs
+        # RIPEMD standard round...
+        for round_ in range(4):
+            a, b, c, d, A, B, C, D = Ripemd128_u.round_f(round_, a, b, c, d, A, B, C, D, words)
             # ...with an extra swap at the end of each round
-            if round == 0:
+            if round_ == 0:
                 a, A = A, a
-            elif round == 1:
+            elif round_ == 1:
                 b, B = B, b
-            elif round == 2:
+            elif round_ == 2:
                 c, C = C, c
-            elif round == 3:
+            elif round_ == 3:
                 d, D = D, d
         return a, b, c, d, A, B, C, D
 

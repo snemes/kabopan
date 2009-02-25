@@ -25,6 +25,7 @@ def get_weights_and_symbols(data):
 
 
 def encode(codes, data_to_encode):
+    """encode data according to its codes"""
     import kbp._bits as _bits
     comp = _bits.compress(1)
     for char in data_to_encode:
@@ -33,6 +34,7 @@ def encode(codes, data_to_encode):
     return result
 
 def decode(tree_root, data_to_decode):
+    """decote data according to its code tree"""
     result = ""
     import kbp._bits as _bits
     decomp = _bits.decompress(data_to_decode, 1)

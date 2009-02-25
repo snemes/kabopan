@@ -1,6 +1,6 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.transf.bwt import *
+from kbp.transf.bwt import transform, get_indexes, rotate_string, revert
 
 assert transform('abraca') == ('caraab', 1)
 

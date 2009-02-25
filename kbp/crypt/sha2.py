@@ -4,14 +4,14 @@ Secure Hash Algorithm 2 - SHA-2
 sha-512, sha-384, sha-256, sha-224
 """
 
-from kbp.crypt.md4 import md4
-from kbp.types import DWORDS
+from kbp.crypt.md4 import Md4
+from kbp.types import DWORDS, Utility
 from kbp._misc import ass
 from kbp.crypt._sha2 import nroot_primes
 
 from kbp._pickle import get_variables, save_variables
 
-class sha512_u():
+class Sha512_u(Utility):
     """utility class for sha-512"""
     pickled = get_variables("sha512", ["IVs", "K"])
     if pickled is None:
@@ -21,36 +21,42 @@ class sha512_u():
         # 64bits representation of fractional parts of cube root of the 80th first primes
         K = nroot_primes(0, 80, 3, 64)
 
-        save_variables("sha512", {"IVs": IVs,"K":K})
+        save_variables("sha512", {"IVs": IVs, "K":K})
     else:
         IVs, K = pickled["IVs"], pickled["K"]
 
 
-class sha512(md4):
+class Sha512(Md4):
     """
     sha-512 is based on md4
-    
+
     ...
     """
     def __init__(self):
-        md4.__init__(self)
+        Md4.__init__(self)
         self.block_length = 1024
         self.nb_rounds = 80
         self.hv_size = 64
         self.padding_size_encoding_length = 128
         self.output_big_endianness = self.block_big_endianness = self.padding_big_endianness = True
-        self.IVs = sha512_u.IVs
-        self.K = sha512_u.K
+        self.IVs = Sha512_u.IVs
+        self.K = Sha512_u.K
 
 
-    def f1(self, x):    return x.ror(28) ^ x.ror(34) ^ x.ror(39)
-    def f2(self, x):    return x.ror(14) ^ x.ror(18) ^ x.ror(41)
+    def f1(self, x):
+        return x.ror(28) ^ x.ror(34) ^ x.ror(39)
+    def f2(self, x):
+        return x.ror(14) ^ x.ror(18) ^ x.ror(41)
 
-    def f3(self, x):    return x.ror( 1) ^ x.ror( 8) ^ (x >> 7)
-    def f4(self, x):    return x.ror(19) ^ x.ror(61) ^ (x >> 6)
+    def f3(self, x):
+        return x.ror( 1) ^ x.ror( 8) ^ (x >> 7)
+    def f4(self, x):
+        return x.ror(19) ^ x.ror(61) ^ (x >> 6)
 
-    def maj(self, x, y, z): return (x & y) ^ (x & z) ^ (y & z)
-    def ch(self, x, y, z):  return (x & y) ^ ((~x) & z)
+    def maj(self, x, y, z):
+        return (x & y) ^ (x & z) ^ (y & z)
+    def ch(self, x, y, z):
+        return (x & y) ^ ((~x) & z)
 
     def compress(self, block, words):
         words.extend(0 for i in xrange(self.nb_rounds - 16))
@@ -70,7 +76,7 @@ class sha512(md4):
                 ]
         return [a, b, c, d, e, f, g, h]
 
-class sha384_u():
+class Sha384_u(Utility):
     """utility class for sha-384"""
     pickled = get_variables("sha384", ["IVs"])
     if pickled is None:
@@ -82,7 +88,7 @@ class sha384_u():
     else:
         IVs = pickled["IVs"]
 
-class sha384(sha512):
+class Sha384(Sha512):
     """
     sha-384 is based on sha-512
 
@@ -90,69 +96,73 @@ class sha384(sha512):
      - the digest is truncated to 384 bits
     """
     def __init__(self):
-        sha512.__init__(self)
-        self.IVs = sha384_u.IVs
+        Sha512.__init__(self)
+        self.IVs = Sha384_u.IVs
 
     def digest(self):
-        return sha512.digest(self)[:384 / 8]
+        return Sha512.digest(self)[:384 / 8]
 
 
-class sha256_u():
+class Sha256_u(Utility):
     """utility class for sha-256"""
     #highest 4 bytes of sha512 IVs and K
-    IVs = [i[:32 / 8] for i in  sha512_u.IVs]
-    K = [i[:32 / 8] for i in sha512_u.K[:64]]
+    IVs = [i[:32 / 8] for i in  Sha512_u.IVs]
+    K = [i[:32 / 8] for i in Sha512_u.K[:64]]
 
-class sha256(sha512):
+class Sha256(Sha512):
     """
     sha-256 is based on sha-512
-    
-    it's sha-512 with IHVs on 32 bits instead of 64: 
+
+    it's sha-512 with IHVs on 32 bits instead of 64:
      - the initialisations vectors and the constants K are the highest 32bits of their sha-512 counterparts.
      - it's using 64 rounds instead of 80, thus:
       - the F1-4 functions need different constants
      - the message length is is encoded on 64 bits instead of 128, during the padding
     """
     def __init__(self):
-        sha512.__init__(self)
+        Sha512.__init__(self)
         self.nb_rounds = 64
         self.block_length = 512
         self.hv_size = 32
         self.padding_size_encoding_length = 64
-        self.K = sha256_u.K
-        self.IVs = sha256_u.IVs
+        self.K = Sha256_u.K
+        self.IVs = Sha256_u.IVs
 
 
-    def f1(self, x):    return x.ror( 2) ^ x.ror(13) ^ x.ror(22)
-    def f2(self, x):    return x.ror( 6) ^ x.ror(11) ^ x.ror(25)
-    def f3(self, x):    return x.ror( 7) ^ x.ror(18) ^ (x >>  3)
-    def f4(self, x):    return x.ror(17) ^ x.ror(19) ^ (x >> 10)
+    def f1(self, x):
+        return x.ror( 2) ^ x.ror(13) ^ x.ror(22)
+    def f2(self, x):
+        return x.ror( 6) ^ x.ror(11) ^ x.ror(25)
+    def f3(self, x):
+        return x.ror( 7) ^ x.ror(18) ^ (x >>  3)
+    def f4(self, x):
+        return x.ror(17) ^ x.ror(19) ^ (x >> 10)
 
-class sha224_u():
+class Sha224_u(Utility):
     """utility class for sha-224"""
     pickled = get_variables("sha224", ["IVs"])
     if pickled is None:
         # lowest 32 bits of sha384 IVs
-        IVs = DWORDS(sha384_u.IVs)
+        IVs = DWORDS(Sha384_u.IVs)
 
         save_variables("sha256", {"IVs": IVs})
     else:
         IVs = pickled["IVs"]
 
 
-class sha224(sha256):
+class Sha224(Sha256):
     """
     sha-224 is based on sha-256
-    
+
      - different IVs (DWORD of sha-384's)
      - the digest is truncated to 224 bits
     """
     def __init__(self):
-        sha256.__init__(self)
-        self.IVs = sha224_u.IVs
+        Sha256.__init__(self)
+        self.IVs = Sha224_u.IVs
 
     def digest(self):
-        return sha256.digest(self)[:224 / 8]
+        return Sha256.digest(self)[:224 / 8]
 
 if __name__ == "__main__":
     import kbp.test.sha2_test

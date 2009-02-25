@@ -177,7 +177,7 @@ def generate_root(polynom):
 
 
 def crc(message, polynom, init=0, in_reflection=False, out_reflection=False, out_xor=False):
-    root, reversed, width = generate_root(polynom)
+    root, reversed_, width = generate_root(polynom)
 
     # we have to augment the string with 'width' bits
     augmented_message = message + "\x00" * (width / 8)

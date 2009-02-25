@@ -1,7 +1,7 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.entro.range import *
-
+from kbp.entro.range import common_string, do
+from fractions import Fraction
 assert common_string(0.123, 0.125) == "0.124"
 
 assert do('b')   == (Fraction(0, 1), Fraction(1, 1))

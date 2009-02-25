@@ -12,6 +12,8 @@ def inverse(number, modulo):
             return i
     return None
 
+def coprimes(x):
+    return [i for i in xrange(x) if (gcd(i, x) == 1)]
 
 def encode(plaintext, alphabet, increment, multiplier,):
     assert gcd(multiplier, len(alphabet)) == 1 # multiplier and length have to be co-primes

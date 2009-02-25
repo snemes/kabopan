@@ -1,7 +1,9 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """tests for ripemd-160, ripemd-128, ripemd-256 and ripemd-320"""
 
-from kbp.crypt.ripemd import *
+from kbp.crypt.ripemd import ( \
+ Ripemd160, Ripemd160_u, Ripemd320, Ripemd320_u,
+ Ripemd128, Ripemd128_u, Ripemd256, Ripemd256_u)
 from kbp._misc import test_vector_strings, ass, nibbleswap
 
 k = [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC, 0xA953FD4E]
@@ -21,8 +23,8 @@ R = [
     (8, 6, 4, 1, 3, 11, 15, 0, 5, 12, 2, 13, 9, 7, 10, 14),
     (12, 15, 10, 4, 1, 5, 8, 7, 6, 2, 13, 14, 0, 3, 9, 11)]
 
-r_values = zip(*[ripemd160_u.rs[i] for i in range(16)])
-R_values = zip(*[ripemd160_u.Rs[i] for i in range(16)])
+r_values = zip(*[Ripemd160_u.rs[i] for i in range(16)])
+R_values = zip(*[Ripemd160_u.Rs[i] for i in range(16)])
 
 ripemd160_test_vectors = [
     0x9c1185a5c5e9fc54612808977ee8f548b2258d31,
@@ -73,26 +75,26 @@ ripemd256_test_vectors = [
     0x5740a408ac16b720b84424ae931cbb1fe363d1d0bf4017f1a89f7ea6de77a0b8,
     0x06fdcc7a409548aaf91368c06a6275b553e3f099bf0ea4edfd6778df89a890dd]
 
-hash160 = lambda x:ripemd160().compute(x).digest()
-hash128 = lambda x:ripemd128().compute(x).digest()
-hash320 = lambda x:ripemd320().compute(x).digest()
-hash256 = lambda x:ripemd256().compute(x).digest()
+hash160 = lambda x:Ripemd160().compute(x).digest()
+hash128 = lambda x:Ripemd128().compute(x).digest()
+hash320 = lambda x:Ripemd320().compute(x).digest()
+hash256 = lambda x:Ripemd256().compute(x).digest()
 
-ass(ripemd160_u.ks, k , "ripemd160 K")
-ass(ripemd160_u.Ks, K, "ripemd160 K'")
+ass(Ripemd160_u.ks, k , "ripemd160 K")
+ass(Ripemd160_u.Ks, K, "ripemd160 K'")
 ass(r_values, r, "ripemd160 r")
 ass(R_values, R, "ripemd160 r'")
 ass(ripemd160_test_vectors, [hash160(s) for s in test_vector_strings], "ripemd160 test vectors")
 
-ass(ripemd320_IVs, ripemd320_u.IVs, "ripemd320 IVs")
+ass(ripemd320_IVs, Ripemd320_u.IVs, "ripemd320 IVs")
 ass(ripemd320_test_vectors, [hash320(s) for s in test_vector_strings], "ripemd320 test vectors")
 
-ass(ripemd128_u.IVs, ripemd128_IVs, "ripemd128 IVs")
-ass(ripemd128_u.ks, [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC], "ripemd128 K")
-ass(ripemd128_u.Ks, [0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x00000000], "ripemd128 K'")
+ass(Ripemd128_u.IVs, ripemd128_IVs, "ripemd128 IVs")
+ass(Ripemd128_u.ks, [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC], "ripemd128 K")
+ass(Ripemd128_u.Ks, [0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x00000000], "ripemd128 K'")
 ass(ripemd128_test_vectors, [hash128(s) for s in test_vector_strings], "ripemd128 test vectors")
 
-ass(ripemd256_u.IVs, ripemd256_IVs, "ripemd256 IVs")
+ass(Ripemd256_u.IVs, ripemd256_IVs, "ripemd256 IVs")
 ass(ripemd256_test_vectors, [hash256(s) for s in test_vector_strings], "ripemd256 test vectors")
 
 #for s, S, r, R, f, F, k, K in rounds_parameters():

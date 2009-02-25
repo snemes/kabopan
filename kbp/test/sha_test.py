@@ -1,11 +1,11 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """tests for sha-0 and sha-1"""
 
-from kbp.crypt.sha import *
+from kbp.crypt.sha import Sha0, Sha1, Sha_u
 from kbp._misc import test_vector_strings, hex2bin, ass
 from kbp.types import add_string
 
-hash0 = lambda x: sha0().compute(x).digest()
+hash0 = lambda x: Sha0().compute(x).digest()
 
 IVs = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0]
 
@@ -18,7 +18,7 @@ sha0_test_vectors = [
     0x79e966f7a3a990df33e40e3d7f8f18d2caebadfa,
     0x4aa29d14d171522ece47bee8957e35a41f3e9cff]
 
-ass(IVs, IVs, "sha-0 IVs")
+ass(IVs, Sha_u.IVs, "sha-0 IVs")
 ass(sha0_test_vectors, [hash0(s) for s in test_vector_strings], "sha-0 test vectors")
 
 #full collision, by Antoine Joux, Patrick Carribault, Christophe Lemuet, William Jalby
@@ -49,7 +49,7 @@ a, b = [hex2bin(s) for s in [a, b]]
 ass(hash0(a), hash0(b), "sha-0 collision")
 
 #sha-1
-hash1 = lambda x: sha1().compute(x).digest()
+hash1 = lambda x: Sha1().compute(x).digest()
 
 
 sha1_test_vectors = [
@@ -67,15 +67,15 @@ ass(sha1_test_vectors, [hash1(s) for s in test_vector_strings], "sha-1 test vect
 #Collisions for 70-step SHA-1: On the Full Cost of Collision Search
 #Christophe De Canniere, Florian Mendel, and Christian Rechberger, 2007
 
-class sha1_70r(sha1):
+class Sha1_70r(Sha1):
     def rounds(self, words):
         [a, b, c, d, e] = list(self.ihvs)
         for round_ in range(4):
-            f = sha_u.functions[round_]
-            k = sha_u.constants[round_]
+            f = Sha_u.functions[round_]
+            k = Sha_u.constants[round_]
             ranges = [20, 20, 20, 10][round_]
             for i in range(ranges):
-                [a, b, c, d, e] = sha_u.round_f(a, b, c, d, e, f, 5, 30, words, i + 20 * round_, k)
+                [a, b, c, d, e] = Sha_u.round_f(a, b, c, d, e, f, 5, 30, words, i + 20 * round_, k)
         return [a, b, c, d, e]
 
 a = \
@@ -94,5 +94,5 @@ b = add_string(a, delta)
 b = b.replace(" ","")
 a, b = [hex2bin(s) for s in [a, b]]
 
-hash1_70r = lambda x: sha1_70r().compute(x).digest()
+hash1_70r = lambda x: Sha1_70r().compute(x).digest()
 assert hash1_70r(a) == hash1_70r(b)

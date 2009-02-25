@@ -1,7 +1,14 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp._misc import *
+from kbp._misc import (
+ byteswap, char_range, countmissing, gcd, getbinlen, getbinstr, gethexstr,
+ gethyphenstr, getlongestcommon, getpadbinstr, getunkbinstr,
+ getvaluefrombinarystring, bin2hex, ASCII, as_words,
+ hex2bin, insert_string, int2bebin, int2lebin, lcm, md5, modifystring,
+ nibbleswap, rol, ror, rorstr, setstr, zip_extend, lcm, slice_and_pad)
+
+import struct
 
 assert char_range("A", "Z") == "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 

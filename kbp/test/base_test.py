@@ -1,10 +1,13 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.coder.base import *
+from kbp.coder.base import ( \
+ base8, base16, base32, base32_hex, base64, base64_safe,
+ encode_base64, decode_base64, encode_base32, encode_base32hex, encode_base16
+ )
 
 assert base8 == "01234567"
-assert base16 =="0123456789ABCDEF"
+assert base16 == "0123456789ABCDEF"
 assert base32 == "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
 assert base32_hex == "0123456789ABCDEFGHIJKLMNOPQRSTUV"
 assert base64 == "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"

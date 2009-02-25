@@ -6,6 +6,7 @@ Base classes for cryptographic hashes
 import kbp._misc as _misc
 import struct
 from kbp.types import Int
+
 class Hash:
     """
     base class for cryptographic hashes
@@ -46,7 +47,7 @@ class Hash:
 
 
 
-class merkledamgaard(Hash):
+class Merkledamgaard(Hash):
     """
     Merkle-Damgaard model of cryptographic hashes
 

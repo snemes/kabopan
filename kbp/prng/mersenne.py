@@ -7,20 +7,22 @@ Makoto Matsumoto and Takuji Nishimura, 1998
 U{http://www.graviness.com/js/mt19937ar.c.js.phtml}
 """
 
+#pylint: disable-msg=W0602
+#doesn't see MT item assignments
+#TODO make it a class
 
-global index, MT
 MT = list(range(624 + 1))
 index = 0
 
 def init(seed):
-    global index, MT
+    global MT
     MT[0] = seed
     for i in range(1, 624 + 1):
         MT[i] = 0xFFFFFFFF & (0x6C078965 * (MT[i - 1] ^ ( (MT[i - 1] >> 30) + i)))
 
 
 def generate():
-    global index, MT
+    global MT
     for i in range(624 + 1):
         y = (0x80000000 & MT[i]) + (0x7FFFFFFF & MT[(i + 1) % 624])
         y &= 0xFFFFFFFF
@@ -42,6 +44,6 @@ def extract():
     index %= 624
     return y
 
-init(5489)
-for i in range(1000):
-    print extract()
+#init(5489)
+#for i in range(1000):
+#    print extract()

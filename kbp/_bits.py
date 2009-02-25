@@ -22,10 +22,10 @@ def bits(string, bit7_first=True):
 
 
 def reverse(integer, width):
-    reversed = 0
+    reversed_ = 0
     for i in range(width):
-        reversed |= ((integer >> i) & 1) << (width - 1 - i)
-    return reversed
+        reversed_ |= ((integer >> i) & 1) << (width - 1 - i)
+    return reversed_
 
 
 class compress:

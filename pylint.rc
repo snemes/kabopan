@@ -59,7 +59,12 @@ disable-msg-cat=IR
 #W0511 TODO
 #W0611 unused imports (for tests)
 #W0612 unused variables (loops)
-disable-msg=W0704,C0103,C0111,C0301,W0611,W0612,W0511
+#[W0105] String statement has no effect
+#[W0142] Used * or ** magic
+#[W0621] Redefining name from outer scope
+#[W0613] Unused argument
+
+disable-msg=W0704,C0103,C0111,C0301,W0611,W0612,W0511,W0105, W0142,W0621,W0613
 
 
 [REPORTS]

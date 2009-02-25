@@ -1,6 +1,6 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.entro._encoding import *
+from kbp.entro._encoding import generate_codes, get_weights_and_symbols
 
 assert generate_codes({'left0': {'symbol': 'a', 'weight': 1},
                      'right1': {'symbol': 'b', 'weight': 1},

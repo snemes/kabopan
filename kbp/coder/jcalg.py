@@ -19,7 +19,7 @@ def lengthdelta(x):
     elif x >= 0x27F:
         return 1
     elif x <= 127:
-        return 4;
+        return 4
     return 0
 
 class compress(_bits.compress):
@@ -136,11 +136,11 @@ class decompress(_bits.decompress):
 
         if (HighIndex == 2):
             # use the last index
-            length = self.read_variablenumber();
+            length = self.read_variablenumber()
         else:
             self.__lastindex = ((HighIndex - 3) << self.__indexbase) \
-                + self.read_fixednumber(self.__indexbase);
-            length = self.read_variablenumber();
+                + self.read_fixednumber(self.__indexbase)
+            length = self.read_variablenumber()
             length += lengthdelta(self.__lastindex)
         self.back_copy(self.__lastindex, length)
         return False

@@ -1,7 +1,7 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.coder.bellaso import *
+from kbp.coder.bellaso import first_sifra, second_sifra
 
 assert first_sifra("larmatatvrchescapa rtiraacinqvedilvgl io", "virtvtiomniaparent virtvtiomniaparent vi") == \
         "syboveyldanvofszlp iincvpnshmlrnxoizn rd"

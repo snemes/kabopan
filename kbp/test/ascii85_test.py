@@ -1,8 +1,8 @@
 #
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
-from kbp.coder.ascii85 import *
-
+from kbp.coder.ascii85 import ASCII85, merge, split, encode, decode
+from kbp._misc import DIGITS, ALPHABET, char_range
 assert ASCII85 == """!"#$%&'()*+,-./""" + DIGITS + ":;<=>?@" + ALPHABET + "[\]^_`" + char_range("a", "u")
 
 assert merge([77, 97, 110, 32], 256) == 1298230816

@@ -7,7 +7,7 @@ universal coder
 """
 
 import kbp.univ.unary as unary
-from kbp._misc import getbinstr, getvaluefrombinarystring, prin
+from kbp._misc import getbinstr, getvaluefrombinarystring
 
 def elias_split(value):
     binary = getbinstr(value)
@@ -76,7 +76,6 @@ def delta_decode(binary_string):
     value = (1 << bits_to_decode) + getvaluefrombinarystring(next_part[:bits_to_decode])
 
     consumed_bits = (length + 1) + length + bits_to_decode
-    prin (length, limit_offset, first_part, next_part, bits_to_decode, value, consumed_bits)
     return value, consumed_bits
 
 
@@ -100,12 +99,9 @@ def omega_decode(binary_string, digits_to_read=1, consumed_bits=0):
         bits = binary_string[:digits_to_read + 1]
         next_part = binary_string[digits_to_read + 1:]
         digits_to_read_next = getvaluefrombinarystring(bits)
-        prin (binary_string, digits_to_read, bits, next_part, digits_to_read_next)
         return omega_decode(next_part, digits_to_read_next, consumed_bits + digits_to_read + 1)
 
 
 
 if __name__ == "__main__":
     import kbp.test.elias_test
-    
-    

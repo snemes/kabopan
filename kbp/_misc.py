@@ -83,9 +83,6 @@ def countmissing(value, modulo):
         result = modulo
     return modulo - result
 
-def prin(*arg):
-    pass
-
 def getpadbinstr(value, bits):
     """return a 0-padded binary string."""
     s = getbinstr(value)

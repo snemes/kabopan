@@ -1,6 +1,5 @@
 import os
 with os.tmpfile() as f: #empty
-	pass
+    pass
 with os.tmpfile() as f: #million a
-	f.write("a"* 10 ** 6)
-
+    f.write("a"* 10 ** 6)
