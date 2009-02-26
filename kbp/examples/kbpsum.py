@@ -3,7 +3,10 @@ from sys import argv, exit
 
 __revision__ = "$LastChangedRevision$"
 __version__ = '0.1r%d' % int( __revision__.split()[1])
-
+description = "checksum calculator"
+  
+from kbp.examples.common import get_parameters, makehelp, get_algorithms
+  
 
 try:
     import psyco
@@ -20,99 +23,64 @@ import kbp.crypt.sha2   as sha2
 import kbp.crypt.ripemd as ripemd
 import kbp.crypt.tiger  as tiger
 
-digesttest = lambda m, s:m.compute(s).hexdigest()
-
+families_test = \
+{
+    "family name": \
+    {
+        "algorithm keyword":["offical name", "description", None]
+    }
+}
 families = {
-    "CRC":{
-        "crc32_ieee":crc.crc32_ieee_hexhash,
+    "CRCs":{
+        "crc32_ieee":["IEEE", "IEEE approved CRC", crc.crc32_ieee_hexhash],
         },
     "HAS":{
-        "HAS-160":lambda x:has.Has160().compute(x).hexdigest(),
+        "has160": ["HAS-160", "Hash Algorithm Standard 160", lambda x:has.Has160().compute(x).hexdigest()],
         },
     "MD":{
-        "MD2":lambda x:md2.Md2().compute(x).hexdigest(),
-        "MD4":lambda x:md4.Md4().compute(x).hexdigest(),
-        "MD5":lambda x:md4.Md5().compute(x).hexdigest(),
+        "md2":["MD2", "MD2", lambda x:md2.Md2().compute(x).hexdigest()],
+        "md4":["MD4", "MD4", lambda x:md4.Md4().compute(x).hexdigest()],
+        "md5":["MD5", "MD5", lambda x:md4.Md5().compute(x).hexdigest()],
         },
     "RIPEMD":{
-        "RIPEMD-128":lambda x:ripemd.Ripemd128().compute(x).hexdigest(),
-        "RIPEMD-160":lambda x:ripemd.Ripemd160().compute(x).hexdigest(),
-        "RIPEMD-256":lambda x:ripemd.Ripemd256().compute(x).hexdigest(),
-        "RIPEMD-320":lambda x:ripemd.Ripemd320().compute(x).hexdigest(),
+        "ripemd128": ["RIPEMD-128", "RIPEMD...", lambda x:ripemd.Ripemd128().compute(x).hexdigest()],
+        "ripemd160": ["RIPEMD-160", "RIPEMD...", lambda x:ripemd.Ripemd160().compute(x).hexdigest()],
+        "ripemd256": ["RIPEMD-256", "RIPEMD...", lambda x:ripemd.Ripemd256().compute(x).hexdigest()],
+        "ripemd320": ["RIPEMD-320", "RIPEMD...", lambda x:ripemd.Ripemd320().compute(x).hexdigest()],
         },
     "SHA":{
-        "SHA-0"     :lambda x:sha.Sha0().compute(x).hexdigest(),
-        "SHA-1"     :lambda x:sha.Sha1().compute(x).hexdigest(),
+        "sha0": ["SHA-0", "SHA-0", lambda x:sha.Sha0().compute(x).hexdigest()],
+        "sha1": ["SHA-1", "SHA-1", lambda x:sha.Sha1().compute(x).hexdigest()],
         },
     "SHA-2":{
-        "SHA-224"   :lambda x:sha2.Sha224().compute(x).hexdigest(),
-        "SHA-256"   :lambda x:sha2.Sha256().compute(x).hexdigest(),
-        "SHA-384"   :lambda x:sha2.Sha384().compute(x).hexdigest(),
-        "SHA-512"   :lambda x:sha2.Sha512().compute(x).hexdigest(),
+        "sha224": ["SHA-224", "SHA-224", lambda x:sha2.Sha224().compute(x).hexdigest()],
+        "sha256": ["SHA-256", "SHA-256", lambda x:sha2.Sha256().compute(x).hexdigest()],
+        "sha384": ["SHA-384", "SHA-384", lambda x:sha2.Sha384().compute(x).hexdigest()],
+        "sha512": ["SHA-512", "SHA-512", lambda x:sha2.Sha512().compute(x).hexdigest()],
         },
     "tiger":{
-        "tiger"     :lambda x:tiger.Tiger().compute(x).hexdigest(),
-        "tiger2"    :lambda x:tiger.Tiger2().compute(x).hexdigest(),
-        "tiger128"  :lambda x:tiger.Tiger128().compute(x).hexdigest(),
-        "tiger160"  :lambda x:tiger.Tiger160().compute(x).hexdigest(),
+        "tiger"   :["tiger-192", "tiger"   , lambda x:tiger.Tiger().compute(x).hexdigest()],
+        "tiger2"  :["tiger2"   , "tiger2"  , lambda x:tiger.Tiger2().compute(x).hexdigest()],
+        "tiger128":["tiger-128", "tiger128", lambda x:tiger.Tiger128().compute(x).hexdigest()],
+        "tiger160":["tiger-160", "tiger160", lambda x:tiger.Tiger160().compute(x).hexdigest()],
         }
     }
 
-algorithms = list()
-for f in families.itervalues():
-    algorithms.extend(list(f.iteritems()))
-algorithms = dict(algorithms)
+algorithms = get_algorithms(families)
 
-#"adler32":_,
-#"flechter16":_,
-#"flechter32":_,
-#"gost":_,
-#"haval":_,
-#"panama":_,
-#"lm":_,
-#"snefru":_,
-#"whirlpool":_,
-
-Help = "Kabopan %s v%s\n" % ("checksum calculator", __version__)
-Help +=  "Parameters:  [-a algorithm] <[-f <input file>]|[<text>]>\n"
-Help += "Algorithms:\n"
-for f, algs in families.iteritems():
-    Help += "\t%s\n" % f
-    for alg in algs:
-        Help += "\t\t%s\n" % alg
-Help += "\n"
+Help = makehelp(description, __version__, "<data_to_sum>", families)
 
 if len(argv) == 1:
     print(Help)
     exit()
 
-opts = "a:f:"
-try:
-    optlist, args = getopt(argv[1:], opts)
-    optlist = dict(optlist)
+requested_algorithms, inputs = get_parameters(argv, 1, algorithms)
+tab = "   "
 
-    if "-a" not in optlist:
-        requested_algorithms = sorted(algorithms.keys())
-    else:
-        if optlist["-a"] not in algorithms:
-            raise GetoptError("algorithm not found")
-        else:
-            requested_algorithms = [optlist["-a"]]
-    if len(args) == 0 and "-f" not in optlist:
-        raise GetoptError("missing text or file")
-    if "-f" in optlist:
-        with open(optlist["-f"], "rb") as f:
-            input = f.read()
-    else:
-        input = " ".join(args)
-
-except GetoptError, error:
-    print("Error: %s\n" % error)
-    print(Help)
-    exit()
-
+data_to_sum = inputs[0]
 if len(requested_algorithms) == 1:
-    print "%s" % (algorithms[requested_algorithms[0]](input))
+    print "%s" % (algorithms[requested_algorithms[0]](data_to_sum))
 else:
     for s in requested_algorithms:
-            print "%s\t%s" % (s, algorithms[s](input))
+            print "%s%s%s" % (s, tab, algorithms[s](data_to_sum))
+
