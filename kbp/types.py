@@ -158,7 +158,8 @@ class Int():
 
     def __eq__(self, other):    
         return ((self.number % self.modulo) == other)
-
+    def __ne__(self, other):    
+        return ((self.number % self.modulo) != other)
     def __invert__(self):      
         return Int((~self.number) % self.modulo, self.width)
     def __trunc__(self):       

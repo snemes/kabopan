@@ -2,7 +2,7 @@
 """tests for tiger family: tiger, tiger-2, tiger-160, tiger-128"""
 
 from kbp.crypt.tiger import Tiger, Tiger2, Tiger128, Tiger160
-from kbp._misc import test_vector_strings, ass
+from kbp.test.common import check_test_vectors
 
 IVs = [0x0123456789abcdef, 0xfedcba9876543210, 0xf096a5b4c3b2e187]
 
@@ -537,7 +537,8 @@ tiger_test_vectors = [
 #TODO:didn't make a friendly class for tiger yet. fix constant generation first
 #ass(IVs, tiger_.IVs, "tiger IVs")
 #ass(Ss_test, tiger_.S, "tiger s-boxes")
-ass(tiger_test_vectors, [Tiger().compute(s).digest() for s in test_vector_strings], "test vectors")
+hash_ = lambda x:Tiger().compute(x).digest()
+check_test_vectors(hash_, tiger_test_vectors, "Tiger")
 
 tiger160_test_vectors = [
     0x3293ac630c13f0245f92bbb1766e16167a4e5849,
@@ -548,7 +549,8 @@ tiger160_test_vectors = [
     0x8dcea680a17583ee502ba38a3c368651890ffbcc,
     0x1c14795529fd9f207a958f84c52f11e887fa0cab]
 
-ass(tiger160_test_vectors, [Tiger160().compute(s).digest() for s in test_vector_strings], "tiger-160 test vectors")
+hash160 = lambda x:Tiger160().compute(x).digest()
+check_test_vectors(hash160, tiger160_test_vectors, "Tiger-160")
 
 tiger128_test_vectors = [
     0x3293ac630c13f0245f92bbb1766e1616,
@@ -559,7 +561,8 @@ tiger128_test_vectors = [
     0x8dcea680a17583ee502ba38a3c368651,
     0x1c14795529fd9f207a958f84c52f11e8]
 
-ass(tiger128_test_vectors, [Tiger128().compute(s).digest() for s in test_vector_strings], "tiger-128 test vectors")
+hash128 = lambda x:Tiger128().compute(x).digest()
+check_test_vectors(hash128, tiger128_test_vectors, "Tiger-128")
 
 tiger2_test_vectors = [
     0x4441BE75F6018773C206C22745374B924AA8313FEF919F41,
@@ -570,4 +573,5 @@ tiger2_test_vectors = [
     0xEA9AB6228CEE7B51B77544FCA6066C8CBB5BBAE6319505CD,
     0xD85278115329EBAA0EEC85ECDC5396FDA8AA3A5820942FFF]
 
-ass(tiger2_test_vectors, [Tiger2().compute(s).digest() for s in test_vector_strings], "tiger-2 test vectors")
+hash2 = lambda x:Tiger2().compute(x).digest()
+check_test_vectors(hash2, tiger2_test_vectors, "Tiger-2")

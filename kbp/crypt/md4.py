@@ -10,7 +10,7 @@ Ron Rivest, 1992
 
 import struct
 from math import sin
-from kbp._misc import hsqrt, hex2bin, ass, pad_0_1_size
+from kbp._misc import hsqrt, hex2bin, pad_0_1_size
 from kbp.types import DWORDS, Utility
 import kbp.crypt.Hash as Hash
 

@@ -1,7 +1,7 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
 from kbp.crypt.md2 import Md2, Md2_u
-from kbp._misc import test_vector_strings
+from kbp.test.common import check_test_vectors
 
 test_vectors = [
     0x8350E5A3E24C153DF2275C9F80692773,
@@ -13,7 +13,7 @@ test_vectors = [
     0xD5976F79D83D3A0DC9806C3C66F3EFD8]
 
 hash_ = lambda x: Md2().compute(x).digest()
-assert [hash_(s) for s in test_vector_strings] == test_vectors
+check_test_vectors(hash_, test_vectors, "MD2")
 
 # in typical MD2 source code, paddings are stored in octal
 octal_paddings = [

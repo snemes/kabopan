@@ -2,7 +2,8 @@
 """tests for sha-0 and sha-1"""
 
 from kbp.crypt.sha import Sha0, Sha1, Sha_u
-from kbp._misc import test_vector_strings, hex2bin, ass
+from kbp.test.common import check_test_vectors
+from kbp._misc import hex2bin
 from kbp.types import add_string
 
 hash0 = lambda x: Sha0().compute(x).digest()
@@ -18,8 +19,8 @@ sha0_test_vectors = [
     0x79e966f7a3a990df33e40e3d7f8f18d2caebadfa,
     0x4aa29d14d171522ece47bee8957e35a41f3e9cff]
 
-ass(IVs, Sha_u.IVs, "sha-0 IVs")
-ass(sha0_test_vectors, [hash0(s) for s in test_vector_strings], "sha-0 test vectors")
+assert IVs == Sha_u.IVs, "sha-0 IVs"
+check_test_vectors(hash0, sha0_test_vectors, "SHA-0")
 
 #full collision, by Antoine Joux, Patrick Carribault, Christophe Lemuet, William Jalby
 a = \
@@ -46,7 +47,7 @@ b = add_string(a, delta)
 b = b.replace(" ","")
 a, b = [hex2bin(s) for s in [a, b]]
 
-ass(hash0(a), hash0(b), "sha-0 collision")
+assert hash0(a) == hash0(b), "sha-0 collision"
 
 #sha-1
 hash1 = lambda x: Sha1().compute(x).digest()
@@ -61,7 +62,7 @@ sha1_test_vectors = [
     0x761C457BF73B14D27E9E9265C46F4B4DDA11F940,
     0x50ABF5706A150990A08B2C5EA40FA0E585554732]
 
-ass(sha1_test_vectors, [hash1(s) for s in test_vector_strings], "sha-1 test vectors")
+check_test_vectors(hash1, sha1_test_vectors, "SHA-1")
 
 #70 rounds collision,
 #Collisions for 70-step SHA-1: On the Full Cost of Collision Search

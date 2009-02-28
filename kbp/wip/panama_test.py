@@ -1,7 +1,7 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 
 from kbp.crypt.panama import *
-from kbp._misc import test_vector_strings
+from kbp.test.common import check_test_vectors
 
 test_vectors = [
         0xaa0cc954d757d7ac7779ca3342334ca471abd47d5952ac91ed837ecd5b16922b,

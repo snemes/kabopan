@@ -1,9 +1,11 @@
 #Kabopan - Readable Algorithms. Public Domain, 2007-2009
 """tests for MD4 and MD5"""
 
-from kbp._misc import rol, hex2bin, test_vector_strings, ass
+from kbp._misc import rol, hex2bin
 from kbp.crypt.md4 import Md4, Md4_u, Md5, Md5_u
 from kbp.types import add_string
+from kbp.test.common import check_test_vectors
+
 
 hashmd4 = lambda x: Md4().compute(x).digest()
 
@@ -34,8 +36,9 @@ a4, b4 = [hex2bin(s) for s in [a4, b4]]
 
 
 
-ass(Md4_u.IVs, md4_IVs, "md4 IVs")
-ass(md4_test_vectors, [hashmd4(s) for s in test_vector_strings], "md4 test vectors")
+assert Md4_u.IVs == md4_IVs, "md4 IVs"
+check_test_vectors(hashmd4, md4_test_vectors, "MD4")
+
 assert hashmd4(a4) == hashmd4(b4)
 
 # MD5
@@ -67,7 +70,7 @@ b5 = add_string(a5, delta5)
 md5_a, md5_b = [hex2bin("".join(s).replace(" ", "")) for s in [a5, b5]]
 
 
-ass(md5_test_vectors, [hashmd5(s) for s in test_vector_strings], "md5 test vectors")
+check_test_vectors(hashmd5, md5_test_vectors, "MD5")
 assert hashmd5(md5_a) == hashmd5(md5_b)
 
 

@@ -4,7 +4,7 @@
 from kbp.crypt.sha2 import ( \
  Sha512, Sha256, Sha224, Sha384,
  Sha512_u, Sha256_u, Sha224_u, Sha384_u)
-from kbp._misc import test_vector_strings, ass
+from kbp.test.common import check_test_vectors
 
 sha512_IVs = [
     0x6a09e667f3bcc908, 0xbb67ae8584caa73b,
@@ -63,9 +63,12 @@ sha512_test_vectors = [
     0x1e07be23c26a86ea37ea810c8ec7809352515a970e9253c26f536cfc7a9996c45c8370583e0a78fa4a90041d71a4ceab7423f19c71b9d5a3e01249f0bebd5894,
     0x72ec1ef1124a45b047e8b7c75a932195135bb61de24ec0d1914042246e0aec3a2354e093d76f3048b456764346900cb130d2a4fd5dd16abb5e30bcb850dee843]
 
-ass(sha512_IVs, Sha512_u.IVs, "sha-512 IVs")
-ass(sha512_K, Sha512_u.K, "sha-512 K")
-ass(sha512_test_vectors, [Sha512().compute(s).digest() for s in test_vector_strings], "sha-512 test vectors")
+assert sha512_IVs == Sha512_u.IVs, "sha-512 IVs"
+assert sha512_K == Sha512_u.K, "sha-512 K"
+
+hash512 = lambda x: Sha512().compute(x).digest()
+check_test_vectors(hash512, sha512_test_vectors, "SHA-512")
+
 
 
 sha256_IVs = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19]
@@ -88,9 +91,10 @@ sha256_test_vectors = [
     0xdb4bfcbd4da0cd85a60c3c37d3fbd8805c77f15fc6b1fdfe614ee0a7c8fdb4c0,
     0xf371bc4a311f2b009eef952dd83ca80e2b60026c8e935592d0f9c308453c813e]
 
-ass(sha256_IVs, Sha256_u.IVs, "sha-256 IVs")
-ass(sha256_K, Sha256_u.K, "sha-256 K")
-ass(sha256_test_vectors, [Sha256().compute(s).digest() for s in test_vector_strings], "sha-256 test vectors")
+assert sha256_IVs == Sha256_u.IVs, "sha-256 IVs"
+assert sha256_K == Sha256_u.K, "sha-256 K"
+hash256 = lambda x: Sha256().compute(x).digest()
+check_test_vectors(hash256, sha256_test_vectors, "SHA-256")
 
 sha224_IVs = [
     0xc1059ed8, 0x367cd507, 0x3070dd17, 0xf70e5939, 0xffc00b31, 0x68581511, 0x64f98fa7, 0xbefa4fa4]
@@ -104,8 +108,9 @@ sha224_test_vectors = [
     0xbff72b4fcb7d75e5632900ac5f90d219e05e97a7bde72e740db393d9,
     0xb50aecbe4e9bb0b57bc5f3ae760a8e01db24f203fb3cdcd13148046e]
 
-ass(sha224_IVs, Sha224_u.IVs, "sha-224 IVs")
-ass(sha224_test_vectors, [Sha224().compute(s).digest() for s in test_vector_strings], "sha-224 test vectors")
+assert sha224_IVs == Sha224_u.IVs, "sha-224 IVs"
+hash224 = lambda x: Sha224().compute(x).digest()
+check_test_vectors(hash224, sha224_test_vectors, "SHA-224")
 
 sha384_IVs = [
     0xcbbb9d5dc1059ed8,
@@ -126,5 +131,7 @@ sha384_test_vectors = [
     0x1761336e3f7cbfe51deb137f026f89e01a448e3b1fafa64039c1464ee8732f11a5341a6f41e0c202294736ed64db1a84,
     0xb12932b0627d1c060942f5447764155655bd4da0c9afa6dd9b9ef53129af1b8fb0195996d2de9ca0df9d821ffee67026]
 
-ass(sha384_IVs, Sha384_u.IVs, "sha-384 IVs")
-ass(sha384_test_vectors, [Sha384().compute(s).digest() for s in test_vector_strings], "sha-384 test vectors")
+assert sha384_IVs == Sha384_u.IVs, "sha-384 IVs"
+hash384 = lambda x: Sha384().compute(x).digest()
+check_test_vectors(hash384, sha384_test_vectors, "SHA-384")
+

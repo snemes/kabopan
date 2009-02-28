@@ -4,7 +4,8 @@
 from kbp.crypt.ripemd import ( \
  Ripemd160, Ripemd160_u, Ripemd320, Ripemd320_u,
  Ripemd128, Ripemd128_u, Ripemd256, Ripemd256_u)
-from kbp._misc import test_vector_strings, ass, nibbleswap
+from kbp.test.common import check_test_vectors
+from kbp._misc import nibbleswap
 
 k = [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC, 0xA953FD4E]
 K = [0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x7A6D76E9, 0x00000000]
@@ -80,22 +81,24 @@ hash128 = lambda x:Ripemd128().compute(x).digest()
 hash320 = lambda x:Ripemd320().compute(x).digest()
 hash256 = lambda x:Ripemd256().compute(x).digest()
 
-ass(Ripemd160_u.ks, k , "ripemd160 K")
-ass(Ripemd160_u.Ks, K, "ripemd160 K'")
-ass(r_values, r, "ripemd160 r")
-ass(R_values, R, "ripemd160 r'")
-ass(ripemd160_test_vectors, [hash160(s) for s in test_vector_strings], "ripemd160 test vectors")
+assert Ripemd160_u.ks == k , "ripemd160 K"
+assert Ripemd160_u.Ks == K, "ripemd160 K'"
+assert r_values == r, "ripemd160 r"
+assert R_values == R, "ripemd160 r'"
+check_test_vectors(hash160, ripemd160_test_vectors, "RIPEMD-160")
 
-ass(ripemd320_IVs, Ripemd320_u.IVs, "ripemd320 IVs")
-ass(ripemd320_test_vectors, [hash320(s) for s in test_vector_strings], "ripemd320 test vectors")
+assert ripemd320_IVs == Ripemd320_u.IVs, "ripemd320 IVs"
+check_test_vectors(hash320, ripemd320_test_vectors, "RIPEMD-320")
 
-ass(Ripemd128_u.IVs, ripemd128_IVs, "ripemd128 IVs")
-ass(Ripemd128_u.ks, [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC], "ripemd128 K")
-ass(Ripemd128_u.Ks, [0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x00000000], "ripemd128 K'")
-ass(ripemd128_test_vectors, [hash128(s) for s in test_vector_strings], "ripemd128 test vectors")
+assert Ripemd128_u.IVs == ripemd128_IVs, "ripemd128 IVs"
+assert Ripemd128_u.ks == [0x00000000, 0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC], \
+    "ripemd128 K"
+assert Ripemd128_u.Ks == [0x50A28BE6, 0x5C4DD124, 0x6D703EF3, 0x00000000], \
+    "ripemd128 K'"
+check_test_vectors(hash128, ripemd128_test_vectors, "RIPEMD-128")
 
-ass(Ripemd256_u.IVs, ripemd256_IVs, "ripemd256 IVs")
-ass(ripemd256_test_vectors, [hash256(s) for s in test_vector_strings], "ripemd256 test vectors")
+assert Ripemd256_u.IVs == ripemd256_IVs, "ripemd256 IVs"
+check_test_vectors(hash256, ripemd256_test_vectors, "RIPEMD-256")
 
 #for s, S, r, R, f, F, k, K in rounds_parameters():
 #    print "%02i" % s, "%02i" % r, f.__name__, "%08X" % k, "%02i" % S, "%02i" % R, F.__name__, "%08X" % K

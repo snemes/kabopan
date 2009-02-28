@@ -223,14 +223,6 @@ def setstr(string, index):
             return rot
     return
 
-test_vector_strings = [
-    "",
-    "a",
-    "abc",
-    "message digest",
-    "abcdefghijklmnopqrstuvwxyz",
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-    "1234567890" * 8]
 
 MASK = dict([i, (1 << i) - 1] for i in [8, 16, 32, 64])
 
@@ -340,21 +332,6 @@ def hsqrt(i):
 def hcbrt(i):
     """hex representation of cube root of i"""
     return int(2 ** 30 * i ** (1. / 3))
-
-import traceback, sys
-def ass(x, y, msg=None, details=False):
-    """cleaner assert"""
-    try:
-        assert x == y, msg
-    except AssertionError, msg:
-        f, n, _t, l = traceback.extract_stack()[0]
-        f = f[f.rindex("\\") + 1:]
-        print "%s(%i): Error %s : %s" % (f, n, msg, l)
-        from pprint import pprint
-        if details:
-            pprint(x)
-            pprint(y)
-        sys.exit()
 
 def add(out_, in_, width):
     """add with masking. obsolete? """
