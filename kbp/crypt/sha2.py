@@ -145,7 +145,7 @@ class Sha224_u(Utility):
         # lowest 32 bits of sha384 IVs
         IVs = DWORDS(Sha384_u.IVs)
 
-        save_variables("sha256", {"IVs": IVs})
+        save_variables("sha224", {"IVs": IVs})
     else:
         IVs = pickled["IVs"]
 
