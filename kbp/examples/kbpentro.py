@@ -1,60 +1,39 @@
 from getopt import GetoptError, getopt
 from sys import argv, exit
+from kbp.examples.common import get_parameters, makehelp, get_algorithms
 
 import kbp.entro.huffman    as huffman
 import kbp.entro.sfc        as sfc
 import kbp.entro._encoding  as encoding
 
+__version__ = '0.1'
+description = "entropy encoder"
+
 families = {
-    "huffman":{
-        "huffman":huffman.generate_tree,
+    "Huffman":{
+        "huffman":["Huffman tree", huffman.generate_tree, ""],
+        #"ahuffman":["Adaptative Huffman tree", lambda:str(), "not implemented"],
         },
-    "shannon-fano":{
-        "sfc":sfc.encode,
+    "Arithmetic":{
+        #"range":["Range Encoding", lambda:str(), "not implemented"],
+        #"arithmetic":["Arithmetic Encoding", lambda:str(), "not implemented"],
+        },
+    "Shannon-Fano":{
+        "sfc":["Shannon-Fano coding", sfc.encode, ""]
         }
     }
 
-algorithms = list()
-for f in families.itervalues():
-    algorithms.extend(list(f.iteritems()))
-algorithms = dict(algorithms)
+algorithms = get_algorithms(families)
 
+Help = makehelp(description, __version__, "<data_to_encode>", families)
 
-print("Kabopan entropy encoder\n")
-Help =  "Parameters:  [-a algorithm] <[-f <input file>]|[<text>]>\n"
-Help += "Algorithms:\n"
-for f, algs in families.iteritems():
-    Help += "\t%s\n" % f
-    for alg in algs:
-        Help += "\t\t%s\n" % alg
-Help += "\n"
-
-
-opts = "a:f:"
-try:
-    optlist, args = getopt(argv[1:], opts)
-    optlist = dict(optlist)
-
-    if "-a" not in optlist:
-        requested_algorithms = sorted(algorithms.keys())
-    else:
-        if optlist["-a"] not in algorithms:
-            raise GetoptError("algorithm not found")
-        else:
-            requested_algorithms = [optlist["-a"]]
-    if len(args) == 0 and "-f" not in optlist:
-        raise GetoptError("missing text or file")
-
-    if "-f" in optlist:
-        with open(optlist["-f"], "rb") as f:
-            input = f.read()
-    else:
-        input = " ".join(args)
-
-except GetoptError, error:
-    print("Error: %s\n" % error)
+if len(argv) == 1:
     print(Help)
     exit()
 
+requested_algorithms, inputs = get_parameters(argv, 1, algorithms)
+tab = "   "
+
+
 for s in requested_algorithms:
-        print "%s\t%s" % (s, generate_codes(algorithms[s](input)))
+        print "%s\t%s" % (algorithms[s][1], encoding.generate_codes(algorithms[s][0](inputs[0])))

@@ -23,46 +23,49 @@ import kbp.crypt.sha2   as sha2
 import kbp.crypt.ripemd as ripemd
 import kbp.crypt.tiger  as tiger
 
-families_test = \
+families = \
 {
-    "family name": \
-    {
-        "algorithm keyword":["offical name", "description", None]
-    }
-}
-families = {
-    "CRCs":{
-        "crc32_ieee":["IEEE", "IEEE approved CRC", crc.crc32_ieee_hexhash],
+    "CRCs": \
+        {
+        "crc32_ieee":["IEEE", crc.crc32_ieee_hexhash,
+            "IEEE approved CRC"],
         },
-    "HAS":{
-        "has160": ["HAS-160", "Hash Algorithm Standard 160", lambda x:has.Has160().compute(x).hexdigest()],
+    "HAS": \
+        {
+        "has160": ["HAS-160", lambda x:has.Has160().compute(x).hexdigest(),
+            "Hash Algorithm Standard 160"],
         },
-    "MD":{
-        "md2":["MD2", "MD2", lambda x:md2.Md2().compute(x).hexdigest()],
-        "md4":["MD4", "MD4", lambda x:md4.Md4().compute(x).hexdigest()],
-        "md5":["MD5", "MD5", lambda x:md4.Md5().compute(x).hexdigest()],
+    "MD": \
+        {
+        "md2":["MD2", lambda x:md2.Md2().compute(x).hexdigest(), ""],
+        "md4":["MD4", lambda x:md4.Md4().compute(x).hexdigest(), ""],
+        "md5":["MD5", lambda x:md4.Md5().compute(x).hexdigest(), ""],
         },
-    "RIPEMD":{
-        "ripemd128": ["RIPEMD-128", "RIPEMD...", lambda x:ripemd.Ripemd128().compute(x).hexdigest()],
-        "ripemd160": ["RIPEMD-160", "RIPEMD...", lambda x:ripemd.Ripemd160().compute(x).hexdigest()],
-        "ripemd256": ["RIPEMD-256", "RIPEMD...", lambda x:ripemd.Ripemd256().compute(x).hexdigest()],
-        "ripemd320": ["RIPEMD-320", "RIPEMD...", lambda x:ripemd.Ripemd320().compute(x).hexdigest()],
+    "RIPEMD": \
+        {
+        "ripemd128": ["RIPEMD-128", lambda x:ripemd.Ripemd128().compute(x).hexdigest(), ""],
+        "ripemd160": ["RIPEMD-160", lambda x:ripemd.Ripemd160().compute(x).hexdigest(), ""],
+        "ripemd256": ["RIPEMD-256", lambda x:ripemd.Ripemd256().compute(x).hexdigest(), ""],
+        "ripemd320": ["RIPEMD-320", lambda x:ripemd.Ripemd320().compute(x).hexdigest(), ""],
         },
-    "SHA":{
-        "sha0": ["SHA-0", "SHA-0", lambda x:sha.Sha0().compute(x).hexdigest()],
-        "sha1": ["SHA-1", "SHA-1", lambda x:sha.Sha1().compute(x).hexdigest()],
+    "SHA": \
+        {
+        "sha0": ["SHA-0", lambda x:sha.Sha0().compute(x).hexdigest(), "first SHA algorithm"],
+        "sha1": ["SHA-1", lambda x:sha.Sha1().compute(x).hexdigest(), "SHA revision"],
         },
-    "SHA-2":{
-        "sha224": ["SHA-224", "SHA-224", lambda x:sha2.Sha224().compute(x).hexdigest()],
-        "sha256": ["SHA-256", "SHA-256", lambda x:sha2.Sha256().compute(x).hexdigest()],
-        "sha384": ["SHA-384", "SHA-384", lambda x:sha2.Sha384().compute(x).hexdigest()],
-        "sha512": ["SHA-512", "SHA-512", lambda x:sha2.Sha512().compute(x).hexdigest()],
+    "SHA-2": \
+        {
+        "sha224": ["SHA-224", lambda x:sha2.Sha224().compute(x).hexdigest(), ""],
+        "sha256": ["SHA-256", lambda x:sha2.Sha256().compute(x).hexdigest(), ""],
+        "sha384": ["SHA-384", lambda x:sha2.Sha384().compute(x).hexdigest(), ""],
+        "sha512": ["SHA-512", lambda x:sha2.Sha512().compute(x).hexdigest(), ""],
         },
-    "tiger":{
-        "tiger"   :["tiger-192", "tiger"   , lambda x:tiger.Tiger().compute(x).hexdigest()],
-        "tiger2"  :["tiger2"   , "tiger2"  , lambda x:tiger.Tiger2().compute(x).hexdigest()],
-        "tiger128":["tiger-128", "tiger128", lambda x:tiger.Tiger128().compute(x).hexdigest()],
-        "tiger160":["tiger-160", "tiger160", lambda x:tiger.Tiger160().compute(x).hexdigest()],
+    "tiger": \
+        {
+        "tiger"   :["tiger-192", lambda x:tiger.Tiger().compute(x).hexdigest(), ""],
+        "tiger2"  :["tiger2"   , lambda x:tiger.Tiger2().compute(x).hexdigest(), ""],
+        "tiger128":["tiger-128", lambda x:tiger.Tiger128().compute(x).hexdigest(), ""],
+        "tiger160":["tiger-160", lambda x:tiger.Tiger160().compute(x).hexdigest(), ""],
         }
     }
 
@@ -79,8 +82,8 @@ tab = "   "
 
 data_to_sum = inputs[0]
 if len(requested_algorithms) == 1:
-    print "%s" % (algorithms[requested_algorithms[0]](data_to_sum))
+    print "%s" % (algorithms[requested_algorithms[0]][0](data_to_sum))
 else:
     for s in requested_algorithms:
-            print "%s%s%s" % (s, tab, algorithms[s](data_to_sum))
+            print "%s%s%s" % (algorithms[s][1], tab, algorithms[s][0](data_to_sum))
 

@@ -21,8 +21,10 @@ def makehelp(description, version, parameters, families):
         HelpLines += [tab + "%s:" % family]
         algos = families[family]
         for algo in sorted(algos):
-            name, description, function = algos[algo]
-            HelpLines += [tab * 2 + "%s <%s> : %s" % (name, algo, description)]
+            name, function, description = algos[algo]
+            HelpLines += [tab * 2 + "%s <%s>" % (name, algo)]
+            if description != "":
+                HelpLines += [tab * 3 + "%s" % (description)]
     
     Help = "\n".join(HelpLines)
     return Help
@@ -63,5 +65,5 @@ def get_algorithms(families):
     algorithms = dict()
     for f in families.itervalues():
         for a, l in f.iteritems():
-            algorithms[a] = l[2]
+            algorithms[a] = [l[1], l[0]]
     return algorithms
