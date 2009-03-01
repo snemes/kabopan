@@ -11,7 +11,7 @@ Ron Rivest, 1992
 import struct
 from math import sin
 from kbp._misc import hsqrt, hex2bin, pad_0_1_size
-from kbp.types import DWORDS, Utility
+from kbp.types import dwords, Utility
 import kbp.crypt.Hash as Hash
 
 class Md4_u(Utility):
@@ -44,7 +44,7 @@ class Md4_u(Utility):
 
     hex = "0123456789ABCDEF"
     IVhex = hex + hex[::-1]
-    IVs = DWORDS(struct.unpack("<4L", hex2bin(IVhex)))
+    IVs = dwords(struct.unpack("<4L", hex2bin(IVhex)))
 
 
 class Md4(Hash.Merkledamgaard):
@@ -98,7 +98,7 @@ class Md4(Hash.Merkledamgaard):
 class Md5_u(Utility):
     """utility class for MD5 cryptographic hash"""
     g_coefficients = [[1, 0], [5, 1], [3, 5], [7, 0]]
-    K = DWORDS([abs(sin(index + 1)) * (2**32) for index in range(16 * 4)])
+    K = dwords([abs(sin(index + 1)) * (2**32) for index in range(16 * 4)])
     shifts = [
         [7, 12, 17, 22],
         [5,  9, 14, 20],

@@ -197,17 +197,17 @@ class Int():
             raise TypeError
 
 
-class DQWORD(Int):
+class DQword(Int):
     def __init__(self, number):
         Int.__init__(self, number, 128)
 
-OWORD = DQWORD
+Oword = DQword
 
-class QWORD(Int):
+class Qword(Int):
     def __init__(self, number):
         Int.__init__(self, number, 64)
 
-class DWORD(Int):
+class Dword(Int):
     def __init__(self, number):
         Int.__init__(self, number, 32)
 
@@ -215,19 +215,19 @@ class WORD(Int):
     def __init__(self, number):
         Int.__init__(self, number, 16)
 
-class BYTE(Int):
+class Byte(Int):
     def __init__(self, number):
         Int.__init__(self, number, 8)
 
 
-def DWORDS(l):
-    return [DWORD(i) for i in l]
+def dwords(l):
+    return [Dword(i) for i in l]
 
-def QWORDS(l):
-    return [QWORD(i) for i in l]
+def qwords(l):
+    return [Qword(i) for i in l]
 
-def BYTES(l):
-    return [BYTE(i) for i in l]
+def bytes(l):
+    return [Byte(i) for i in l]
 
 
 if __name__ == "__main__":

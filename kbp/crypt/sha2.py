@@ -5,7 +5,7 @@ sha-512, sha-384, sha-256, sha-224
 """
 
 from kbp.crypt.md4 import Md4
-from kbp.types import DWORDS, Utility, Int
+from kbp.types import dwords, Utility, Int
 from kbp._misc import nroot, frac, generate_primes
 from kbp._pickle import get_variables, save_variables
 
@@ -147,7 +147,7 @@ class Sha224_u(Utility):
     pickled = get_variables("sha224", ["IVs"])
     if pickled is None:
         # lowest 32 bits of sha384 IVs
-        IVs = DWORDS(Sha384_u.IVs)
+        IVs = dwords(Sha384_u.IVs)
 
         save_variables("sha224", {"IVs": IVs})
     else:
@@ -158,7 +158,7 @@ class Sha224(Sha256):
     """
     sha-224 is based on sha-256
 
-     - different IVs (DWORD of sha-384's)
+     - different IVs (Dword of sha-384's)
      - the digest is truncated to 224 bits
     """
     def __init__(self):

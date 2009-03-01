@@ -2,13 +2,13 @@
 """
 RC4, ARC4, ARCFOUR, Ron's Code 4, Rivest's Cipher 4
 """
-from kbp.types import BYTE
+from kbp.types import Byte
 
 def init_states(key):
     """init rc4 state"""
     keylength = len(key)
-    states = [BYTE(i) for i in xrange(256)]
-    index = BYTE(0)
+    states = [Byte(i) for i in xrange(256)]
+    index = Byte(0)
     for i, dummy in enumerate(states):
         index += states[i] + ord(key[i % keylength])
         states[i], states[index] = states[index], states[i]
@@ -17,8 +17,8 @@ def init_states(key):
 
 def prga(length, states):
     """generate 'length' prn from 'states'"""
-    i = BYTE(0)
-    j = BYTE(0)
+    i = Byte(0)
+    j = Byte(0)
     for c in xrange(length):
         i += 1
         j += states[i]

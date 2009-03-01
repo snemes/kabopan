@@ -3,12 +3,12 @@
 Tiny Encryption Algorithm Tea, XTEA
 """
 from kbp.crypt.cipher import Feistel
-from kbp.types import DWORD, DWORDS, Utility
+from kbp.types import Dword, Dwords, Utility
 
 class Tea_u(Utility):
     """utility class for tea"""
     phi = (1 + 5**(1./2)) /2 #: golden ratio
-    constant = DWORD((1 << 32) / phi)
+    constant = Dword((1 << 32) / phi)
 
 assert Tea_u.constant == 0x9e3779b9
 
@@ -72,11 +72,11 @@ class Xtea(Tea):
 
 
 if __name__ == "__main__":
-    print [str(i) for i in Tea(64).crypt("\x00" * 8, DWORDS([0, 0, 0, 0]))]
-    print [str(i) for i in Tea(64).decrypt("\x41\xea\x3a\x0a\x94\xba\xa9\x40", DWORDS([0, 0, 0, 0]))]
+    print [str(i) for i in Tea(64).crypt("\x00" * 8, Dwords([0, 0, 0, 0]))]
+    print [str(i) for i in Tea(64).decrypt("\x41\xea\x3a\x0a\x94\xba\xa9\x40", Dwords([0, 0, 0, 0]))]
     print
-    #assert tea().crypt("\x00" * 8, DWORDS([0, 0, 0, 0])) == DWORDS([0x41ea3a0a, 0x94baa940])
-    #assert tea().decrypt("\x41\xea\x3a\x0a\x94\xba\xa9\x40", DWORDS([0, 0, 0, 0])) == [0, 0]
-    print [str(i) for i in Xtea(64).crypt("\x00" * 8, DWORDS([0, 0, 0, 0]))]
+    #assert tea().crypt("\x00" * 8, Dwords([0, 0, 0, 0])) == Dwords([0x41ea3a0a, 0x94baa940])
+    #assert tea().decrypt("\x41\xea\x3a\x0a\x94\xba\xa9\x40", Dwords([0, 0, 0, 0])) == [0, 0]
+    print [str(i) for i in Xtea(64).crypt("\x00" * 8, Dwords([0, 0, 0, 0]))]
     #XTEA  ['\xdee9d4d8', '\xf7131ed9']
-    print [str(i) for i in Xtea(64).decrypt("\xDE\xE9\xD4\xD8\xF7\x13\x1E\xD9" , DWORDS([0, 0, 0, 0]))]
+    print [str(i) for i in Xtea(64).decrypt("\xDE\xE9\xD4\xD8\xF7\x13\x1E\xD9" , Dwords([0, 0, 0, 0]))]

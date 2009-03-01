@@ -8,7 +8,7 @@ Telecommunications Technology Association
 """
 
 from kbp._misc import hsqrt
-from kbp.types import QWORD, Utility
+from kbp.types import Qword, Utility
 from kbp.crypt.sha import Sha0, Sha_u
 from kbp.crypt.md4 import Md4_u, Md5_u
 
@@ -53,7 +53,7 @@ class Has160(Sha0):
             b_rot = [10, 17, 25, 30][r]
 
             for i in range(4):
-                w = QWORD(0)
+                w = Qword(0)
                 for j in xrange(4):
                     w ^= words[Has160_u.extensions[r][i][j]]
                 words[16 + i] = w

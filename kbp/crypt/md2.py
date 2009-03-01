@@ -8,7 +8,7 @@ B. Kaliski, 1992
 """
 
 from kbp._misc import as_bytes_blocks
-from kbp.types import BYTES, BYTE, Utility
+from kbp.types import bytes, Byte, Utility
 from kbp.crypt.Hash import Merkledamgaard
 
 class Md2_u(Utility):
@@ -83,7 +83,7 @@ class Md2(Merkledamgaard):
         Merkledamgaard.__init__(self)
         self.block_length = 16
         self.hv_size = 8
-        self.IVs = BYTES([0 for i in xrange(16)])
+        self.IVs = bytes([0 for i in xrange(16)])
 
     def pad(self, message):
         padpkcs7 = Md2_u.padpkcs7(len(message))
@@ -97,12 +97,12 @@ class Md2(Merkledamgaard):
         blocks = as_bytes_blocks(message, 16)
 
         for block in blocks:
-            xor = BYTES([0 for i in xrange(16)])
+            xor = bytes([0 for i in xrange(16)])
             block_bytes = [ord(i) for i in block]
             for i in xrange(16):
                 xor[i] = self.ihvs[i] ^ block_bytes[i]
 
-            previous = BYTE(0)
+            previous = Byte(0)
             for round_ in xrange(18):
                 for l in [self.ihvs, block_bytes, xor]:
                     for k in xrange(16):

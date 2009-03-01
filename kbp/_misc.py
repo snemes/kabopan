@@ -235,10 +235,10 @@ def rol(number, shift, width=32):
     return result
 
 def rol32(n, s):
-    """DWORD left rotation"""
+    """Dword left rotation"""
     return rol(n, s, 32)
 def rol64(n, s):
-    """QWORD left rotation"""
+    """Qword left rotation"""
     return rol(n, s, 64)
 
 
@@ -248,10 +248,10 @@ def ror(number, shift, width):
     return rol(number, (width - shift) % width, width)
 
 def ror32(n, s):
-    """DWORD ror """
+    """Dword ror """
     return ror(n, s, 32)
 def ror64(n, s):
-    """QWORD ror """
+    """Qword ror """
     return ror(n, s, 64)
 
 
@@ -344,7 +344,7 @@ struct_prefixes = {True:">", False:"<"}
 struct_sizes = {32:"L", 64:"Q"}
 
 def pack128(number, bigendian=False):
-    """pack on OQWORDS"""
+    """pack on OQwordS"""
     struct_string = struct_prefixes[bigendian] + struct_sizes[64]
     if bigendian:
         return struct.pack(struct_string, number >> 64) + struct.pack(struct_string, number)
@@ -352,11 +352,11 @@ def pack128(number, bigendian=False):
         return struct.pack(struct_string, number) + struct.pack(struct_string, number >> 64)
 
 def pack64(number, bigendian=False):
-    """pack on QWORD"""
+    """pack on Qword"""
     return struct.pack(struct_prefixes[bigendian] + struct_sizes[64], number)
 
 def pack32(number, bigendian=False):
-    """pack on DWORDs"""
+    """pack on Dwords"""
     return struct.pack(struct_prefixes[bigendian] + struct_sizes[32], number)
 
 def pack(number, bigendian, width):

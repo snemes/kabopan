@@ -15,7 +15,7 @@ except ImportError:
 
 from kbp._misc import xor, hex2bin, as_words
 from kbp.crypt.md4 import Md4
-from kbp.types import QWORD, BYTE, List, QWORDS, DWORD
+from kbp.types import Qword, Byte, List, qwords, Dword
 import struct
 
 import kbp.crypt.tiger_const as tiger_const
@@ -28,7 +28,7 @@ class Tiger(Md4):
 
         hex_ = "0123456789ABCDEF"
         IVhex = hex_ + hex_[::-1]
-        self.IVs = QWORDS(list(struct.unpack(">2Q", hex2bin(IVhex)))  + [0xF090A0B0C0B0E080 | 0x0006050403020107])
+        self.IVs = qwords(list(struct.unpack(">2Q", hex2bin(IVhex)))  + [0xF090A0B0C0B0E080 | 0x0006050403020107])
         self.pad_bit_7 = False
 
         self.S = tiger_const.Ss_test
@@ -71,8 +71,8 @@ class Tiger(Md4):
         a, b, c = round_indexes
         bhvs[c] ^= x
         c = bhvs[c]
-        ta = xor((sbox[c[7 - index]] for sbox, index in zip(self.sboxes, [0, 2, 4, 6])), QWORD(0))
-        tb = xor((sbox[c[7 - index]] for sbox, index in zip(self.Sboxes, [1, 3, 5, 7])), QWORD(0))
+        ta = xor((sbox[c[7 - index]] for sbox, index in zip(self.sboxes, [0, 2, 4, 6])), Qword(0))
+        tb = xor((sbox[c[7 - index]] for sbox, index in zip(self.Sboxes, [1, 3, 5, 7])), Qword(0))
         bhvs[a] -= ta
         bhvs[b] += tb
         bhvs[b] *= mul
@@ -106,7 +106,7 @@ class Tiger(Md4):
         sys.exit()
 #        print [str(i) for i in words]
         print [str(i) for i in words]
-        table = [list([DWORD(0) for i in range(1024)]) for j in range(2)]
+        table = [list([Dword(0) for i in range(1024)]) for j in range(2)]
         #input: 1024 of 8 of char
         #output : 2 of 1024 of dword
         """
@@ -140,10 +140,10 @@ class Tiger(Md4):
                         temp = (table[i_][j_] >> j) & 0xFF
                         table[i_][j_], table[i2_][j2_] = table[i2_][j2_], table[i_][j_]
         """
-        table_ch = [list([BYTE(0) for i in range(8)]) for j in range(1024)]
+        table_ch = [list([Byte(0) for i in range(8)]) for j in range(1024)]
         for i in xrange(1024):
             for col in xrange(8):
-                table_ch[i][col] = BYTE(i & 0xff)
+                table_ch[i][col] = Byte(i & 0xff)
         abc = 2
         self.ihvs = list(self.IVs)
         for cnt in range(nb_passes):

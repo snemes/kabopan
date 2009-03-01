@@ -5,14 +5,14 @@ RFC 3174
 """
 from kbp.crypt.md4 import Md4, Md4_u
 from kbp._misc import hsqrt
-from kbp.types import DWORD, Utility
+from kbp.types import Dword, Utility
 
 class Sha_u(Utility):
     """utility class for sha"""
     constants = [hsqrt(i) for i in [2, 3, 5, 10]]
     f, g, h = Md4_u.f, Md4_u.h, Md4_u.g
     functions = [f, g, h, g]
-    IVs = list(Md4_u.IVs) + [DWORD(0xC0D0E0F0 | 0x03020100)]
+    IVs = list(Md4_u.IVs) + [Dword(0xC0D0E0F0 | 0x03020100)]
 
     @staticmethod
     def round_f(a, b, c, d, e, f, rol1, rol2, words, words_index, k):
@@ -43,7 +43,7 @@ class Sha0(Md4):
 
 
     def compress(self, block, words):
-        words.extend(DWORD(0) for i in xrange(80 - 16))
+        words.extend(Dword(0) for i in xrange(80 - 16))
         for i in range(16, 80):
             words[i] = words[i - 3] ^ words[i - 8] ^ words[i - 14] ^ words[i - 16]
         return words
