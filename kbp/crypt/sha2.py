@@ -5,10 +5,15 @@ sha-512, sha-384, sha-256, sha-224
 """
 
 from kbp.crypt.md4 import Md4
-from kbp.types import DWORDS, Utility
-from kbp.crypt._sha2 import nroot_primes
-
+from kbp.types import DWORDS, Utility, Int
+from kbp._misc import nroot, frac, generate_primes
 from kbp._pickle import get_variables, save_variables
+
+primes = generate_primes(409)
+
+def nroot_primes(start, end, root, precision):
+    """returns the 'precision' bits representation of fractional parts of 'root'-root of the prime numbers, from the 'start'th to the 'end'th"""
+    return list(Int(frac(nroot(i, root)) * 2 ** precision, precision) for i in primes[start:end])
 
 class Sha512_u(Utility):
     """utility class for sha-512"""
