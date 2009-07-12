@@ -1,6 +1,8 @@
 #Kabopan - Readable Algorithms. Public Domain, 2009
 """customised standard type classes"""
 
+class Kbp():
+	pass
 
 class Utility():
     """empty parent for utility classes"""
@@ -211,7 +213,7 @@ class Dword(Int):
     def __init__(self, number):
         Int.__init__(self, number, 32)
 
-class WORD(Int):
+class Word(Int):
     def __init__(self, number):
         Int.__init__(self, number, 16)
 

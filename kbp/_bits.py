@@ -7,6 +7,7 @@ classes for variable-sized auto-reloading tag, sliding window, compression and d
 #todo : working, but needs a lot of cleaning, and bugfixing
 
 import kbp._misc as _misc
+from kbp.types import Kbp
 
 debug = False
 
@@ -28,7 +29,7 @@ def reverse(integer, width):
     return reversed_
 
 
-class compress:
+class compress(Kbp):
     """bit machine for variable-sized auto-reloading tag compression"""
     def __init__(self, tagsize):
         """tagsize is the number of bytes that takes the tag"""
@@ -114,7 +115,7 @@ class compress:
 #            print newstatus
 
 
-class decompress:
+class decompress(Kbp):
     """bit machine for variable-sized auto-reloading tag decompression"""
     def __init__(self, data, tagsize):
         self.__curbit = 0

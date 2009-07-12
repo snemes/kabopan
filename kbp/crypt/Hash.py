@@ -5,9 +5,9 @@ Base classes for cryptographic hashes
 
 import kbp._misc as _misc
 import struct
-from kbp.types import Int
+from kbp.types import Int, Kbp
 
-class Hash:
+class Hash(Kbp):
     """
     base class for cryptographic hashes
     """

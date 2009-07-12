@@ -5,7 +5,12 @@ base classes for (block) ciphers
 
 from kbp.types import Dword, dwords
 
-class Feistel:
+from kbp.types import Kbp
+
+class Cipher(Kbp):
+	pass
+
+class Feistel(Cipher):
     def __init__(self):
         self.rounds = 0
         self.middle = 0
