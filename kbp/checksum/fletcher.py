@@ -8,7 +8,7 @@ Fletcher, J. G.
 """
 
 def compute(data_to_checksum, size, modulo, limit=None):
-    sum_, sum_of_sum = 1, 0
+    sum_, sum_of_sum = 1, 0 # standard values in other libs: 0xffff, 0xffff
 
     length = len(data_to_checksum)
     if limit is not None and length > limit:
